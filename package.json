@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node src/server.mjs",
+    "sync:open-data": "node src/sync-open-data.mjs",
     "test": "node --test"
   }
 }
