@@ -81,6 +81,8 @@ const clubTresorsMembers = [
 ];
 
 const accents = ["FFC7A45A", "FF496B65", "FFB8795E", "FF6B7698", "FF87734E", "FF55766F"];
+const civcDirectoryUrl =
+  "https://www.champagne.fr/fr/visiter-la-champagne/annuaire-caves-champagne";
 
 function initials(name) {
   return name
@@ -129,4 +131,14 @@ export const producers = [...clubTresorsProducers, ...openDataProducers]
       )
     ) === index;
   })
+  .map((producer) => ({
+    ...producer,
+    sourceUrl: producer.directoryUrl,
+    directoryUrl: civcDirectoryUrl,
+    mapsUrl: producer.latitude != null && producer.longitude != null
+      ? `https://www.google.com/maps/search/?api=1&query=${producer.latitude},${producer.longitude}`
+      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+          `${producer.name}, ${producer.address}`
+        )}`
+  }))
   .sort((a, b) => a.name.localeCompare(b.name, "fr"));
