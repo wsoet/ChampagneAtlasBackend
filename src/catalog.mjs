@@ -1,5 +1,6 @@
 import { openDataProducers } from "./open-data.mjs";
 import { wikipediaHouses } from "./wikipedia-houses.mjs";
+import { spreadsheetHouses } from "./spreadsheet-houses.mjs";
 
 export const sources = [
   {
@@ -57,6 +58,13 @@ export const sources = [
     kind: "OPEN_CONTENT",
     url: "https://en.wikipedia.org/wiki/List_of_champagne_houses",
     reuse: "CC BY-SA 4.0; bronvermelding en gelijk delen zijn van toepassing."
+  },
+  {
+    id: "user-champagne-xlsx",
+    name: "champagne.xlsx",
+    kind: "USER_PROVIDED",
+    url: "",
+    reuse: "Door de gebruiker aangeleverde werkcatalogus; velden worden later aangevuld."
   }
 ];
 
@@ -127,7 +135,12 @@ function normalizedProducerName(value) {
     .replace(/[^a-z0-9]+/g, "");
 }
 
-export const producers = [...clubTresorsProducers, ...openDataProducers, ...wikipediaHouses]
+export const producers = [
+  ...clubTresorsProducers,
+  ...openDataProducers,
+  ...wikipediaHouses,
+  ...spreadsheetHouses
+]
   .filter((producer, index, all) => {
     const key = normalizedProducerName(producer.name);
     return all.findIndex((candidate) =>
