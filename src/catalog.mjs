@@ -1,4 +1,5 @@
 import { openDataProducers } from "./open-data.mjs";
+import { wikipediaHouses } from "./wikipedia-houses.mjs";
 
 export const sources = [
   {
@@ -49,6 +50,13 @@ export const sources = [
     kind: "OPEN_DATA",
     url: "https://www.wikidata.org/wiki/Wikidata:Licensing",
     reuse: "CC0 gestructureerde achtergrondgegevens."
+  },
+  {
+    id: "wikipedia-champagne-houses",
+    name: "Wikipedia – List of champagne houses",
+    kind: "OPEN_CONTENT",
+    url: "https://en.wikipedia.org/wiki/List_of_champagne_houses",
+    reuse: "CC BY-SA 4.0; bronvermelding en gelijk delen zijn van toepassing."
   }
 ];
 
@@ -119,7 +127,7 @@ function normalizedProducerName(value) {
     .replace(/[^a-z0-9]+/g, "");
 }
 
-export const producers = [...clubTresorsProducers, ...openDataProducers]
+export const producers = [...clubTresorsProducers, ...openDataProducers, ...wikipediaHouses]
   .filter((producer, index, all) => {
     const key = normalizedProducerName(producer.name);
     return all.findIndex((candidate) =>
