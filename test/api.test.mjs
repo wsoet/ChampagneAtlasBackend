@@ -25,12 +25,16 @@ test("health endpoint reports the catalog version", async () => {
   });
 });
 
-test("producer endpoint exposes 25 Club Trésors members", async () => {
+test("producer endpoint exposes the 300 spreadsheet rows", async () => {
   await withServer(async (baseUrl) => {
-    const response = await fetch(`${baseUrl}/api/v1/producers?source=club-tresors`);
+    const response = await fetch(
+      `${baseUrl}/api/v1/producers?source=user-champagne-xlsx`
+    );
     const body = await response.json();
-    assert.equal(body.count, 25);
-    assert.equal(body.producers[0].sourceIds[0], "club-tresors");
+    assert.equal(body.count, 300);
+    assert.ok(body.producers.every((producer) =>
+      producer.sourceIds.includes("user-champagne-xlsx")
+    ));
   });
 });
 
@@ -39,9 +43,13 @@ test("producer search is case insensitive", async () => {
     const response = await fetch(`${baseUrl}/api/v1/producers?q=BOUZY`);
     const body = await response.json();
     assert.ok(body.count >= 1);
-    assert.ok(body.producers.some((producer) => producer.id === "paul-bara"));
+    assert.ok(body.producers.some(
+      (producer) => producer.name === "Champagne Paul Bara"
+    ));
     assert.ok(body.producers.every((producer) =>
-      `${producer.name} ${producer.city} ${producer.region}`.toLowerCase().includes("bouzy")
+      `${producer.name} ${producer.city} ${producer.region}`
+        .toLowerCase()
+        .includes("bouzy")
     ));
   });
 });
