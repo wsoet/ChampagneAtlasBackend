@@ -66,9 +66,6 @@ export function createServer() {
       json(response, 200, {
         catalogVersion: "2026-07-24",
       attribution: [
-        "OpenStreetMap data © OpenStreetMap contributors (ODbL)",
-        "Club Trésors de Champagne – public member directory",
-        "Wikipedia contributors – List of champagne houses (CC BY-SA 4.0)",
         "champagne.xlsx – user-provided working catalog"
       ],
         count: result.length,
