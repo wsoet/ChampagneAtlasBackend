@@ -141,12 +141,14 @@ export const producers = [...clubTresorsProducers, ...openDataProducers, ...wiki
   })
   .map((producer) => ({
     ...producer,
-    sourceUrl: producer.directoryUrl,
+    sourceUrl: producer.sourceUrl || producer.directoryUrl,
     directoryUrl: civcDirectoryUrl,
-    mapsUrl: producer.latitude != null && producer.longitude != null
-      ? `https://www.google.com/maps/search/?api=1&query=${producer.latitude},${producer.longitude}`
-      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-          `${producer.name}, ${producer.address}`
-        )}`
+    mapsUrl: producer.mapsUrl || (
+      producer.latitude != null && producer.longitude != null
+        ? `https://www.google.com/maps/search/?api=1&query=${producer.latitude},${producer.longitude}`
+        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            producer.address
+          )}`
+    )
   }))
   .sort((a, b) => a.name.localeCompare(b.name, "fr"));
