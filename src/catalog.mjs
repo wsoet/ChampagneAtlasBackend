@@ -1,3 +1,5 @@
+import { openDataProducers } from "./open-data.mjs";
+
 export const sources = [
   {
     id: "comite-champagne",
@@ -90,7 +92,7 @@ function initials(name) {
     .join("");
 }
 
-export const producers = clubTresorsMembers.map(([id, name, city], index) => ({
+const clubTresorsProducers = clubTresorsMembers.map(([id, name, city], index) => ({
   id,
   name,
   type: "GROWER",
@@ -105,3 +107,26 @@ export const producers = clubTresorsMembers.map(([id, name, city], index) => ({
   accent: accents[index % accents.length],
   sourceIds: ["club-tresors"]
 }));
+
+function normalizedProducerName(value) {
+  return value
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/^champagne\s+/, "")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+export const producers = [...clubTresorsProducers, ...openDataProducers]
+  .filter((producer, index, all) => {
+    const key = normalizedProducerName(producer.name);
+    return all.findIndex((candidate) =>
+      normalizedProducerName(candidate.name) === key &&
+      (
+        candidate.city.toLowerCase() === producer.city.toLowerCase() ||
+        candidate.city === "Champagne" ||
+        producer.city === "Champagne"
+      )
+    ) === index;
+  })
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));

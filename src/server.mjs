@@ -65,6 +65,10 @@ export function createServer() {
       });
       json(response, 200, {
         catalogVersion: "2026-07-24",
+        attribution: [
+          "OpenStreetMap data © OpenStreetMap contributors (ODbL)",
+          "Club Trésors de Champagne – public member directory"
+        ],
         count: result.length,
         producers: result
       }, origin);
