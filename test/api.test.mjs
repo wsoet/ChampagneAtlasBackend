@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { once } from "node:events";
+import { scryptSync } from "node:crypto";
 import { createServer } from "../src/server.mjs";
 
 async function withServer(run) {
@@ -68,9 +69,8 @@ test("Muselet availability exposes a usable online shop link", async () => {
 
 test("admin page does not expose producer data before authentication", async () => {
   const keys = [
-    "GOOGLE_CLIENT_ID",
-    "GOOGLE_CLIENT_SECRET",
-    "ADMIN_EMAILS",
+    "ADMIN_USERNAME",
+    "ADMIN_PASSWORD_HASH",
     "SESSION_SECRET",
     "ADMIN_BASE_URL",
     "RENDER_EXTERNAL_URL"
@@ -82,7 +82,7 @@ test("admin page does not expose producer data before authentication", async () 
       const response = await fetch(`${baseUrl}/admin`);
       const body = await response.text();
       assert.equal(response.status, 503);
-      assert.match(body, /Google-login is nog niet geconfigureerd/);
+      assert.match(body, /adminlogin is nog niet geconfigureerd/);
       assert.doesNotMatch(body, /Champagne Bollinger/);
       assert.equal(response.headers.get("x-frame-options"), "DENY");
       assert.match(response.headers.get("content-security-policy"), /default-src 'none'/);
@@ -92,5 +92,48 @@ test("admin page does not expose producer data before authentication", async () 
       if (previous[key] === undefined) delete process.env[key];
       else process.env[key] = previous[key];
     });
+  }
+});
+
+test("valid admin credentials create a protected session", async () => {
+  const salt = Buffer.from("champagne-atlas-test-salt");
+  const passwordHash =
+    `scrypt$${salt.toString("base64url")}$` +
+    scryptSync("test-password", salt, 32).toString("base64url");
+  const previous = {
+    ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+    ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
+    SESSION_SECRET: process.env.SESSION_SECRET
+  };
+  process.env.ADMIN_USERNAME = "test-admin";
+  process.env.ADMIN_PASSWORD_HASH = passwordHash;
+  process.env.SESSION_SECRET = "test-session-secret-that-is-longer-than-32-characters";
+  try {
+    await withServer(async (baseUrl) => {
+      const loginResponse = await fetch(`${baseUrl}/auth/login`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          username: "test-admin",
+          password: "test-password"
+        })
+      });
+      assert.equal(loginResponse.status, 303);
+      const sessionCookie = loginResponse.headers.get("set-cookie");
+      assert.match(sessionCookie, /ca_session=/);
+
+      const adminResponse = await fetch(`${baseUrl}/admin`, {
+        headers: { Cookie: sessionCookie.split(";")[0] }
+      });
+      const body = await adminResponse.text();
+      assert.equal(adminResponse.status, 200);
+      assert.match(body, /300<\/strong> huizen/);
+    });
+  } finally {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
   }
 });

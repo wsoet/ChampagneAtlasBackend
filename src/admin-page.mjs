@@ -38,12 +38,16 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
 
 export function loginPage(configured, error = "") {
   const message = configured
-    ? "Log in met het Google-account dat voor deze beheerpagina is toegestaan."
-    : "Google-login is nog niet geconfigureerd. Voeg de vereiste omgevingsvariabelen toe in Render.";
+    ? "Log in met je Champagne Atlas-beheeraccount."
+    : "De adminlogin is nog niet geconfigureerd. Voeg de vereiste omgevingsvariabelen toe in Render.";
   return documentPage("Champagne Atlas beheer", `<section class="login">
     <div style="font-size:52px">🍾</div><h1>Champagne Atlas</h1>
     <p class="muted">${escapeHtml(error || message)}</p>
-    ${configured ? '<p><a class="button" href="/auth/google">Inloggen met Google</a></p>' : ""}
+    ${configured ? `<form method="post" action="/auth/login">
+      <p><input name="username" autocomplete="username" placeholder="Gebruikersnaam" required></p>
+      <p><input name="password" type="password" autocomplete="current-password" placeholder="Wachtwoord" required></p>
+      <p><button class="button" type="submit">Inloggen</button></p>
+    </form>` : ""}
   </section>`);
 }
 
@@ -52,7 +56,7 @@ export function adminPage(producers, profile) {
   const regions = [...new Set(producers.map((item) => item.region).filter(Boolean))]
     .sort((a, b) => a.localeCompare(b, "nl"));
   const body = `<header><div><h1>Champagne Atlas</h1><small>Databasebeheer · alleen lezen</small></div>
-    <div class="spacer"></div><span>${escapeHtml(profile.email)}</span>
+    <div class="spacer"></div><span>${escapeHtml(profile.username)}</span>
     <a class="button light" href="/auth/logout">Uitloggen</a></header>
   <main>
     <div class="stats">

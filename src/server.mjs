@@ -2,9 +2,8 @@ import http from "node:http";
 import { producers, sources } from "./catalog.mjs";
 import {
   authConfig,
-  beginGoogleLogin,
   currentAdmin,
-  finishGoogleLogin,
+  login,
   logout
 } from "./auth.mjs";
 import { adminPage, loginPage } from "./admin-page.mjs";
@@ -52,6 +51,19 @@ function html(response, status, body) {
   response.end(body);
 }
 
+async function readForm(request) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > 4096) throw new Error("Form too large");
+    chunks.push(chunk);
+  }
+  return Object.fromEntries(
+    new URLSearchParams(Buffer.concat(chunks).toString("utf8"))
+  );
+}
+
 export function createServer() {
   return http.createServer(async (request, response) => {
     const origin = request.headers.origin || "";
@@ -67,12 +79,28 @@ export function createServer() {
       return;
     }
 
+    const config = authConfig();
+    if (request.method === "POST" && url.pathname === "/auth/login") {
+      if (!config.ready) {
+        html(response, 503, loginPage(false));
+        return;
+      }
+      try {
+        const credentials = await readForm(request);
+        if (!login(request, response, credentials, config)) {
+          html(response, 401, loginPage(true, "Gebruikersnaam of wachtwoord is onjuist."));
+        }
+      } catch {
+        html(response, 400, loginPage(true, "De login kon niet worden verwerkt."));
+      }
+      return;
+    }
+
     if (request.method !== "GET") {
       json(response, 405, { error: "Method not allowed" }, origin);
       return;
     }
 
-    const config = authConfig();
     if (url.pathname === "/admin") {
       const profile = currentAdmin(request, config);
       html(
@@ -80,29 +108,6 @@ export function createServer() {
         profile ? 200 : config.ready ? 401 : 503,
         profile ? adminPage(producers, profile) : loginPage(config.ready)
       );
-      return;
-    }
-
-    if (url.pathname === "/auth/google") {
-      if (!config.ready) {
-        html(response, 503, loginPage(false));
-        return;
-      }
-      beginGoogleLogin(response, config);
-      return;
-    }
-
-    if (url.pathname === "/auth/google/callback") {
-      if (!config.ready) {
-        html(response, 503, loginPage(false));
-        return;
-      }
-      try {
-        await finishGoogleLogin(request, response, url, config);
-      } catch (error) {
-        console.error("Google login failed:", error.message);
-        html(response, 403, loginPage(true, "Inloggen is niet gelukt of dit account heeft geen toegang."));
-      }
       return;
     }
 

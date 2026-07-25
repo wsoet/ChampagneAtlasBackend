@@ -11,11 +11,9 @@ services:
         value: "20"
       - key: ALLOWED_ORIGINS
         value: "*"
-      - key: GOOGLE_CLIENT_ID
-        sync: false
-      - key: GOOGLE_CLIENT_SECRET
-        sync: false
-      - key: ADMIN_EMAILS
+      - key: ADMIN_USERNAME
+        value: wsoet
+      - key: ADMIN_PASSWORD_HASH
         sync: false
       - key: SESSION_SECRET
         generateValue: true
