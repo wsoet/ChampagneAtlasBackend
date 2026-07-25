@@ -296,8 +296,7 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
 
       const form = new FormData();
       form.set("csrf", csrf);
-      form.set("id", "test-regio");
-      form.set("name", "Testregio");
+      form.set("name", "Test regio");
       form.set("description", "Een tijdelijke testregio.");
       form.set("classification", "Test");
       form.set("aliases", "Testgebied");
@@ -315,7 +314,7 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
 
       const regionResponse = await fetch(`${baseUrl}/api/v1/regions/test-regio`);
       const region = await regionResponse.json();
-      assert.equal(region.name, "Testregio");
+      assert.equal(region.name, "Test regio");
       assert.equal(region.hasBanner, true);
       const bannerResponse = await fetch(`${baseUrl}/regions/test-regio/banner`);
       assert.equal(bannerResponse.status, 200);

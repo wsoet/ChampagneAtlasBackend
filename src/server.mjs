@@ -142,7 +142,7 @@ function cleanRegionData(form) {
     description,
     classification: String(form.classification || "").trim(),
     aliases: String(form.aliases || "").split(",").map((item) => item.trim()).filter(Boolean),
-    sourceName: String(form.sourceName || "").trim(),
+    sourceName: String(form.sourceName || "").trim() || "Eigen invoer",
     sourceUrl: cleanUrl(form.sourceUrl)
   };
 }
@@ -332,7 +332,13 @@ export function createServer() {
         }
         const { fields, banner } = await readMultipart(request);
         if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
-        const regionId = regionSaveMatch?.[1] || String(fields.id || "").trim();
+        const generatedId = String(fields.name || "")
+          .normalize("NFD")
+          .replace(/\p{Diacritic}/gu, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-|-$/g, "");
+        const regionId = regionSaveMatch?.[1] || generatedId;
         if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(regionId)) throw new Error("Invalid region ID");
         const currentRegions = await allRegions();
         if (!regionSaveMatch && regionById(regionId, currentRegions)) throw new Error("Region already exists");
@@ -343,7 +349,14 @@ export function createServer() {
       } catch (error) {
         console.error("Region admin request failed:", error instanceof Error ? error.message : "Unknown error");
         const profileRegions = await allRegions().catch(() => []);
-        html(response, 400, regionAdminPage(profileRegions, profile, csrfToken(profile, config), "Opslaan is niet gelukt. Controleer de velden en banner (maximaal 2 MB)."));
+        const reason = error instanceof Error && error.message === "Region already exists"
+          ? "Er bestaat al een regio met deze naam."
+          : error instanceof Error && error.message === "Invalid banner"
+            ? "De banner moet een geldige JPG, PNG of WebP van maximaal 2 MB zijn."
+            : error instanceof Error && error.message === "Name and description are required"
+              ? "Vul minimaal de naam en omschrijving van de regio in."
+              : "Opslaan is niet gelukt. Controleer de ingevulde gegevens.";
+        html(response, 400, regionAdminPage(profileRegions, profile, csrfToken(profile, config), reason));
       }
       return;
     }

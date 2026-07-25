@@ -46,7 +46,7 @@ export function regionPage(region, producers) {
       `<li><strong>${escapeHtml(producer.name)}</strong><br><span>${escapeHtml(producer.city)}</span></li>`
     ).join("")}</ul>` : "<p>Er zijn nog geen huizen aan deze regio gekoppeld.</p>"}
   </section>
-  <section class="card"><h2>Bron</h2><p>De regio-informatie komt uit ${escapeHtml(region.sourceName)}.</p>
-    <a href="${escapeHtml(region.sourceUrl)}" target="_blank" rel="noopener noreferrer">Bekijk de oorspronkelijke bron</a></section>
+  ${region.sourceName ? `<section class="card"><h2>Bron</h2><p>De regio-informatie komt uit ${escapeHtml(region.sourceName)}.</p>
+    ${region.sourceUrl ? `<a href="${escapeHtml(region.sourceUrl)}" target="_blank" rel="noopener noreferrer">Bekijk de oorspronkelijke bron</a>` : ""}</section>` : ""}
   </main></body></html>`;
 }

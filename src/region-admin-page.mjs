@@ -8,14 +8,14 @@ function fields(region = {}, csrf = "", isNew = false) {
   return `<form class="card" method="post" enctype="multipart/form-data"
     action="${isNew ? "/admin/regions/new" : `/admin/regions/${encodeURIComponent(region.id)}`}">
     <input type="hidden" name="csrf" value="${escapeHtml(csrf)}">
-    ${isNew ? `<label>URL-ID<input name="id" required pattern="[a-z0-9-]+" placeholder="bijv. massief-de-saint-thierry"></label>` : ""}
     <label>Naam<input name="name" required value="${escapeHtml(region.name)}"></label>
     <label>Alternatieve naam<input name="alternativeName" value="${escapeHtml(region.alternativeName)}"></label>
     <label class="wide">Omschrijving<textarea name="description" required rows="5">${escapeHtml(region.description)}</textarea></label>
     <label>Classificatie<input name="classification" value="${escapeHtml(region.classification)}"></label>
     <label>Aliassen (komma-gescheiden)<input name="aliases" value="${escapeHtml(aliases)}"></label>
-    <label>Bronnaam<input name="sourceName" value="${escapeHtml(region.sourceName)}"></label>
-    <label>Bron-URL<input name="sourceUrl" type="url" value="${escapeHtml(region.sourceUrl)}"></label>
+    <label>Bron (optioneel)<input name="sourceName" value="${escapeHtml(region.sourceName)}" placeholder="Bijv. eigen onderzoek of Wikipedia">
+      <small>Waar de informatie vandaan komt. Laat leeg bij eigen invoer.</small></label>
+    <label>Link naar bron (optioneel)<input name="sourceUrl" type="url" value="${escapeHtml(region.sourceUrl)}" placeholder="https://…"></label>
     <label class="wide">Banner (JPG, PNG of WebP; maximaal 2 MB)
       <input name="banner" type="file" accept="image/jpeg,image/png,image/webp">
     </label>
