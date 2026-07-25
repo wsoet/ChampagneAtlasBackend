@@ -147,10 +147,15 @@ function cleanRegionData(form) {
   };
 }
 
-function cleanProducerData(form) {
+function cleanProducerData(form, regionList) {
   const name = String(form.name || "").trim();
   if (!name) throw new Error("Producer name is required");
   const museletUrl = cleanUrl(form.museletUrl);
+  const requestedRegion = String(form.region || "").trim();
+  const matchedRegion = requestedRegion
+    ? regionForName(requestedRegion, regionList)
+    : null;
+  if (requestedRegion && !matchedRegion) throw new Error("Unknown region");
   return {
     name,
     city: String(form.city || "").trim(),
@@ -158,7 +163,7 @@ function cleanProducerData(form) {
     locationType: String(form.locationType || "").trim(),
     website: cleanUrl(form.website),
     mapsUrl: cleanUrl(form.mapsUrl),
-    region: String(form.region || "").trim(),
+    region: matchedRegion?.name || "",
     visitable: form.visitable === "yes",
     tastings: form.tastings === "yes",
     cuvees: String(form.cuvees || "").trim(),
@@ -254,7 +259,7 @@ export function createServer() {
           response.end();
           return;
         }
-        const data = cleanProducerData(form);
+        const data = cleanProducerData(form, currentRegions);
         const baseSlug = data.name.normalize("NFD").replace(/\p{Diacritic}/gu, "")
           .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "huis";
         const producerId = `custom-${baseSlug}-${randomBytes(4).toString("hex")}`;
@@ -290,7 +295,7 @@ export function createServer() {
         }
         await saveProducerOverride(
           producerEditMatch[1],
-          cleanProducerData(form),
+          cleanProducerData(form, currentRegions),
           profile.username
         );
         response.writeHead(303, {
@@ -355,7 +360,7 @@ export function createServer() {
         response,
         profile ? 200 : config.ready ? 401 : 503,
         profile
-          ? adminPage(currentProducers, profile, csrfToken(profile, config))
+          ? adminPage(currentProducers, profile, csrfToken(profile, config), currentRegions)
           : loginPage(config.ready)
       );
       return;

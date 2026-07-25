@@ -169,6 +169,8 @@ test("valid admin credentials create a protected session", async () => {
       assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
       assert.match(body, /\/regions\/montagne-de-reims/);
       assert.match(body, /Gegevens bewerken/);
+      assert.match(body, /<select name="region">/);
+      assert.match(body, /Montagne de Reims/);
       const csrf = body.match(/const csrf="([^"]+)"/)?.[1];
       assert.ok(csrf);
 
