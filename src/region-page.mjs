@@ -37,10 +37,22 @@ export function regionPage(region, producers) {
   const alternative = region.alternativeName
     ? `<span class="pill">Ook bekend als ${escapeHtml(region.alternativeName)}</span>`
     : "";
+  const informationSections = [
+    ["Algemene feiten", region.generalFacts],
+    ["Ligging", region.location],
+    ["Geschiedenis", region.history],
+    ["Terroir", region.terroir],
+    ["Klimaat", region.climate],
+    ["Druivenrassen", region.grapeVarieties],
+    ["Grand Cru & Premier Cru", region.cruClassification]
+  ].filter(([, content]) => content);
   return `${pageStart(region.name)}<main>${region.hasBanner ? `<img class="banner" src="/regions/${encodeURIComponent(region.id)}/banner" alt="Banner ${escapeHtml(region.name)}">` : ""}<span class="eyebrow">Champagneregio</span>
   <h1>${escapeHtml(region.name)}</h1><p class="lead">${escapeHtml(region.description)}</p>
   <div class="meta"><span class="pill">${escapeHtml(region.classification)}</span>${alternative}
     <span class="pill">${producers.length} huizen in de database</span></div>
+  ${informationSections.map(([title, content]) =>
+    `<section class="card"><h2>${escapeHtml(title)}</h2><p>${escapeHtml(content).replaceAll("\n", "<br>")}</p></section>`
+  ).join("")}
   <section class="card"><h2>Champagnehuizen in deze regio</h2>
     ${producers.length ? `<ul class="houses">${producers.map((producer) =>
       `<li><strong>${escapeHtml(producer.name)}</strong><br><span>${escapeHtml(producer.city)}</span></li>`

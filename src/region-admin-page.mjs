@@ -10,7 +10,14 @@ function fields(region = {}, csrf = "", isNew = false) {
     <input type="hidden" name="csrf" value="${escapeHtml(csrf)}">
     <label>Naam<input name="name" required value="${escapeHtml(region.name)}"></label>
     <label>Alternatieve naam<input name="alternativeName" value="${escapeHtml(region.alternativeName)}"></label>
-    <label class="wide">Omschrijving<textarea name="description" required rows="5">${escapeHtml(region.description)}</textarea></label>
+    <label class="wide">Korte omschrijving<textarea name="description" required rows="4">${escapeHtml(region.description)}</textarea></label>
+    <label class="wide">1. Algemene feiten<textarea name="generalFacts" rows="5">${escapeHtml(region.generalFacts)}</textarea></label>
+    <label class="wide">2. Ligging<textarea name="location" rows="5">${escapeHtml(region.location)}</textarea></label>
+    <label class="wide">3. Geschiedenis<textarea name="history" rows="5">${escapeHtml(region.history)}</textarea></label>
+    <label class="wide">4. Terroir<textarea name="terroir" rows="5">${escapeHtml(region.terroir)}</textarea></label>
+    <label class="wide">5. Klimaat<textarea name="climate" rows="5">${escapeHtml(region.climate)}</textarea></label>
+    <label class="wide">6. Druivenrassen<textarea name="grapeVarieties" rows="5">${escapeHtml(region.grapeVarieties)}</textarea></label>
+    <label class="wide">7. Grand Cru &amp; Premier Cru<textarea name="cruClassification" rows="5">${escapeHtml(region.cruClassification)}</textarea></label>
     <label>Classificatie<input name="classification" value="${escapeHtml(region.classification)}"></label>
     <label>Aliassen (komma-gescheiden)<input name="aliases" value="${escapeHtml(aliases)}"></label>
     <label>Bron (optioneel)<input name="sourceName" value="${escapeHtml(region.sourceName)}" placeholder="Bijv. eigen onderzoek of Wikipedia">

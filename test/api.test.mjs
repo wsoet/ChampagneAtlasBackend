@@ -344,6 +344,13 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
       form.set("csrf", csrf);
       form.set("name", "Test regio");
       form.set("description", "Een tijdelijke testregio.");
+      form.set("generalFacts", "Algemene testfeiten.");
+      form.set("location", "Ten noorden van de teststad.");
+      form.set("history", "Een lange testgeschiedenis.");
+      form.set("terroir", "Krijt en testgrond.");
+      form.set("climate", "Koel testklimaat.");
+      form.set("grapeVarieties", "Chardonnay en Pinot noir.");
+      form.set("cruClassification", "Eén Premier Cru testdorp.");
       form.set("classification", "Test");
       form.set("aliases", "Testgebied");
       form.set("sourceName", "Testbron");
@@ -361,7 +368,12 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
       const regionResponse = await fetch(`${baseUrl}/api/v1/regions/test-regio`);
       const region = await regionResponse.json();
       assert.equal(region.name, "Test regio");
+      assert.equal(region.generalFacts, "Algemene testfeiten.");
+      assert.equal(region.grapeVarieties, "Chardonnay en Pinot noir.");
       assert.equal(region.hasBanner, true);
+      const publicRegion = await (await fetch(`${baseUrl}/regions/test-regio`)).text();
+      assert.match(publicRegion, /Grand Cru &amp; Premier Cru/);
+      assert.match(publicRegion, /Eén Premier Cru testdorp/);
       const bannerResponse = await fetch(`${baseUrl}/regions/test-regio/banner`);
       assert.equal(bannerResponse.status, 200);
       assert.equal(bannerResponse.headers.get("content-type"), "image/png");
