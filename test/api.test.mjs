@@ -349,6 +349,8 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
       const adminBody = await adminResponse.text();
       assert.equal(adminResponse.status, 200);
       assert.match(adminBody, /Nieuwe regio/);
+      assert.match(adminBody, /id="newRegionButton"/);
+      assert.match(adminBody, /id="newRegionDialog"/);
       const csrf = adminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
       assert.ok(csrf);
 

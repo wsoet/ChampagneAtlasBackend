@@ -46,10 +46,21 @@ export function regionAdminPage(regions, profile, csrf, message = "") {
   label{display:grid;gap:5px;font-weight:650}.wide{grid-column:1/-1}input,textarea{width:100%;padding:10px;border:1px solid #bfb7aa;border-radius:9px;font:inherit}
   button{border:0;border-radius:9px;background:var(--forest);color:#fff;padding:10px 16px;font-weight:700;cursor:pointer}.danger{background:var(--red)}
   .actions{display:flex;justify-content:space-between}.preview img{width:100%;height:min(240px,35vw);object-fit:cover;border-radius:12px}
-  .notice{background:#e7f3ec;border-radius:10px;padding:12px}@media(max-width:650px){.card{grid-template-columns:1fr}}
+  .notice{background:#e7f3ec;border-radius:10px;padding:12px}.top-actions{display:flex;justify-content:flex-end}
+  dialog{width:min(1050px,94vw);max-height:90vh;overflow:auto;border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
+  dialog::backdrop{background:#071a1488}.dialog-body{padding:22px}.dialog-head{display:flex;align-items:center;justify-content:space-between}
+  .close{border:0;background:#eee5d6;color:var(--forest);border-radius:50%;width:38px;height:38px;padding:0;font-size:22px}
+  @media(max-width:650px){.card{grid-template-columns:1fr}}
   </style></head><body><header><a class="brand" href="/admin" aria-label="Naar hoofdpagina"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a><span class="admin-label">Admin / Beheerpaneel</span><a href="/admin">Huizen</a><a href="/regions">Publieke regio’s</a><span>Ingelogd als ${escapeHtml(profile.username)}</span></header>
   <main><h1>Regio’s beheren</h1>${message ? `<p class="notice">${escapeHtml(message)}</p>` : ""}
-  <h2>Nieuwe regio</h2>${fields({}, csrf, true)}
+  <div class="top-actions"><button id="newRegionButton" type="button">Nieuwe regio</button></div>
   <h2>Bestaande regio’s</h2>${regions.map((region) => fields(region, csrf)).join("")}
-  </main></body></html>`;
+  </main>
+  <dialog id="newRegionDialog"><div class="dialog-body"><div class="dialog-head"><h2>Nieuwe regio</h2><button class="close" type="button" aria-label="Sluiten">×</button></div>${fields({}, csrf, true)}</div></dialog>
+  <script nonce="ca-admin">
+    const newRegionDialog=document.querySelector("#newRegionDialog");
+    document.querySelector("#newRegionButton").addEventListener("click",()=>newRegionDialog.showModal());
+    newRegionDialog.querySelector(".close").addEventListener("click",()=>newRegionDialog.close());
+    newRegionDialog.addEventListener("click",event=>{if(event.target===newRegionDialog)newRegionDialog.close()});
+  </script></body></html>`;
 }
