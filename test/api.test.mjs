@@ -270,6 +270,11 @@ test("valid admin credentials create a protected session", async () => {
       assert.equal(logoUploadResponse.status, 303);
       const withLogo = await (await fetch(`${baseUrl}/api/v1/producers/${createdId}`)).json();
       assert.equal(withLogo.logoUrl, `/producers/${createdId}/logo`);
+      const refreshedAdmin = await (await fetch(`${baseUrl}/admin`, {
+        headers: { Cookie: sessionCookie.split(";")[0] }
+      })).text();
+      assert.match(refreshedAdmin, /house-name-logo/);
+      assert.match(refreshedAdmin, new RegExp(`/producers/${createdId}/logo`));
       const logoResponse = await fetch(`${baseUrl}${withLogo.logoUrl}`);
       assert.equal(logoResponse.status, 200);
       assert.equal(logoResponse.headers.get("content-type"), "image/png");
