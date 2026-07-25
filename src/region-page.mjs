@@ -20,7 +20,7 @@ h1,h2{font-family:Georgia,serif;color:var(--forest)}h1{font-size:clamp(42px,8vw,
 .pill{background:var(--cream);border-radius:999px;padding:8px 13px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:26px;margin-top:28px}
 .houses{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:0;list-style:none}.houses li{border-bottom:1px solid var(--line);padding:9px 0}
 .button{display:inline-block;background:var(--forest);color:white;text-decoration:none;border-radius:12px;padding:10px 15px;font-weight:700}
-.banner{width:100%;height:clamp(210px,40vw,430px);object-fit:cover;border-radius:22px;margin:24px 0 8px}
+.banner{display:block;width:100%;height:clamp(220px,38vw,480px);object-fit:cover;object-position:center;margin:0}
 .thumb{width:100%;height:180px;object-fit:cover;border-radius:14px}
 </style></head><body><header><a href="/regions">Champagne Atlas · Regio’s</a></header>`;
 
@@ -46,7 +46,7 @@ export function regionPage(region, producers) {
     ["Druivenrassen", region.grapeVarieties],
     ["Grand Cru & Premier Cru", region.cruClassification]
   ].filter(([, content]) => content);
-  return `${pageStart(region.name)}<main>${region.hasBanner ? `<img class="banner" src="/regions/${encodeURIComponent(region.id)}/banner" alt="Banner ${escapeHtml(region.name)}">` : ""}<span class="eyebrow">Champagneregio</span>
+  return `${pageStart(region.name)}${region.hasBanner ? `<img class="banner" src="/regions/${encodeURIComponent(region.id)}/banner" alt="Banner ${escapeHtml(region.name)}">` : ""}<main><span class="eyebrow">Champagneregio</span>
   <h1>${escapeHtml(region.name)}</h1><p class="lead">${escapeHtml(region.description)}</p>
   <div class="meta"><span class="pill">${escapeHtml(region.classification)}</span>${alternative}
     <span class="pill">${producers.length} huizen in de database</span></div>

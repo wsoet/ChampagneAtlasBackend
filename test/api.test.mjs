@@ -386,6 +386,7 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
       assert.equal(region.grapeVarieties, "Chardonnay en Pinot noir.");
       assert.equal(region.hasBanner, true);
       const publicRegion = await (await fetch(`${baseUrl}/regions/test-regio`)).text();
+      assert.match(publicRegion, /<\/header><img class="banner"[^>]+><main>/);
       assert.match(publicRegion, /Grand Cru &amp; Premier Cru/);
       assert.match(publicRegion, /Eén Premier Cru testdorp/);
       const bannerResponse = await fetch(`${baseUrl}/regions/test-regio/banner`);
