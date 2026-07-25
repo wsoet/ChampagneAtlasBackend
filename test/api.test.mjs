@@ -180,6 +180,7 @@ test("valid admin credentials create a protected session", async () => {
       assert.match(body, /\/regions\/montagne-de-reims/);
       assert.match(body, /Gegevens bewerken/);
       assert.match(body, /href="\/admin" aria-label="Naar hoofdpagina"/);
+      assert.match(body, /Admin \/ Beheerpaneel/);
       assert.match(body, /<select name="region">/);
       assert.match(body, /Montagne de Reims/);
       const csrf = body.match(/const csrf="([^"]+)"/)?.[1];

@@ -33,14 +33,14 @@ export function regionAdminPage(regions, profile, csrf, message = "") {
   :root{--forest:#0f3b2e;--gold:#c9a227;--ivory:#fdfbf6;--line:#ddd6c8;--red:#8b1731}
   *{box-sizing:border-box}body{margin:0;background:var(--ivory);font:15px/1.5 system-ui;color:#1d1d1b}
   header{background:var(--forest);color:#fff;padding:16px 4vw;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-  .brand{display:block;background:#fff;border-radius:10px;padding:4px 8px;line-height:0}.brand img{display:block;width:190px;height:54px;object-fit:contain}
+  .brand{display:block;background:#fff;border-radius:10px;padding:4px 8px;line-height:0}.brand img{display:block;width:190px;height:54px;object-fit:contain}.admin-label{font-weight:750;letter-spacing:.03em}
   header a{color:#fff}main{width:min(1050px,92vw);margin:30px auto 70px}h1,h2{font-family:Georgia,serif;color:var(--forest)}
   .card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}
   label{display:grid;gap:5px;font-weight:650}.wide{grid-column:1/-1}input,textarea{width:100%;padding:10px;border:1px solid #bfb7aa;border-radius:9px;font:inherit}
   button{border:0;border-radius:9px;background:var(--forest);color:#fff;padding:10px 16px;font-weight:700;cursor:pointer}.danger{background:var(--red)}
   .actions{display:flex;justify-content:space-between}.preview img{width:100%;height:min(240px,35vw);object-fit:cover;border-radius:12px}
   .notice{background:#e7f3ec;border-radius:10px;padding:12px}@media(max-width:650px){.card{grid-template-columns:1fr}}
-  </style></head><body><header><a class="brand" href="/admin" aria-label="Naar hoofdpagina"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a><a href="/admin">Huizen</a><a href="/regions">Publieke regio’s</a><span>Ingelogd als ${escapeHtml(profile.username)}</span></header>
+  </style></head><body><header><a class="brand" href="/admin" aria-label="Naar hoofdpagina"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a><span class="admin-label">Admin / Beheerpaneel</span><a href="/admin">Huizen</a><a href="/regions">Publieke regio’s</a><span>Ingelogd als ${escapeHtml(profile.username)}</span></header>
   <main><h1>Regio’s beheren</h1>${message ? `<p class="notice">${escapeHtml(message)}</p>` : ""}
   <h2>Nieuwe regio</h2>${fields({}, csrf, true)}
   <h2>Bestaande regio’s</h2>${regions.map((region) => fields(region, csrf)).join("")}
