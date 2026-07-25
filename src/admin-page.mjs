@@ -48,6 +48,32 @@ export function loginPage(configured, error = "") {
       <p><input name="password" type="password" autocomplete="current-password" placeholder="Wachtwoord" required></p>
       <p><button class="button" type="submit">Inloggen</button></p>
     </form>` : ""}
+    ${configured ? `<p><a href="/auth/forgot">Wachtwoord vergeten?</a></p>` : ""}
+  </section>`);
+}
+
+export function forgotPage(message = "") {
+  return documentPage("Wachtwoord herstellen", `<section class="login">
+    <h1>Wachtwoord herstellen</h1>
+    <p class="muted">${escapeHtml(message || "Vul het bekende beheeradres in. Als dit klopt, ontvang je een resetlink.")}</p>
+    <form method="post" action="/auth/forgot">
+      <p><input name="email" type="email" autocomplete="email" placeholder="E-mailadres" required></p>
+      <p><button class="button" type="submit">Stuur resetlink</button></p>
+    </form>
+    <p><a href="/admin">Terug naar inloggen</a></p>
+  </section>`);
+}
+
+export function resetPage(token, message = "") {
+  return documentPage("Nieuw wachtwoord", `<section class="login">
+    <h1>Nieuw wachtwoord</h1>
+    <p class="muted">${escapeHtml(message || "Gebruik minimaal 12 tekens.")}</p>
+    <form method="post" action="/auth/reset">
+      <input type="hidden" name="token" value="${escapeHtml(token)}">
+      <p><input name="password" type="password" minlength="12" autocomplete="new-password" placeholder="Nieuw wachtwoord" required></p>
+      <p><input name="confirmation" type="password" minlength="12" autocomplete="new-password" placeholder="Herhaal wachtwoord" required></p>
+      <p><button class="button" type="submit">Wachtwoord opslaan</button></p>
+    </form>
   </section>`);
 }
 

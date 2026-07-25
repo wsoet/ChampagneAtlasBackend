@@ -4,9 +4,12 @@ import {
   authConfig,
   currentAdmin,
   login,
-  logout
+  logout,
+  requestPasswordReset,
+  resetPassword,
+  resetReady
 } from "./auth.mjs";
-import { adminPage, loginPage } from "./admin-page.mjs";
+import { adminPage, forgotPage, loginPage, resetPage } from "./admin-page.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
@@ -87,11 +90,39 @@ export function createServer() {
       }
       try {
         const credentials = await readForm(request);
-        if (!login(request, response, credentials, config)) {
+        if (!await login(request, response, credentials, config)) {
           html(response, 401, loginPage(true, "Gebruikersnaam of wachtwoord is onjuist."));
         }
       } catch {
         html(response, 400, loginPage(true, "De login kon niet worden verwerkt."));
+      }
+      return;
+    }
+
+    if (request.method === "POST" && url.pathname === "/auth/forgot") {
+      try {
+        const form = await readForm(request);
+        const baseUrl = String(process.env.RENDER_EXTERNAL_URL || `https://${request.headers.host}`).replace(/\/$/, "");
+        await requestPasswordReset(form.email, baseUrl, config);
+        html(response, 200, forgotPage("Als het adres bekend is, is er een resetlink verstuurd."));
+      } catch {
+        html(response, 503, forgotPage("De resetmail kon nu niet worden verstuurd. Probeer het later opnieuw."));
+      }
+      return;
+    }
+
+    if (request.method === "POST" && url.pathname === "/auth/reset") {
+      try {
+        const form = await readForm(request);
+        if (form.password !== form.confirmation || String(form.password).length < 12) {
+          html(response, 400, resetPage(form.token, "De wachtwoorden moeten gelijk zijn en minimaal 12 tekens bevatten."));
+        } else if (await resetPassword(form.token, form.password, config)) {
+          html(response, 200, loginPage(true, "Je wachtwoord is gewijzigd. Je kunt nu inloggen."));
+        } else {
+          html(response, 400, resetPage("", "Deze resetlink is ongeldig, gebruikt of verlopen."));
+        }
+      } catch {
+        html(response, 503, resetPage("", "Het wachtwoord kon niet worden gewijzigd."));
       }
       return;
     }
@@ -108,6 +139,18 @@ export function createServer() {
         profile ? 200 : config.ready ? 401 : 503,
         profile ? adminPage(producers, profile) : loginPage(config.ready)
       );
+      return;
+    }
+
+    if (url.pathname === "/auth/forgot") {
+      html(response, resetReady(config) ? 200 : 503, forgotPage(
+        resetReady(config) ? "" : "Wachtwoordherstel is nog niet volledig geconfigureerd."
+      ));
+      return;
+    }
+
+    if (url.pathname === "/auth/reset") {
+      html(response, 200, resetPage(url.searchParams.get("token") || ""));
       return;
     }
 
