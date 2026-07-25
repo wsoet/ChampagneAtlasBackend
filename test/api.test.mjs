@@ -36,6 +36,9 @@ test("producer endpoint exposes the 300 spreadsheet rows", async () => {
     assert.ok(body.producers.every((producer) =>
       producer.sourceIds.includes("user-champagne-xlsx")
     ));
+    assert.ok(body.producers.every((producer) =>
+      typeof producer.locationType === "string" && producer.locationType.length > 0
+    ));
   });
 });
 
@@ -129,6 +132,9 @@ test("valid admin credentials create a protected session", async () => {
       const body = await adminResponse.text();
       assert.equal(adminResponse.status, 200);
       assert.match(body, /300<\/strong> huizen/);
+      assert.match(body, /Locatie \/ Type/);
+      assert.match(body, /Belangrijkste cuvées/);
+      assert.match(body, /Muselet bron/);
     });
   } finally {
     for (const [key, value] of Object.entries(previous)) {

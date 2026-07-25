@@ -25,7 +25,7 @@ a{color:var(--forest)}.button{display:inline-block;border:0;border-radius:12px;p
 input,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
 .stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:var(--cream);padding:8px 12px;border-radius:999px}
 .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:white}
-table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:1750px}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
 th{position:sticky;top:0;background:#f7f2e7;color:var(--forest)}tbody tr:hover{background:#fcf8ef;cursor:pointer}
 .yes{color:var(--forest);font-weight:700}.no{color:var(--muted)}
 dialog{width:min(700px,92vw);border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
@@ -98,7 +98,7 @@ export function adminPage(producers, profile) {
     </div>
     <p id="count" class="muted"></p>
     <div class="table-wrap"><table>
-      <thead><tr><th>Champagnehuis</th><th>Plaats</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverij</th><th>Koop online</th></tr></thead>
+      <thead><tr><th>Champagnehuis</th><th>Locatie / Type</th><th>Website</th><th>Google Maps</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverijen</th><th>Belangrijkste cuvées</th><th>Muselet</th><th>Muselet bron</th></tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
   </main>
@@ -107,10 +107,10 @@ export function adminPage(producers, profile) {
 const data=${safeData};
 const esc=(v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody");
-function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.city,p.region].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
-function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.city)}</td><td>\${esc(p.region)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?"Ja":"Nee"}</td></tr>\`).join("")}
 function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel="noopener noreferrer">\${label}</a>\`:"—"}
-rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Koop online</dt><dd>\${p.museletAvailable?link("Open Muselet",p.museletUrl):"—"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd></dl>\`;dialog.showModal()});
+function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
+function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.locationType||p.city)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${esc(p.region)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?"Ja":"Nee"}</td><td>\${p.museletAvailable?link("Muselet",p.museletUrl):"—"}</td></tr>\`).join("")}
+rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a"))return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Locatie / Type</dt><dd>\${esc(p.locationType||p.city)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?"Ja":"Nee"}</dd><dt>Muselet bron</dt><dd>\${p.museletAvailable?link("Open Muselet",p.museletUrl):"—"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd></dl>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
   return documentPage("Champagne Atlas beheer", body, script);

@@ -3635,6 +3635,7 @@ export const spreadsheetHouses = rows.map((row) => {
     name: displayName,
     type: "HOUSE",
     city,
+    locationType: row.location,
     address,
     region: row.region || (isSubLabel ? "Champagne – Sub-label" : "Champagne"),
     description: isSubLabel
