@@ -28,8 +28,8 @@ input,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:
 table{width:100%;border-collapse:collapse;table-layout:fixed}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
 th{font-size:12px}td{font-size:13px}
 th:nth-child(1){width:13%}th:nth-child(2){width:10%}th:nth-child(3),th:nth-child(4){width:7%}
-th:nth-child(5){width:10%}th:nth-child(6),th:nth-child(7),th:nth-child(9){width:6%}
-th:nth-child(8){width:25%}th:nth-child(10){width:10%}
+th:nth-child(5){width:10%}th:nth-child(6),th:nth-child(7){width:7%}
+th:nth-child(8){width:28%}th:nth-child(9){width:12%}
 th{position:sticky;top:0;background:#f7f2e7;color:var(--forest)}tbody tr:hover{background:#fcf8ef;cursor:pointer}
 .yes{color:var(--forest);font-weight:700}.no{color:var(--muted)}
 dialog{width:min(700px,92vw);border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
@@ -47,10 +47,10 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
   tbody td:nth-child(3)::before{content:"Website"}tbody td:nth-child(4)::before{content:"Google Maps"}
   tbody td:nth-child(5)::before{content:"Regio"}tbody td:nth-child(6)::before{content:"Bezoekbaar"}
   tbody td:nth-child(7)::before{content:"Proeverijen"}tbody td:nth-child(8)::before{content:"Belangrijkste cuvées"}
-  tbody td:nth-child(9)::before{content:"Muselet"}tbody td:nth-child(10)::before{content:"Muselet bron"}
-  tbody td:nth-child(8),tbody td:nth-child(10){grid-column:1/-1}
+  tbody td:nth-child(9)::before{content:"Muselet"}
+  tbody td:nth-child(8),tbody td:nth-child(9){grid-column:1/-1}
 }
-@media(max-width:520px){tbody tr{grid-template-columns:1fr}tbody td,tbody td:nth-child(8),tbody td:nth-child(10){grid-column:1}}
+@media(max-width:520px){tbody tr{grid-template-columns:1fr}tbody td,tbody td:nth-child(8),tbody td:nth-child(9){grid-column:1}}
 </style></head><body>${body}${script ? `<script nonce="ca-admin">${script}</script>` : ""}</body></html>`;
 }
 
@@ -116,7 +116,7 @@ export function adminPage(producers, profile) {
     </div>
     <p id="count" class="muted"></p>
     <div class="table-wrap"><table>
-      <thead><tr><th>Champagnehuis</th><th>Locatie / Type</th><th>Website</th><th>Google Maps</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverijen</th><th>Belangrijkste cuvées</th><th>Muselet</th><th>Muselet bron</th></tr></thead>
+      <thead><tr><th>Champagnehuis</th><th>Locatie / Type</th><th>Website</th><th>Google Maps</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverijen</th><th>Belangrijkste cuvées</th><th>Muselet</th></tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
   </main>
@@ -127,8 +127,8 @@ const esc=(v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":
 const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody");
 function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel="noopener noreferrer">\${label}</a>\`:"—"}
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
-function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.locationType||p.city)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${esc(p.region)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?"Ja":"Nee"}</td><td>\${p.museletAvailable?link("Muselet",p.museletUrl):"—"}</td></tr>\`).join("")}
-rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a"))return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Locatie / Type</dt><dd>\${esc(p.locationType||p.city)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?"Ja":"Nee"}</dd><dt>Muselet bron</dt><dd>\${p.museletAvailable?link("Open Muselet",p.museletUrl):"—"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd></dl>\`;dialog.showModal()});
+function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.locationType||p.city)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${esc(p.region)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?"Ja · "+link("Open Muselet",p.museletUrl):"Nee"}</td></tr>\`).join("")}
+rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a"))return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Locatie / Type</dt><dd>\${esc(p.locationType||p.city)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?"Ja · "+link("Open Muselet",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd></dl>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
   return documentPage("Champagne Atlas beheer", body, script);
