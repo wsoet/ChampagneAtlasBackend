@@ -213,3 +213,78 @@ test("valid admin credentials create a protected session", async () => {
     }
   }
 });
+
+test("only wsoet can manage regions, including a persistent banner", async () => {
+  const salt = Buffer.from("champagne-atlas-region-test");
+  const previous = {
+    ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+    ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
+    SESSION_SECRET: process.env.SESSION_SECRET
+  };
+  process.env.ADMIN_USERNAME = "wsoet";
+  process.env.ADMIN_PASSWORD_HASH =
+    `scrypt$${salt.toString("base64url")}$` +
+    scryptSync("test-password", salt, 32).toString("base64url");
+  process.env.SESSION_SECRET = "region-test-session-secret-longer-than-32-characters";
+  try {
+    await withServer(async (baseUrl) => {
+      const loginResponse = await fetch(`${baseUrl}/auth/login`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ username: "wsoet", password: "test-password" })
+      });
+      const cookie = loginResponse.headers.get("set-cookie").split(";")[0];
+      const adminResponse = await fetch(`${baseUrl}/admin/regions`, { headers: { Cookie: cookie } });
+      const adminBody = await adminResponse.text();
+      assert.equal(adminResponse.status, 200);
+      assert.match(adminBody, /Nieuwe regio/);
+      const csrf = adminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
+      assert.ok(csrf);
+
+      const form = new FormData();
+      form.set("csrf", csrf);
+      form.set("id", "test-regio");
+      form.set("name", "Testregio");
+      form.set("description", "Een tijdelijke testregio.");
+      form.set("classification", "Test");
+      form.set("aliases", "Testgebied");
+      form.set("sourceName", "Testbron");
+      form.set("sourceUrl", "https://example.com/");
+      const png = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
+      form.set("banner", new Blob([png], { type: "image/png" }), "banner.png");
+      const saveResponse = await fetch(`${baseUrl}/admin/regions/new`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: cookie },
+        body: form
+      });
+      assert.equal(saveResponse.status, 303);
+
+      const regionResponse = await fetch(`${baseUrl}/api/v1/regions/test-regio`);
+      const region = await regionResponse.json();
+      assert.equal(region.name, "Testregio");
+      assert.equal(region.hasBanner, true);
+      const bannerResponse = await fetch(`${baseUrl}/regions/test-regio/banner`);
+      assert.equal(bannerResponse.status, 200);
+      assert.equal(bannerResponse.headers.get("content-type"), "image/png");
+
+      const deleteResponse = await fetch(`${baseUrl}/admin/regions/test-regio/delete`, {
+        method: "POST",
+        redirect: "manual",
+        headers: {
+          Cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({ csrf })
+      });
+      assert.equal(deleteResponse.status, 303);
+      assert.equal((await fetch(`${baseUrl}/api/v1/regions/test-regio`)).status, 404);
+    });
+  } finally {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
+});

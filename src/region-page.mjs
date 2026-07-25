@@ -20,12 +20,14 @@ h1,h2{font-family:Georgia,serif;color:var(--forest)}h1{font-size:clamp(42px,8vw,
 .pill{background:var(--cream);border-radius:999px;padding:8px 13px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:26px;margin-top:28px}
 .houses{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:0;list-style:none}.houses li{border-bottom:1px solid var(--line);padding:9px 0}
 .button{display:inline-block;background:var(--forest);color:white;text-decoration:none;border-radius:12px;padding:10px 15px;font-weight:700}
+.banner{width:100%;height:clamp(210px,40vw,430px);object-fit:cover;border-radius:22px;margin:24px 0 8px}
+.thumb{width:100%;height:180px;object-fit:cover;border-radius:14px}
 </style></head><body><header><a href="/regions">Champagne Atlas · Regio’s</a></header>`;
 
 export function regionsIndexPage(regions) {
   return `${pageStart("Regio’s")}<main><span class="eyebrow">Ontdek de Champagne</span>
   <h1>Regio’s</h1><p class="lead">Lees meer over de belangrijkste districten en ontdek welke champagnehuizen er in iedere regio staan.</p>
-  ${regions.map((region) => `<article class="card"><h2>${escapeHtml(region.name)}</h2>
+  ${regions.map((region) => `<article class="card">${region.hasBanner ? `<img class="thumb" src="/regions/${encodeURIComponent(region.id)}/banner" alt="Banner ${escapeHtml(region.name)}">` : ""}<h2>${escapeHtml(region.name)}</h2>
     <p>${escapeHtml(region.description)}</p><p><strong>${region.producerCount}</strong> gekoppelde huizen</p>
     <a class="button" href="/regions/${encodeURIComponent(region.id)}">Bekijk regio</a></article>`).join("")}
   </main></body></html>`;
@@ -35,7 +37,7 @@ export function regionPage(region, producers) {
   const alternative = region.alternativeName
     ? `<span class="pill">Ook bekend als ${escapeHtml(region.alternativeName)}</span>`
     : "";
-  return `${pageStart(region.name)}<main><span class="eyebrow">Champagneregio</span>
+  return `${pageStart(region.name)}<main>${region.hasBanner ? `<img class="banner" src="/regions/${encodeURIComponent(region.id)}/banner" alt="Banner ${escapeHtml(region.name)}">` : ""}<span class="eyebrow">Champagneregio</span>
   <h1>${escapeHtml(region.name)}</h1><p class="lead">${escapeHtml(region.description)}</p>
   <div class="meta"><span class="pill">${escapeHtml(region.classification)}</span>${alternative}
     <span class="pill">${producers.length} huizen in de database</span></div>

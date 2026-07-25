@@ -105,6 +105,7 @@ export function adminPage(producers, profile, csrf) {
     .sort((a, b) => a.localeCompare(b, "nl"));
   const body = `<header><div><h1>Champagne Atlas</h1><small>Databasebeheer · alleen lezen</small></div>
     <div class="spacer"></div><span>${escapeHtml(profile.username)}</span>
+    <a class="button light" href="/admin/regions">Regio’s beheren</a>
     <a class="button light" href="/auth/logout">Uitloggen</a></header>
   <main>
     <div class="stats">

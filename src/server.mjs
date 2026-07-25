@@ -1,4 +1,5 @@
 import http from "node:http";
+import Busboy from "busboy";
 import { producers, sources } from "./catalog.mjs";
 import {
   authConfig,
@@ -13,8 +14,10 @@ import {
 } from "./auth.mjs";
 import { adminPage, forgotPage, loginPage, resetPage } from "./admin-page.mjs";
 import { regionPage, regionsIndexPage } from "./region-page.mjs";
-import { regionById, regionForName, regions, regionWithProducers } from "./regions.mjs";
+import { regionById, regionForName, regionWithProducers } from "./regions.mjs";
 import { producersWithOverrides, saveProducerOverride } from "./producer-store.mjs";
+import { regionAdminPage } from "./region-admin-page.mjs";
+import { allRegions, deleteRegion, regionBanner, saveRegion } from "./region-store.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
@@ -70,6 +73,72 @@ async function readForm(request) {
   return Object.fromEntries(
     new URLSearchParams(Buffer.concat(chunks).toString("utf8"))
   );
+}
+
+async function readMultipart(request) {
+  return new Promise((resolve, reject) => {
+    const fields = {};
+    let banner = null;
+    let failed = false;
+    const parser = Busboy({
+      headers: request.headers,
+      limits: { files: 1, fileSize: 2 * 1024 * 1024, fields: 20, fieldSize: 32768 }
+    });
+    parser.on("field", (name, value) => { fields[name] = value; });
+    parser.on("file", (name, stream, info) => {
+      if (name !== "banner" || !info.filename) {
+        stream.resume();
+        return;
+      }
+      if (!["image/jpeg", "image/png", "image/webp"].includes(info.mimeType)) {
+        failed = true;
+        stream.resume();
+        return;
+      }
+      const chunks = [];
+      stream.on("data", (chunk) => chunks.push(chunk));
+      stream.on("limit", () => { failed = true; });
+      stream.on("end", () => {
+        if (failed) return;
+        const data = Buffer.concat(chunks);
+        const validSignature =
+          (info.mimeType === "image/jpeg" && data[0] === 0xff && data[1] === 0xd8 && data[2] === 0xff) ||
+          (info.mimeType === "image/png" && data.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) ||
+          (info.mimeType === "image/webp" && data.subarray(0, 4).toString() === "RIFF" && data.subarray(8, 12).toString() === "WEBP");
+        if (!validSignature) {
+          failed = true;
+          return;
+        }
+        banner = { data, mime: info.mimeType };
+      });
+    });
+    parser.on("error", reject);
+    parser.on("finish", () => failed ? reject(new Error("Invalid banner")) : resolve({ fields, banner }));
+    request.pipe(parser);
+  });
+}
+
+const cleanUrl = (value) => {
+  const candidate = String(value || "").trim();
+  if (!candidate) return "";
+  const parsed = new URL(candidate);
+  if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("Invalid URL");
+  return parsed.href;
+};
+
+function cleanRegionData(form) {
+  const name = String(form.name || "").trim();
+  const description = String(form.description || "").trim();
+  if (!name || !description) throw new Error("Name and description are required");
+  return {
+    name,
+    alternativeName: String(form.alternativeName || "").trim(),
+    description,
+    classification: String(form.classification || "").trim(),
+    aliases: String(form.aliases || "").split(",").map((item) => item.trim()).filter(Boolean),
+    sourceName: String(form.sourceName || "").trim(),
+    sourceUrl: cleanUrl(form.sourceUrl)
+  };
 }
 
 export function createServer() {
@@ -147,14 +216,8 @@ export function createServer() {
         }
         const requiredName = String(form.name || "").trim();
         if (!requiredName) throw new Error("Producer name is required");
-        const cleanUrl = (value) => {
-          const candidate = String(value || "").trim();
-          if (!candidate) return "";
-          const parsed = new URL(candidate);
-          if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("Invalid URL");
-          return parsed.href;
-        };
-        const currentProducers = await producersWithOverrides(producers);
+        const currentRegions = await allRegions();
+        const currentProducers = await producersWithOverrides(producers, currentRegions);
         if (!currentProducers.some((producer) => producer.id === producerEditMatch[1])) {
           json(response, 404, { error: "Producer not found" }, origin);
           return;
@@ -186,6 +249,44 @@ export function createServer() {
       return;
     }
 
+    const isNewRegion = url.pathname === "/admin/regions/new";
+    const regionSaveMatch = isNewRegion ? null : url.pathname.match(/^\/admin\/regions\/([a-z0-9-]+)$/);
+    const regionDeleteMatch = url.pathname.match(/^\/admin\/regions\/([a-z0-9-]+)\/delete$/);
+    if (request.method === "POST" && (isNewRegion || regionSaveMatch || regionDeleteMatch)) {
+      const profile = currentAdmin(request, config);
+      if (!profile || profile.username !== "wsoet") {
+        html(response, 403, loginPage(config.ready, "Alleen admin wsoet kan regio’s beheren."));
+        return;
+      }
+      try {
+        if (regionDeleteMatch) {
+          const form = await readForm(request);
+          if (!validCsrf(profile, form.csrf, config)) throw new Error("Invalid CSRF");
+          const currentRegions = await allRegions();
+          if (!regionById(regionDeleteMatch[1], currentRegions)) throw new Error("Unknown region");
+          await deleteRegion(regionDeleteMatch[1], profile.username);
+          response.writeHead(303, { Location: "/admin/regions?deleted=1", "Cache-Control": "no-store" });
+          response.end();
+          return;
+        }
+        const { fields, banner } = await readMultipart(request);
+        if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
+        const regionId = regionSaveMatch?.[1] || String(fields.id || "").trim();
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(regionId)) throw new Error("Invalid region ID");
+        const currentRegions = await allRegions();
+        if (!regionSaveMatch && regionById(regionId, currentRegions)) throw new Error("Region already exists");
+        if (regionSaveMatch && !regionById(regionId, currentRegions)) throw new Error("Unknown region");
+        await saveRegion(regionId, cleanRegionData(fields), banner, profile.username);
+        response.writeHead(303, { Location: "/admin/regions?saved=1", "Cache-Control": "no-store" });
+        response.end();
+      } catch (error) {
+        console.error("Region admin request failed:", error instanceof Error ? error.message : "Unknown error");
+        const profileRegions = await allRegions().catch(() => []);
+        html(response, 400, regionAdminPage(profileRegions, profile, csrfToken(profile, config), "Opslaan is niet gelukt. Controleer de velden en banner (maximaal 2 MB)."));
+      }
+      return;
+    }
+
     if (request.method !== "GET") {
       json(response, 405, { error: "Method not allowed" }, origin);
       return;
@@ -193,7 +294,8 @@ export function createServer() {
 
     if (url.pathname === "/admin") {
       const profile = currentAdmin(request, config);
-      const currentProducers = profile ? await producersWithOverrides(producers) : [];
+      const currentRegions = profile ? await allRegions() : [];
+      const currentProducers = profile ? await producersWithOverrides(producers, currentRegions) : [];
       html(
         response,
         profile ? 200 : config.ready ? 401 : 503,
@@ -211,6 +313,20 @@ export function createServer() {
       return;
     }
 
+    if (url.pathname === "/admin/regions") {
+      const profile = currentAdmin(request, config);
+      if (!profile || profile.username !== "wsoet") {
+        html(response, profile ? 403 : 401, loginPage(config.ready, "Alleen admin wsoet kan regio’s beheren."));
+        return;
+      }
+      const currentRegions = await allRegions();
+      const message = url.searchParams.has("saved")
+        ? "De regio is opgeslagen."
+        : url.searchParams.has("deleted") ? "De regio is verwijderd." : "";
+      html(response, 200, regionAdminPage(currentRegions, profile, csrfToken(profile, config), message));
+      return;
+    }
+
     if (url.pathname === "/auth/reset") {
       html(response, 200, resetPage(url.searchParams.get("token") || ""));
       return;
@@ -222,28 +338,52 @@ export function createServer() {
     }
 
     if (url.pathname === "/regions") {
-      const currentProducers = await producersWithOverrides(producers);
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
       html(
         response,
         200,
-        regionsIndexPage(regions.map((region) => regionWithProducers(region, currentProducers)))
+        regionsIndexPage(currentRegions.map((region) => regionWithProducers(region, currentProducers, currentRegions)))
       );
+      return;
+    }
+
+    const bannerMatch = url.pathname.match(/^\/regions\/([a-z0-9-]+)\/banner$/);
+    if (bannerMatch) {
+      const currentRegions = await allRegions();
+      if (!regionById(bannerMatch[1], currentRegions)) {
+        response.writeHead(404).end();
+        return;
+      }
+      const banner = await regionBanner(bannerMatch[1]);
+      if (!banner) {
+        response.writeHead(404).end();
+        return;
+      }
+      response.writeHead(200, {
+        "Content-Type": banner.mime,
+        "Content-Length": banner.data.length,
+        "Cache-Control": "public, max-age=300",
+        "X-Content-Type-Options": "nosniff"
+      });
+      response.end(banner.data);
       return;
     }
 
     const regionPageMatch = url.pathname.match(/^\/regions\/([a-z0-9-]+)$/);
     if (regionPageMatch) {
-      const region = regionById(regionPageMatch[1]);
-      const currentProducers = await producersWithOverrides(producers);
+      const currentRegions = await allRegions();
+      const region = regionById(regionPageMatch[1], currentRegions);
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
       const matchingProducers = region
-        ? currentProducers.filter((producer) => regionForName(producer.region)?.id === region.id)
+        ? currentProducers.filter((producer) => regionForName(producer.region, currentRegions)?.id === region.id)
         : [];
       html(
         response,
         region ? 200 : 404,
         region
           ? regionPage(region, matchingProducers)
-          : regionsIndexPage(regions.map((item) => regionWithProducers(item, currentProducers)))
+          : regionsIndexPage(currentRegions.map((item) => regionWithProducers(item, currentProducers, currentRegions)))
       );
       return;
     }
@@ -259,27 +399,30 @@ export function createServer() {
     }
 
     if (url.pathname === "/api/v1/regions") {
-      const currentProducers = await producersWithOverrides(producers);
-      const enrichedRegions = regions.map((region) => regionWithProducers(region, currentProducers));
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
+      const enrichedRegions = currentRegions.map((region) => regionWithProducers(region, currentProducers, currentRegions));
       json(response, 200, { count: enrichedRegions.length, regions: enrichedRegions }, origin);
       return;
     }
 
     const regionApiMatch = url.pathname.match(/^\/api\/v1\/regions\/([a-z0-9-]+)$/);
     if (regionApiMatch) {
-      const region = regionById(regionApiMatch[1]);
-      const currentProducers = await producersWithOverrides(producers);
+      const currentRegions = await allRegions();
+      const region = regionById(regionApiMatch[1], currentRegions);
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
       json(
         response,
         region ? 200 : 404,
-        region ? regionWithProducers(region, currentProducers) : { error: "Region not found" },
+        region ? regionWithProducers(region, currentProducers, currentRegions) : { error: "Region not found" },
         origin
       );
       return;
     }
 
     if (url.pathname === "/api/v1/producers") {
-      const currentProducers = await producersWithOverrides(producers);
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
       const query = (url.searchParams.get("q") || "").trim().toLocaleLowerCase("fr");
       const source = (url.searchParams.get("source") || "").trim();
       const result = currentProducers.filter((producer) => {
@@ -303,7 +446,8 @@ export function createServer() {
 
     const match = url.pathname.match(/^\/api\/v1\/producers\/([a-z0-9-]+)$/);
     if (match) {
-      const currentProducers = await producersWithOverrides(producers);
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
       const producer = currentProducers.find((item) => item.id === match[1]);
       json(
         response,

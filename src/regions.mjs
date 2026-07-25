@@ -68,16 +68,22 @@ const regionByAlias = new Map(
   )
 );
 
-export function regionForName(name) {
-  return regionByAlias.get(slug(name)) || null;
+export function regionForName(name, regionList = regions) {
+  if (regionList === regions) return regionByAlias.get(slug(name)) || null;
+  const needle = slug(name);
+  return regionList.find((region) =>
+    [region.name, region.alternativeName, ...(region.aliases || [])]
+      .filter(Boolean)
+      .some((alias) => slug(alias) === needle)
+  ) || null;
 }
 
-export function regionById(id) {
-  return regions.find((region) => region.id === id) || null;
+export function regionById(id, regionList = regions) {
+  return regionList.find((region) => region.id === id) || null;
 }
 
-export function regionWithProducers(region, producers) {
-  const matches = producers.filter((producer) => regionForName(producer.region)?.id === region.id);
+export function regionWithProducers(region, producers, regionList = regions) {
+  const matches = producers.filter((producer) => regionForName(producer.region, regionList)?.id === region.id);
   return {
     ...region,
     aliases: undefined,

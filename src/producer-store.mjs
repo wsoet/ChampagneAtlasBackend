@@ -65,11 +65,11 @@ export async function producerOverrides() {
   ]));
 }
 
-export async function producersWithOverrides(baseProducers) {
+export async function producersWithOverrides(baseProducers, regionList) {
   const overrides = await producerOverrides();
   return baseProducers.map((producer) => {
     const merged = { ...producer, ...(overrides.get(producer.id) || {}) };
-    const matchedRegion = regionForName(merged.region);
+    const matchedRegion = regionForName(merged.region, regionList);
     return {
       ...merged,
       regionId: matchedRegion?.id || "",
