@@ -43,7 +43,7 @@ export function createServer() {
     }
 
     if (url.pathname === "/health") {
-      json(response, 200, { status: "ok", catalogVersion: "2026-07-24" }, origin);
+      json(response, 200, { status: "ok", catalogVersion: "2026-07-25" }, origin);
       return;
     }
 
@@ -64,7 +64,10 @@ export function createServer() {
         return matchesQuery && matchesSource;
       });
       json(response, 200, {
-        catalogVersion: "2026-07-24",
+        catalogVersion: "2026-07-25",
+      attribution: [
+        "champagne.xlsx – user-provided working catalog"
+      ],
         count: result.length,
         producers: result
       }, origin);

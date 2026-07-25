@@ -1,107 +1,14 @@
+import { spreadsheetHouses } from "./spreadsheet-houses.mjs";
+
 export const sources = [
   {
-    id: "comite-champagne",
-    name: "Comité Champagne",
-    kind: "OFFICIAL_DIRECTORY",
-    url: "https://www.champagne.fr/fr/visiter-la-champagne/annuaire-caves-champagne",
-    reuse: "Link naar de officiële producenten- en bezoekersdirectory."
-  },
-  {
-    id: "umc",
-    name: "Union des Maisons de Champagne",
-    kind: "TRADE_ASSOCIATION",
-    url: "https://maisons-champagne.com/fr/maisons/liste-des-maisons/",
-    reuse: "Publieke ledenlijst; redactionele teksten worden niet gekopieerd."
-  },
-  {
-    id: "champagne-de-vignerons",
-    name: "Champagne de Vignerons",
-    kind: "TRADE_ASSOCIATION",
-    url: "https://www.champagnedevignerons.fr/annuaire-des-vignerons/",
-    reuse: "Publiek register van vignerons en coöperaties; deeplink naar de bron."
-  },
-  {
-    id: "club-tresors",
-    name: "Club Trésors de Champagne",
-    kind: "PRODUCER_ASSOCIATION",
-    url: "https://www.clubtresorsdechampagne.com/en/",
-    reuse: "Publieke ledennamen en vestigingsplaatsen; deeplink naar de bron."
-  },
-  {
-    id: "champagne-club",
-    name: "Champagne Club",
-    kind: "EDITORIAL",
-    url: "https://www.champagneclub.com/producer-profiles/",
-    reuse: "Alleen linken; profielen en beoordelingen vereisen toestemming."
-  },
-  {
-    id: "openstreetmap",
-    name: "OpenStreetMap",
-    kind: "OPEN_DATA",
-    url: "https://www.openstreetmap.org/copyright",
-    reuse: "ODbL; attributie en voorwaarden zijn verplicht."
-  },
-  {
-    id: "wikidata",
-    name: "Wikidata",
-    kind: "OPEN_DATA",
-    url: "https://www.wikidata.org/wiki/Wikidata:Licensing",
-    reuse: "CC0 gestructureerde achtergrondgegevens."
+    id: "user-champagne-xlsx",
+    name: "champagne.xlsx",
+    kind: "PRIMARY_SOURCE",
+    url: "",
+    reuse: "Door de gebruiker aangeleverde werkcatalogus en enige producentenbron."
   }
 ];
 
-const clubTresorsMembers = [
-  ["paul-bara", "Champagne Paul Bara", "Bouzy"],
-  ["roland-champion", "Champagne Roland Champion", "Chouilly"],
-  ["charlier-et-fils", "Champagne Charlier & Fils", "Montigny-sous-Châtillon"],
-  ["gaston-chiquet", "Champagne Gaston Chiquet", "Dizy"],
-  ["dumenil", "Champagne Dumenil", "Sacy"],
-  ["forget-chemin", "Champagne Forget-Chemin", "Ludes"],
-  ["fresnet-juillet", "Champagne Fresnet-Juillet", "Verzy"],
-  ["pierre-gimonnet", "Champagne Pierre Gimonnet & Fils", "Cuis"],
-  ["morel", "Champagne Morel", "Les Riceys"],
-  ["henri-goutorbe", "Champagne Henri Goutorbe", "Aÿ-Champagne"],
-  ["grongnet", "Champagne Grongnet", "Étoges"],
-  ["marc-hebrart", "Champagne Marc Hébrart", "Mareuil-sur-Aÿ"],
-  ["hervieux-dumez", "Champagne Hervieux-Dumez", "Sacy"],
-  ["vincent-joudart", "Champagne Vincent Joudart", "Fèrebrianges"],
-  ["juillet-lallement", "Champagne Juillet-Lallement", "Verzy"],
-  ["j-lassalle", "Champagne J. Lassalle", "Chigny-les-Roses"],
-  ["pertois-moriset", "Champagne Pertois-Moriset", "Le Mesnil-sur-Oger"],
-  ["loriot-pagel", "Champagne Loriot-Pagel", "Festigny"],
-  ["a-margaine", "Champagne A. Margaine", "Villers-Marmery"],
-  ["remy-massin", "Champagne Rémy Massin & Fils", "Ville-sur-Arce"],
-  ["jose-michel", "Champagne José Michel", "Moussy"],
-  ["nomine-renard", "Champagne Nominé-Renard", "Villevenard"],
-  ["salmon", "Champagne Salmon", "Chaumuzy"],
-  ["sanchez-le-guedard", "Champagne Sanchez Le Guédard", "Cumières"],
-  ["vazart-coquart", "Champagne Vazart-Coquart & Fils", "Chouilly"]
-];
-
-const accents = ["FFC7A45A", "FF496B65", "FFB8795E", "FF6B7698", "FF87734E", "FF55766F"];
-
-function initials(name) {
-  return name
-    .replace(/^Champagne\s+/i, "")
-    .split(/[\s&-]+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0].toUpperCase())
-    .join("");
-}
-
-export const producers = clubTresorsMembers.map(([id, name, city], index) => ({
-  id,
-  name,
-  type: "GROWER",
-  city,
-  address: `${name}, ${city}, France`,
-  region: "Club Trésors de Champagne",
-  description:
-    `${name} is lid van Club Trésors de Champagne, de vereniging achter de Spécial Club-cuvées.`,
-  website: "",
-  directoryUrl: "https://www.clubtresorsdechampagne.com/en/",
-  initials: initials(name),
-  accent: accents[index % accents.length],
-  sourceIds: ["club-tresors"]
-}));
+export const producers = [...spreadsheetHouses]
+  .sort((a, b) => a.name.localeCompare(b.name, "fr"));
