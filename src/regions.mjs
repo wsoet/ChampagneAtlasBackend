@@ -44,8 +44,15 @@ export const regions = [
     alternativeName: "",
     classification: "Veelgebruikte 5-districten-indeling",
     description: "Heuvelachtig gebied rond Reims, tussen de Vesle en de Marne, met veel bos en hellingen. Pinot noir is hier de meest voorkomende druif en geeft structuur aan veel blends.",
-    sourceUrl: "https://en.wikipedia.org/wiki/Champagne_wine_region",
-    sourceName: "Regios.xlsx",
+    generalFacts: "Ligging: tussen Reims en Épernay\nOppervlakte: circa 8.500 hectare\nBelangrijkste druif: Pinot Noir\nBelangrijkste plaatsen: Reims, Verzy, Ambonnay en Bouzy",
+    location: "De regio ligt op een hoefijzervormige heuvelrug rondom de stad Reims. Wijngaarden liggen voornamelijk op noord-, oost- en zuidhellingen. De beschutte ligging en krijtbodem zorgen voor uitstekende omstandigheden voor Pinot Noir.",
+    history: "De Montagne de Reims behoort tot de historische kern van de Champagnestreek. Dorpen als Bouzy en Ambonnay genoten al in de 18e en 19e eeuw een uitstekende reputatie voor rode basiswijnen die werden gebruikt voor prestigieuze assemblages.",
+    terroir: "De ondergrond bestaat hoofdzakelijk uit diep krijt met lagen klei en kalkrijke mergel. Het krijt slaat water op en geeft dit geleidelijk af, wat zorgt voor een gelijkmatige rijping en een krachtige maar verfijnde wijnstijl.",
+    climate: "Het koele, semi-continentale klimaat wordt beïnvloed door Atlantische luchtstromen. De hoogte en bosrijke omgeving beperken temperatuurextremen en creëren verschillende microklimaten.",
+    grapeVarieties: "Pinot Noir: circa 56%\nChardonnay: circa 30%\nPinot Meunier: circa 14%\n\nDe regio levert krachtige, gestructureerde Pinot Noir met aroma's van rood fruit, specerijen en een uitgesproken mineraliteit.",
+    cruClassification: "Grand Cru-dorpen: Ambonnay, Beaumont-sur-Vesle, Bouzy, Louvois, Mailly-Champagne, Puisieulx, Sillery, Verzenay en Verzy.\n\nBelangrijke Premier Cru-dorpen: Rilly-la-Montagne, Chigny-les-Roses, Ludes, Taissy, Sermiers, Chamery en Ville-Dommange.\n\nDeze dorpen vormen de basis voor veel prestigieuze cuvées dankzij hun uitstekende Pinot Noir en Chardonnay.",
+    sourceUrl: "",
+    sourceName: "02-Montagne_de_Reims.pdf",
     aliases: ["Montagne de Reims"]
   },
   {

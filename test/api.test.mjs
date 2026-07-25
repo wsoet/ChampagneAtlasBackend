@@ -107,7 +107,7 @@ test("public region page renders spreadsheet information", async () => {
     assert.equal(response.status, 200);
     assert.match(body, /Heuvelachtig gebied rond Reims/);
     assert.match(body, /Champagnehuizen in deze regio/);
-    assert.match(body, /Regios\.xlsx/);
+    assert.match(body, /02-Montagne_de_Reims\.pdf/);
   });
 });
 
@@ -120,6 +120,18 @@ test("Vallée de la Marne exposes the supplied PDF information", async () => {
     assert.match(region.history, /Dom Pérignon/);
     assert.match(region.cruClassification, /Tours-sur-Marne/);
     assert.equal(region.sourceName, "01-Vallee_de_la_Marne V.20.pdf");
+  });
+});
+
+test("Montagne de Reims exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/montagne-de-reims`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /8\.500 hectare/);
+    assert.match(region.grapeVarieties, /circa 56%/);
+    assert.match(region.cruClassification, /Beaumont-sur-Vesle/);
+    assert.equal(region.sourceName, "02-Montagne_de_Reims.pdf");
   });
 });
 
