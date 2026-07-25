@@ -164,7 +164,7 @@ test("valid admin credentials create a protected session", async () => {
       const body = await adminResponse.text();
       assert.equal(adminResponse.status, 200);
       assert.match(body, /300<\/strong> huizen/);
-      assert.match(body, /<th>Plaats<\/th>/);
+      assert.match(body, /<th>Logo<\/th><th>Champagnehuis<\/th><th>Plaats<\/th>/);
       assert.doesNotMatch(body, /Locatie \/ Type/);
       assert.match(body, /Belangrijkste cuvées/);
       assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
@@ -273,7 +273,7 @@ test("valid admin credentials create a protected session", async () => {
       const refreshedAdmin = await (await fetch(`${baseUrl}/admin`, {
         headers: { Cookie: sessionCookie.split(";")[0] }
       })).text();
-      assert.match(refreshedAdmin, /house-name-logo/);
+      assert.match(refreshedAdmin, /overview-logo/);
       assert.match(refreshedAdmin, new RegExp(`/producers/${createdId}/logo`));
       const logoResponse = await fetch(`${baseUrl}${withLogo.logoUrl}`);
       assert.equal(logoResponse.status, 200);
