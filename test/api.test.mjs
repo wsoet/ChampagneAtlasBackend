@@ -111,6 +111,18 @@ test("public region page renders spreadsheet information", async () => {
   });
 });
 
+test("Vallée de la Marne exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/vallee-de-la-marne`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /±12\.000 ha/);
+    assert.match(region.history, /Dom Pérignon/);
+    assert.match(region.cruClassification, /Tours-sur-Marne/);
+    assert.equal(region.sourceName, "01-Vallee_de_la_Marne V.20.pdf");
+  });
+});
+
 test("admin page does not expose producer data before authentication", async () => {
   const keys = [
     "ADMIN_USERNAME",
