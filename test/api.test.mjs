@@ -246,6 +246,34 @@ test("valid admin credentials create a protected session", async () => {
       assert.equal(created.address, "1 Rue de Test");
       assert.equal(created.isCustom, true);
 
+      const logoForm = new FormData();
+      logoForm.set("csrf", csrf);
+      logoForm.set("name", created.name);
+      logoForm.set("city", created.city);
+      logoForm.set("address", created.address);
+      logoForm.set("website", created.website);
+      logoForm.set("mapsUrl", created.mapsUrl);
+      logoForm.set("region", created.region);
+      logoForm.set("cuvees", created.cuvees);
+      logoForm.set("visitable", "yes");
+      logoForm.set("tastings", "yes");
+      logoForm.set("museletAvailable", "yes");
+      logoForm.set("museletUrl", created.museletUrl);
+      const logoPng = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
+      logoForm.set("logo", new Blob([logoPng], { type: "image/png" }), "logo.png");
+      const logoUploadResponse = await fetch(`${baseUrl}/admin/producers/${createdId}`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: sessionCookie.split(";")[0] },
+        body: logoForm
+      });
+      assert.equal(logoUploadResponse.status, 303);
+      const withLogo = await (await fetch(`${baseUrl}/api/v1/producers/${createdId}`)).json();
+      assert.equal(withLogo.logoUrl, `/producers/${createdId}/logo`);
+      const logoResponse = await fetch(`${baseUrl}${withLogo.logoUrl}`);
+      assert.equal(logoResponse.status, 200);
+      assert.equal(logoResponse.headers.get("content-type"), "image/png");
+
       const deleteResponse = await fetch(`${baseUrl}/admin/producers/${createdId}/delete`, {
         method: "POST",
         redirect: "manual",

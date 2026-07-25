@@ -19,6 +19,7 @@ import { regionById, regionForName, regionWithProducers } from "./regions.mjs";
 import {
   createProducer,
   deleteProducer,
+  producerLogo,
   producersWithOverrides,
   saveProducerOverride
 } from "./producer-store.mjs";
@@ -81,10 +82,10 @@ async function readForm(request) {
   );
 }
 
-async function readMultipart(request) {
+async function readMultipart(request, fileField = "banner") {
   return new Promise((resolve, reject) => {
     const fields = {};
-    let banner = null;
+    let file = null;
     let failed = false;
     const parser = Busboy({
       headers: request.headers,
@@ -92,7 +93,7 @@ async function readMultipart(request) {
     });
     parser.on("field", (name, value) => { fields[name] = value; });
     parser.on("file", (name, stream, info) => {
-      if (name !== "banner" || !info.filename) {
+      if (name !== fileField || !info.filename) {
         stream.resume();
         return;
       }
@@ -115,13 +116,19 @@ async function readMultipart(request) {
           failed = true;
           return;
         }
-        banner = { data, mime: info.mimeType };
+        file = { data, mime: info.mimeType };
       });
     });
     parser.on("error", reject);
-    parser.on("finish", () => failed ? reject(new Error("Invalid banner")) : resolve({ fields, banner }));
+    parser.on("finish", () => failed ? reject(new Error("Invalid image")) : resolve({ fields, file }));
     request.pipe(parser);
   });
+}
+
+async function readProducerForm(request) {
+  return String(request.headers["content-type"] || "").startsWith("multipart/form-data")
+    ? readMultipart(request, "logo")
+    : { fields: await readForm(request), file: null };
 }
 
 const cleanUrl = (value) => {
@@ -243,7 +250,9 @@ export function createServer() {
         return;
       }
       try {
-        const form = await readForm(request);
+        const { fields: form, file: logo } = isNewProducer
+          ? await readProducerForm(request)
+          : { fields: await readForm(request), file: null };
         if (!validCsrf(profile, form.csrf, config)) {
           html(response, 403, loginPage(true, "De beveiligingscode is verlopen. Log opnieuw in."));
           return;
@@ -264,13 +273,14 @@ export function createServer() {
         const baseSlug = data.name.normalize("NFD").replace(/\p{Diacritic}/gu, "")
           .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "huis";
         const producerId = `custom-${baseSlug}-${randomBytes(4).toString("hex")}`;
-        await createProducer(producerId, data, profile.username);
+        await createProducer(producerId, data, profile.username, logo);
         response.writeHead(303, {
           Location: `/admin?saved=${encodeURIComponent(producerId)}`,
           "Cache-Control": "no-store"
         });
         response.end();
-      } catch {
+      } catch (error) {
+        console.error("Producer create/delete request failed:", error instanceof Error ? error.message : "Unknown error");
         html(response, 400, loginPage(true, "Het record kon niet worden opgeslagen."));
       }
       return;
@@ -283,7 +293,7 @@ export function createServer() {
         return;
       }
       try {
-        const form = await readForm(request);
+        const { fields: form, file: logo } = await readProducerForm(request);
         if (!validCsrf(profile, form.csrf, config)) {
           html(response, 403, loginPage(true, "De beveiligingscode is verlopen. Log opnieuw in."));
           return;
@@ -297,7 +307,8 @@ export function createServer() {
         await saveProducerOverride(
           producerEditMatch[1],
           cleanProducerData(form, currentRegions),
-          profile.username
+          profile.username,
+          logo
         );
         response.writeHead(303, {
           Location: `/admin?saved=${encodeURIComponent(producerEditMatch[1])}`,
@@ -330,7 +341,7 @@ export function createServer() {
           response.end();
           return;
         }
-        const { fields, banner } = await readMultipart(request);
+        const { fields, file: banner } = await readMultipart(request);
         if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
         const generatedId = String(fields.name || "")
           .normalize("NFD")
@@ -351,7 +362,7 @@ export function createServer() {
         const profileRegions = await allRegions().catch(() => []);
         const reason = error instanceof Error && error.message === "Region already exists"
           ? "Er bestaat al een regio met deze naam."
-          : error instanceof Error && error.message === "Invalid banner"
+          : error instanceof Error && error.message === "Invalid image"
             ? "De banner moet een geldige JPG, PNG of WebP van maximaal 2 MB zijn."
             : error instanceof Error && error.message === "Name and description are required"
               ? "Vul minimaal de naam en omschrijving van de regio in."
@@ -419,6 +430,29 @@ export function createServer() {
         200,
         regionsIndexPage(currentRegions.map((region) => regionWithProducers(region, currentProducers, currentRegions)))
       );
+      return;
+    }
+
+    const producerLogoMatch = url.pathname.match(/^\/producers\/([a-z0-9-]+)\/logo$/);
+    if (producerLogoMatch) {
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
+      if (!currentProducers.some((producer) => producer.id === producerLogoMatch[1])) {
+        response.writeHead(404).end();
+        return;
+      }
+      const logo = await producerLogo(producerLogoMatch[1]);
+      if (!logo) {
+        response.writeHead(404).end();
+        return;
+      }
+      response.writeHead(200, {
+        "Content-Type": logo.mime,
+        "Content-Length": logo.data.length,
+        "Cache-Control": "public, max-age=300",
+        "X-Content-Type-Options": "nosniff"
+      });
+      response.end(logo.data);
       return;
     }
 

@@ -24,11 +24,15 @@ async function ready() {
       data JSONB NOT NULL,
       deleted BOOLEAN NOT NULL DEFAULT FALSE,
       is_custom BOOLEAN NOT NULL DEFAULT FALSE,
+      logo_data BYTEA,
+      logo_mime TEXT,
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_by TEXT NOT NULL
     );
     ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS deleted BOOLEAN NOT NULL DEFAULT FALSE;
-    ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS is_custom BOOLEAN NOT NULL DEFAULT FALSE
+    ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS is_custom BOOLEAN NOT NULL DEFAULT FALSE;
+    ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS logo_data BYTEA;
+    ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS logo_mime TEXT
   `);
   await initialized;
   return db;
@@ -59,7 +63,9 @@ export async function producerOverrides() {
   const db = await ready();
   if (!db) return new Map(memoryOverrides);
   const result = await db.query(
-    "SELECT producer_id, data, deleted, is_custom, updated_at, updated_by FROM producer_overrides"
+    `SELECT producer_id, data, deleted, is_custom,
+            logo_data IS NOT NULL AS has_logo, updated_at, updated_by
+     FROM producer_overrides`
   );
   return new Map(result.rows.map((row) => [
     row.producer_id,
@@ -67,6 +73,7 @@ export async function producerOverrides() {
       ...row.data,
       deleted: row.deleted,
       isCustom: row.is_custom,
+      hasLogo: row.has_logo,
       editedAt: row.updated_at,
       editedBy: row.updated_by
     }
@@ -104,19 +111,22 @@ export async function producersWithOverrides(baseProducers, regionList) {
       ...merged,
       city: merged.city || merged.locationType || "",
       locationType: merged.city || merged.locationType || "",
+      logoUrl: merged.hasLogo ? `/producers/${producer.id}/logo` : "",
       regionId: matchedRegion?.id || "",
       regionUrl: matchedRegion ? `/regions/${matchedRegion.id}` : ""
     }];
   }).sort((a, b) => a.name.localeCompare(b.name, "fr"));
 }
 
-async function persist(producerId, data, updatedBy, isCustom = false, deleted = false) {
+async function persist(producerId, data, updatedBy, isCustom = false, deleted = false, logo = null) {
   const db = await ready();
   if (!db) {
     memoryOverrides.set(producerId, {
       ...data,
       deleted,
       isCustom,
+      hasLogo: logo ? true : memoryOverrides.get(producerId)?.hasLogo,
+      logo: logo || memoryOverrides.get(producerId)?.logo,
       editedAt: new Date().toISOString(),
       editedBy: updatedBy
     });
@@ -124,26 +134,41 @@ async function persist(producerId, data, updatedBy, isCustom = false, deleted = 
   }
   await db.query(
     `INSERT INTO producer_overrides
-       (producer_id, data, deleted, is_custom, updated_at, updated_by)
-     VALUES ($1, $2::jsonb, $3, $4, NOW(), $5)
+       (producer_id, data, deleted, is_custom, logo_data, logo_mime, updated_at, updated_by)
+     VALUES ($1, $2::jsonb, $3, $4, $5, $6, NOW(), $7)
      ON CONFLICT (producer_id) DO UPDATE SET
        data = EXCLUDED.data,
        deleted = EXCLUDED.deleted,
        is_custom = producer_overrides.is_custom OR EXCLUDED.is_custom,
+       logo_data = COALESCE(EXCLUDED.logo_data, producer_overrides.logo_data),
+       logo_mime = COALESCE(EXCLUDED.logo_mime, producer_overrides.logo_mime),
        updated_at = NOW(),
        updated_by = EXCLUDED.updated_by`,
-    [producerId, JSON.stringify(data), deleted, isCustom, updatedBy]
+    [producerId, JSON.stringify(data), deleted, isCustom, logo?.data || null, logo?.mime || null, updatedBy]
   );
 }
 
-export async function saveProducerOverride(producerId, patch, updatedBy) {
+export async function saveProducerOverride(producerId, patch, updatedBy, logo = null) {
   const data = cleanPatch(patch);
   const existing = (await producerOverrides()).get(producerId);
-  await persist(producerId, data, updatedBy, Boolean(existing?.isCustom), false);
+  await persist(producerId, data, updatedBy, Boolean(existing?.isCustom), false, logo);
 }
 
-export async function createProducer(producerId, patch, updatedBy) {
-  await persist(producerId, cleanPatch(patch), updatedBy, true, false);
+export async function createProducer(producerId, patch, updatedBy, logo = null) {
+  await persist(producerId, cleanPatch(patch), updatedBy, true, false, logo);
+}
+
+export async function producerLogo(producerId) {
+  const db = await ready();
+  if (!db) return memoryOverrides.get(producerId)?.logo || null;
+  const result = await db.query(
+    `SELECT logo_data, logo_mime
+     FROM producer_overrides
+     WHERE producer_id = $1 AND NOT deleted`,
+    [producerId]
+  );
+  const row = result.rows[0];
+  return row?.logo_data ? { data: row.logo_data, mime: row.logo_mime } : null;
 }
 
 export async function deleteProducer(producerId, updatedBy) {
