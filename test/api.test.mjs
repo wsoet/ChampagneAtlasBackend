@@ -274,6 +274,8 @@ test("valid admin credentials create a protected session", async () => {
         headers: { Cookie: sessionCookie.split(";")[0] }
       })).text();
       assert.match(refreshedAdmin, /overview-logo/);
+      assert.match(refreshedAdmin, /id="logoDialog"/);
+      assert.match(refreshedAdmin, /showModal\(\)/);
       assert.match(refreshedAdmin, new RegExp(`/producers/${createdId}/logo`));
       const logoResponse = await fetch(`${baseUrl}${withLogo.logoUrl}`);
       assert.equal(logoResponse.status, 200);

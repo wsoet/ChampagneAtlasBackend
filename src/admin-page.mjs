@@ -41,6 +41,7 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
 .edit-form .check{display:flex;align-items:center;gap:8px;color:var(--ink)}.edit-form .check input{width:auto}.edit-actions{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px}.danger{background:var(--red)}
 .house-logo{width:92px;height:92px;object-fit:contain;border:1px solid var(--line);border-radius:14px;background:white;padding:8px;margin:0 0 14px}
 .overview-logo{width:44px;height:44px;display:block;object-fit:contain;border:1px solid var(--line);border-radius:9px;background:white;padding:4px;margin:auto}
+.overview-logo{cursor:zoom-in}.logo-lightbox{padding:18px;text-align:center}.logo-lightbox img{display:block;width:min(520px,78vw);height:min(520px,70vh);object-fit:contain;margin:12px auto 0;background:white;border-radius:14px}
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
 @media(max-width:900px){
   .toolbar{grid-template-columns:1fr}.detail-grid,.edit-form{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.edit-actions{grid-column:1}
@@ -152,18 +153,19 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
     <label><span>Muselet bron</span><input name="museletUrl" type="url"></label>
     <div class="edit-actions"><span></span><button class="button" type="submit">Huis aanmaken</button></div>
   </form></div></dialog>`;
+  const logoDialog = `<dialog id="logoDialog"><div class="logo-lightbox"><button class="close" aria-label="Sluiten">×</button><img id="largeLogo" alt=""></div></dialog>`;
   const script = `
 const data=${safeData};
 const regionData=${safeRegions};
 const csrf=${JSON.stringify(csrf)};
 const esc=(v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody"),newDialog=document.querySelector("#newDialog");
+const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody"),newDialog=document.querySelector("#newDialog"),logoDialog=document.querySelector("#logoDialog"),largeLogo=document.querySelector("#largeLogo");
 function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel="noopener noreferrer">\${label}</a>\`:"—"}
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
 function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.region)}
 function regionOptions(selected){return '<option value="">Geen regio</option>'+regionData.map(r=>\`<option value="\${esc(r.name)}" \${r.name===selected?"selected":""}>\${esc(r.name)}</option>\`).join("")}
 function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td>\${p.logoUrl?\`<img class="overview-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:"—"}</td><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.city||p.locationType)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${regionLink(p)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</td></tr>\`).join("")}
-rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a"))return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`\${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||p.locationType)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Plaats</dt><dd>\${esc(p.city||p.locationType)}</dd><dt>Regio</dt><dd>\${regionLink(p)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd>\${p.editedAt?\`<dt>Laatst gewijzigd</dt><dd>\${esc(p.editedBy)} · \${esc(new Date(p.editedAt).toLocaleString("nl-NL"))}</dd>\`:""}</dl>
+rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;const p=data.find(x=>x.id===tr.dataset.id);if(e.target.closest(".overview-logo")){largeLogo.src=p.logoUrl;largeLogo.alt="Logo "+p.name;logoDialog.showModal();return}if(e.target.closest("a"))return;detailBody.innerHTML=\`\${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||p.locationType)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Plaats</dt><dd>\${esc(p.city||p.locationType)}</dd><dt>Regio</dt><dd>\${regionLink(p)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd>\${p.editedAt?\`<dt>Laatst gewijzigd</dt><dd>\${esc(p.editedBy)} · \${esc(new Date(p.editedAt).toLocaleString("nl-NL"))}</dd>\`:""}</dl>
 <details class="edit-panel"><summary>Gegevens bewerken</summary><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
 <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
@@ -182,6 +184,7 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.targ
 </form></details>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
 document.querySelector("#newProducer").addEventListener("click",()=>newDialog.showModal());newDialog.querySelector(".close").addEventListener("click",()=>newDialog.close());newDialog.addEventListener("click",e=>{if(e.target===newDialog)newDialog.close()});
+logoDialog.querySelector(".close").addEventListener("click",()=>logoDialog.close());logoDialog.addEventListener("click",e=>{if(e.target===logoDialog)logoDialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
-  return documentPage("Champagne Atlas beheer", body, script);
+  return documentPage("Champagne Atlas beheer", body + logoDialog, script);
 }
