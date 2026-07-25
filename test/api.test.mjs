@@ -168,6 +168,43 @@ test("valid admin credentials create a protected session", async () => {
       assert.match(body, /Belangrijkste cuvées/);
       assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
       assert.match(body, /\/regions\/montagne-de-reims/);
+      assert.match(body, /Gegevens bewerken/);
+      const csrf = body.match(/const csrf="([^"]+)"/)?.[1];
+      assert.ok(csrf);
+
+      const editResponse = await fetch(
+        `${baseUrl}/admin/producers/xlsx-paul-bara-bouzy`,
+        {
+          method: "POST",
+          redirect: "manual",
+          headers: {
+            Cookie: sessionCookie.split(";")[0],
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({
+            csrf,
+            name: "Paul Bara bijgewerkt",
+            locationType: "Bouzy",
+            website: "https://example.com/paul-bara",
+            mapsUrl: "https://maps.google.com/",
+            region: "Montagne de Reims",
+            visitable: "yes",
+            tastings: "yes",
+            cuvees: "Testcuvée",
+            museletAvailable: "yes",
+            museletUrl: "https://muselet.nl/test"
+          })
+        }
+      );
+      assert.equal(editResponse.status, 303);
+
+      const updatedResponse = await fetch(
+        `${baseUrl}/api/v1/producers/xlsx-paul-bara-bouzy`
+      );
+      const updated = await updatedResponse.json();
+      assert.equal(updated.name, "Paul Bara bijgewerkt");
+      assert.equal(updated.cuvees, "Testcuvée");
+      assert.equal(updated.editedBy, "test-admin");
     });
   } finally {
     for (const [key, value] of Object.entries(previous)) {

@@ -2,16 +2,19 @@ import http from "node:http";
 import { producers, sources } from "./catalog.mjs";
 import {
   authConfig,
+  csrfToken,
   currentAdmin,
   login,
   logout,
   requestPasswordReset,
   resetPassword,
-  resetReady
+  resetReady,
+  validCsrf
 } from "./auth.mjs";
 import { adminPage, forgotPage, loginPage, resetPage } from "./admin-page.mjs";
 import { regionPage, regionsIndexPage } from "./region-page.mjs";
 import { regionById, regionForName, regions, regionWithProducers } from "./regions.mjs";
+import { producersWithOverrides, saveProducerOverride } from "./producer-store.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
@@ -61,7 +64,7 @@ async function readForm(request) {
   let size = 0;
   for await (const chunk of request) {
     size += chunk.length;
-    if (size > 4096) throw new Error("Form too large");
+    if (size > 32768) throw new Error("Form too large");
     chunks.push(chunk);
   }
   return Object.fromEntries(
@@ -129,6 +132,60 @@ export function createServer() {
       return;
     }
 
+    const producerEditMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)$/);
+    if (request.method === "POST" && producerEditMatch) {
+      const profile = currentAdmin(request, config);
+      if (!profile) {
+        html(response, 401, loginPage(config.ready, "Log opnieuw in om gegevens te bewerken."));
+        return;
+      }
+      try {
+        const form = await readForm(request);
+        if (!validCsrf(profile, form.csrf, config)) {
+          html(response, 403, loginPage(true, "De beveiligingscode is verlopen. Log opnieuw in."));
+          return;
+        }
+        const requiredName = String(form.name || "").trim();
+        if (!requiredName) throw new Error("Producer name is required");
+        const cleanUrl = (value) => {
+          const candidate = String(value || "").trim();
+          if (!candidate) return "";
+          const parsed = new URL(candidate);
+          if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("Invalid URL");
+          return parsed.href;
+        };
+        const currentProducers = await producersWithOverrides(producers);
+        if (!currentProducers.some((producer) => producer.id === producerEditMatch[1])) {
+          json(response, 404, { error: "Producer not found" }, origin);
+          return;
+        }
+        await saveProducerOverride(
+          producerEditMatch[1],
+          {
+            name: requiredName,
+            locationType: String(form.locationType || "").trim(),
+            website: cleanUrl(form.website),
+            mapsUrl: cleanUrl(form.mapsUrl),
+            region: String(form.region || "").trim(),
+            visitable: form.visitable === "yes",
+            tastings: form.tastings === "yes",
+            cuvees: String(form.cuvees || "").trim(),
+            museletAvailable: form.museletAvailable === "yes" && Boolean(String(form.museletUrl || "").trim()),
+            museletUrl: cleanUrl(form.museletUrl)
+          },
+          profile.username
+        );
+        response.writeHead(303, {
+          Location: `/admin?saved=${encodeURIComponent(producerEditMatch[1])}`,
+          "Cache-Control": "no-store"
+        });
+        response.end();
+      } catch {
+        html(response, 400, loginPage(true, "De wijzigingen konden niet worden opgeslagen."));
+      }
+      return;
+    }
+
     if (request.method !== "GET") {
       json(response, 405, { error: "Method not allowed" }, origin);
       return;
@@ -136,10 +193,13 @@ export function createServer() {
 
     if (url.pathname === "/admin") {
       const profile = currentAdmin(request, config);
+      const currentProducers = profile ? await producersWithOverrides(producers) : [];
       html(
         response,
         profile ? 200 : config.ready ? 401 : 503,
-        profile ? adminPage(producers, profile) : loginPage(config.ready)
+        profile
+          ? adminPage(currentProducers, profile, csrfToken(profile, config))
+          : loginPage(config.ready)
       );
       return;
     }
@@ -162,10 +222,11 @@ export function createServer() {
     }
 
     if (url.pathname === "/regions") {
+      const currentProducers = await producersWithOverrides(producers);
       html(
         response,
         200,
-        regionsIndexPage(regions.map((region) => regionWithProducers(region, producers)))
+        regionsIndexPage(regions.map((region) => regionWithProducers(region, currentProducers)))
       );
       return;
     }
@@ -173,15 +234,16 @@ export function createServer() {
     const regionPageMatch = url.pathname.match(/^\/regions\/([a-z0-9-]+)$/);
     if (regionPageMatch) {
       const region = regionById(regionPageMatch[1]);
+      const currentProducers = await producersWithOverrides(producers);
       const matchingProducers = region
-        ? producers.filter((producer) => regionForName(producer.region)?.id === region.id)
+        ? currentProducers.filter((producer) => regionForName(producer.region)?.id === region.id)
         : [];
       html(
         response,
         region ? 200 : 404,
         region
           ? regionPage(region, matchingProducers)
-          : regionsIndexPage(regions.map((item) => regionWithProducers(item, producers)))
+          : regionsIndexPage(regions.map((item) => regionWithProducers(item, currentProducers)))
       );
       return;
     }
@@ -197,7 +259,8 @@ export function createServer() {
     }
 
     if (url.pathname === "/api/v1/regions") {
-      const enrichedRegions = regions.map((region) => regionWithProducers(region, producers));
+      const currentProducers = await producersWithOverrides(producers);
+      const enrichedRegions = regions.map((region) => regionWithProducers(region, currentProducers));
       json(response, 200, { count: enrichedRegions.length, regions: enrichedRegions }, origin);
       return;
     }
@@ -205,19 +268,21 @@ export function createServer() {
     const regionApiMatch = url.pathname.match(/^\/api\/v1\/regions\/([a-z0-9-]+)$/);
     if (regionApiMatch) {
       const region = regionById(regionApiMatch[1]);
+      const currentProducers = await producersWithOverrides(producers);
       json(
         response,
         region ? 200 : 404,
-        region ? regionWithProducers(region, producers) : { error: "Region not found" },
+        region ? regionWithProducers(region, currentProducers) : { error: "Region not found" },
         origin
       );
       return;
     }
 
     if (url.pathname === "/api/v1/producers") {
+      const currentProducers = await producersWithOverrides(producers);
       const query = (url.searchParams.get("q") || "").trim().toLocaleLowerCase("fr");
       const source = (url.searchParams.get("source") || "").trim();
-      const result = producers.filter((producer) => {
+      const result = currentProducers.filter((producer) => {
         const matchesQuery =
           !query ||
           [producer.name, producer.city, producer.region]
@@ -238,7 +303,8 @@ export function createServer() {
 
     const match = url.pathname.match(/^\/api\/v1\/producers\/([a-z0-9-]+)$/);
     if (match) {
-      const producer = producers.find((item) => item.id === match[1]);
+      const currentProducers = await producersWithOverrides(producers);
+      const producer = currentProducers.find((item) => item.id === match[1]);
       json(
         response,
         producer ? 200 : 404,

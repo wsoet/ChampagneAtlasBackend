@@ -144,6 +144,17 @@ export async function login(request, response, credentials, config = authConfig(
   return true;
 }
 
+export function csrfToken(profile, config = authConfig()) {
+  return profile?.nonce && config.sessionSecret
+    ? sign(`csrf:${profile.nonce}`, config.sessionSecret)
+    : "";
+}
+
+export function validCsrf(profile, token, config = authConfig()) {
+  const expected = csrfToken(profile, config);
+  return Boolean(expected && safeEqual(expected, token));
+}
+
 export function resetReady(config = authConfig()) {
   return Boolean(config.ready && config.adminEmail && config.resendApiKey && config.databaseUrl);
 }
