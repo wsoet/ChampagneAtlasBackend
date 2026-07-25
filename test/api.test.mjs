@@ -45,7 +45,7 @@ test("producer search is case insensitive", async () => {
     const body = await response.json();
     assert.ok(body.count >= 1);
     assert.ok(body.producers.some(
-      (producer) => producer.name === "Champagne Paul Bara"
+      (producer) => producer.name === "Paul Bara"
     ));
     assert.ok(body.producers.every((producer) =>
       `${producer.name} ${producer.city} ${producer.region}`
