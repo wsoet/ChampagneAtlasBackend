@@ -65,3 +65,32 @@ test("Muselet availability exposes a usable online shop link", async () => {
     ));
   });
 });
+
+test("admin page does not expose producer data before authentication", async () => {
+  const keys = [
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "ADMIN_EMAILS",
+    "SESSION_SECRET",
+    "ADMIN_BASE_URL",
+    "RENDER_EXTERNAL_URL"
+  ];
+  const previous = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
+  keys.forEach((key) => delete process.env[key]);
+  try {
+    await withServer(async (baseUrl) => {
+      const response = await fetch(`${baseUrl}/admin`);
+      const body = await response.text();
+      assert.equal(response.status, 503);
+      assert.match(body, /Google-login is nog niet geconfigureerd/);
+      assert.doesNotMatch(body, /Champagne Bollinger/);
+      assert.equal(response.headers.get("x-frame-options"), "DENY");
+      assert.match(response.headers.get("content-security-policy"), /default-src 'none'/);
+    });
+  } finally {
+    keys.forEach((key) => {
+      if (previous[key] === undefined) delete process.env[key];
+      else process.env[key] = previous[key];
+    });
+  }
+});

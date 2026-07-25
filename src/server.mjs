@@ -1,5 +1,13 @@
 import http from "node:http";
 import { producers, sources } from "./catalog.mjs";
+import {
+  authConfig,
+  beginGoogleLogin,
+  currentAdmin,
+  finishGoogleLogin,
+  logout
+} from "./auth.mjs";
+import { adminPage, loginPage } from "./admin-page.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
@@ -22,8 +30,30 @@ function json(response, status, body, requestOrigin = "") {
   response.end(JSON.stringify(body));
 }
 
+function html(response, status, body) {
+  response.writeHead(status, {
+    "Content-Type": "text/html; charset=utf-8",
+    "Cache-Control": "no-store",
+    "Content-Security-Policy": [
+      "default-src 'none'",
+      "style-src 'unsafe-inline'",
+      "script-src 'nonce-ca-admin'",
+      "img-src 'self' data:",
+      "connect-src 'self'",
+      "base-uri 'none'",
+      "frame-ancestors 'none'",
+      "form-action 'self'"
+    ].join("; "),
+    "Referrer-Policy": "no-referrer",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY"
+  });
+  response.end(body);
+}
+
 export function createServer() {
-  return http.createServer((request, response) => {
+  return http.createServer(async (request, response) => {
     const origin = request.headers.origin || "";
     const url = new URL(request.url || "/", `http://${request.headers.host || "localhost"}`);
 
@@ -39,6 +69,45 @@ export function createServer() {
 
     if (request.method !== "GET") {
       json(response, 405, { error: "Method not allowed" }, origin);
+      return;
+    }
+
+    const config = authConfig();
+    if (url.pathname === "/admin") {
+      const profile = currentAdmin(request, config);
+      html(
+        response,
+        profile ? 200 : config.ready ? 401 : 503,
+        profile ? adminPage(producers, profile) : loginPage(config.ready)
+      );
+      return;
+    }
+
+    if (url.pathname === "/auth/google") {
+      if (!config.ready) {
+        html(response, 503, loginPage(false));
+        return;
+      }
+      beginGoogleLogin(response, config);
+      return;
+    }
+
+    if (url.pathname === "/auth/google/callback") {
+      if (!config.ready) {
+        html(response, 503, loginPage(false));
+        return;
+      }
+      try {
+        await finishGoogleLogin(request, response, url, config);
+      } catch (error) {
+        console.error("Google login failed:", error.message);
+        html(response, 403, loginPage(true, "Inloggen is niet gelukt of dit account heeft geen toegang."));
+      }
+      return;
+    }
+
+    if (url.pathname === "/auth/logout") {
+      logout(response);
       return;
     }
 
