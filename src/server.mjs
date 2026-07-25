@@ -10,6 +10,8 @@ import {
   resetReady
 } from "./auth.mjs";
 import { adminPage, forgotPage, loginPage, resetPage } from "./admin-page.mjs";
+import { regionPage, regionsIndexPage } from "./region-page.mjs";
+import { regionById, regionForName, regions, regionWithProducers } from "./regions.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
@@ -159,6 +161,31 @@ export function createServer() {
       return;
     }
 
+    if (url.pathname === "/regions") {
+      html(
+        response,
+        200,
+        regionsIndexPage(regions.map((region) => regionWithProducers(region, producers)))
+      );
+      return;
+    }
+
+    const regionPageMatch = url.pathname.match(/^\/regions\/([a-z0-9-]+)$/);
+    if (regionPageMatch) {
+      const region = regionById(regionPageMatch[1]);
+      const matchingProducers = region
+        ? producers.filter((producer) => regionForName(producer.region)?.id === region.id)
+        : [];
+      html(
+        response,
+        region ? 200 : 404,
+        region
+          ? regionPage(region, matchingProducers)
+          : regionsIndexPage(regions.map((item) => regionWithProducers(item, producers)))
+      );
+      return;
+    }
+
     if (url.pathname === "/health") {
       json(response, 200, { status: "ok", catalogVersion: "2026-07-25" }, origin);
       return;
@@ -166,6 +193,24 @@ export function createServer() {
 
     if (url.pathname === "/api/v1/sources") {
       json(response, 200, { count: sources.length, sources }, origin);
+      return;
+    }
+
+    if (url.pathname === "/api/v1/regions") {
+      const enrichedRegions = regions.map((region) => regionWithProducers(region, producers));
+      json(response, 200, { count: enrichedRegions.length, regions: enrichedRegions }, origin);
+      return;
+    }
+
+    const regionApiMatch = url.pathname.match(/^\/api\/v1\/regions\/([a-z0-9-]+)$/);
+    if (regionApiMatch) {
+      const region = regionById(regionApiMatch[1]);
+      json(
+        response,
+        region ? 200 : 404,
+        region ? regionWithProducers(region, producers) : { error: "Region not found" },
+        origin
+      );
       return;
     }
 
@@ -205,7 +250,13 @@ export function createServer() {
 
     json(response, 404, {
       error: "Not found",
-      endpoints: ["/health", "/api/v1/sources", "/api/v1/producers"]
+      endpoints: [
+        "/health",
+        "/api/v1/sources",
+        "/api/v1/producers",
+        "/api/v1/regions",
+        "/regions"
+      ]
     }, origin);
   });
 }

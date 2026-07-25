@@ -1,6 +1,6 @@
 # Champagne Atlas API
 
-Kleine, dependencyvrije Node.js API voor de Champagne Atlas Android-app.
+Node.js API voor de Champagne Atlas Android-app.
 
 ## Endpoints
 
@@ -10,6 +10,10 @@ Kleine, dependencyvrije Node.js API voor de Champagne Atlas Android-app.
 - `GET /api/v1/producers?q=bouzy`
 - `GET /api/v1/producers?source=club-tresors`
 - `GET /api/v1/producers/:id`
+- `GET /api/v1/regions`
+- `GET /api/v1/regions/:id`
+- `GET /regions`
+- `GET /regions/:id`
 - `GET /admin` (read-only beheerpagina met beveiligde adminlogin)
 
 De API bevat alleen publiek verifieerbare namen, plaatsen en bronlinks. Teksten,

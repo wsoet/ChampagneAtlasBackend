@@ -70,6 +70,38 @@ test("Muselet availability exposes a usable online shop link", async () => {
   });
 });
 
+test("region API exposes the five spreadsheet regions and producer links", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions`);
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(body.count, 5);
+    const aube = body.regions.find((region) => region.id === "aube");
+    assert.equal(aube.alternativeName, "Côte des Bar");
+    assert.ok(aube.producerCount > 0);
+    assert.equal(aube.producerIds.length, aube.producerCount);
+
+    const producersResponse = await fetch(`${baseUrl}/api/v1/producers`);
+    const producersBody = await producersResponse.json();
+    const linked = producersBody.producers.filter((producer) => producer.regionId);
+    assert.ok(linked.length > 250);
+    assert.ok(linked.every((producer) =>
+      producer.regionUrl === `/regions/${producer.regionId}`
+    ));
+  });
+});
+
+test("public region page renders spreadsheet information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/regions/montagne-de-reims`);
+    const body = await response.text();
+    assert.equal(response.status, 200);
+    assert.match(body, /Heuvelachtig gebied rond Reims/);
+    assert.match(body, /Champagnehuizen in deze regio/);
+    assert.match(body, /Regios\.xlsx/);
+  });
+});
+
 test("admin page does not expose producer data before authentication", async () => {
   const keys = [
     "ADMIN_USERNAME",
@@ -135,6 +167,7 @@ test("valid admin credentials create a protected session", async () => {
       assert.match(body, /Locatie \/ Type/);
       assert.match(body, /Belangrijkste cuvées/);
       assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
+      assert.match(body, /\/regions\/montagne-de-reims/);
     });
   } finally {
     for (const [key, value] of Object.entries(previous)) {

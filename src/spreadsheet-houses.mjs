@@ -1,3 +1,5 @@
+import { regionForName } from "./regions.mjs";
+
 const sourceName = "champagne.xlsx";
 
 const rows = [
@@ -3630,6 +3632,7 @@ export const spreadsheetHouses = rows.map((row) => {
     .replace(/\s{2,}/g, " ")
     .trim();
   const address = `${displayName}, ${city}, France`;
+  const matchedRegion = regionForName(row.region);
   return {
     id: `xlsx-${slug(row.name)}-${slug(city)}`,
     name: displayName,
@@ -3638,6 +3641,8 @@ export const spreadsheetHouses = rows.map((row) => {
     locationType: row.location,
     address,
     region: row.region || (isSubLabel ? "Champagne – Sub-label" : "Champagne"),
+    regionId: matchedRegion?.id || "",
+    regionUrl: matchedRegion ? `/regions/${matchedRegion.id}` : "",
     description: isSubLabel
       ? `${displayName} is in de aangeleverde bron gemarkeerd als sub-label.`
       : `${displayName} staat in de aangeleverde champagnecatalogus.`,
