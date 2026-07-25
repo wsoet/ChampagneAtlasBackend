@@ -13,7 +13,7 @@ function documentPage(title, body, script = "") {
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escapeHtml(title)}</title>
 <style>
-:root{--forest:#0f3b2e;--gold:#c9a227;--cream:#f2ebd6;--ivory:#fdfbf6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2}
+:root{--forest:#0f3b2e;--gold:#c9a227;--cream:#f2ebd6;--ivory:#fdfbf6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2;--red:#8b1731}
 *{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
 header{background:var(--forest);color:#fff;padding:22px 5vw;display:flex;align-items:center;gap:18px}
 header h1{font:500 30px Georgia,serif;margin:0}header .spacer{flex:1}
@@ -21,7 +21,7 @@ a{color:var(--forest)}.button{display:inline-block;border:0;border-radius:12px;p
 .button.light{background:white;color:var(--forest)}main{width:min(1180px,92vw);margin:28px auto}
 .login{width:min(520px,92vw);margin:12vh auto;padding:36px;border:1px solid var(--line);border-radius:22px;background:white;text-align:center;box-shadow:0 16px 50px #0f3b2e12}
 .login h1{font:500 38px Georgia,serif;color:var(--forest)}.muted{color:var(--muted)}
-.toolbar{display:grid;grid-template-columns:1fr 220px auto;gap:12px;margin:20px 0}
+.toolbar{display:grid;grid-template-columns:1fr 220px auto auto;gap:12px;margin:20px 0}
 input,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
 .stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:var(--cream);padding:8px 12px;border-radius:999px}
 .table-wrap{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:white}
@@ -38,7 +38,7 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
 .edit-panel{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}.edit-panel summary{color:var(--forest);font-weight:750;cursor:pointer}
 .edit-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.edit-form label{color:var(--muted);font-size:13px}
 .edit-form label span{display:block;margin-bottom:4px}.edit-form .wide{grid-column:1/-1}.edit-form textarea{width:100%;min-height:90px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit}
-.edit-form .check{display:flex;align-items:center;gap:8px;color:var(--ink)}.edit-form .check input{width:auto}.edit-actions{grid-column:1/-1;display:flex;justify-content:flex-end}
+.edit-form .check{display:flex;align-items:center;gap:8px;color:var(--ink)}.edit-form .check input{width:auto}.edit-actions{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px}.danger{background:var(--red)}
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
 @media(max-width:900px){
   .toolbar{grid-template-columns:1fr}.detail-grid,.edit-form{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.edit-actions{grid-column:1}
@@ -118,6 +118,7 @@ export function adminPage(producers, profile, csrf) {
       <select id="region"><option value="">Alle regio’s</option>${regions.map((region) =>
         `<option>${escapeHtml(region)}</option>`).join("")}</select>
       <select id="shop"><option value="">Alle huizen</option><option value="yes">Met Koop online</option></select>
+      <button id="newProducer" class="button" type="button">Nieuw huis</button>
     </div>
     <p id="count" class="muted"></p>
     <div class="table-wrap"><table>
@@ -125,12 +126,29 @@ export function adminPage(producers, profile, csrf) {
       <tbody id="rows"></tbody>
     </table></div>
   </main>
-  <dialog id="detail"><div class="detail"><button class="close" aria-label="Sluiten">×</button><div id="detailBody"></div></div></dialog>`;
+  <dialog id="detail"><div class="detail"><button class="close" aria-label="Sluiten">×</button><div id="detailBody"></div></div></dialog>
+  <dialog id="newDialog"><div class="detail"><button class="close" aria-label="Sluiten">×</button><h2>Nieuw champagnehuis</h2>
+  <form class="edit-form" method="post" action="/admin/producers/new">
+    <input type="hidden" name="csrf" value="${escapeHtml(csrf)}">
+    <label><span>Champagnehuis</span><input name="name" required></label>
+    <label><span>Plaats</span><input name="city"></label>
+    <label class="wide"><span>Adres</span><input name="address"></label>
+    <label><span>Locatie / Type</span><input name="locationType"></label>
+    <label><span>Regio</span><input name="region"></label>
+    <label><span>Website</span><input name="website" type="url"></label>
+    <label><span>Google Maps</span><input name="mapsUrl" type="url"></label>
+    <label class="check"><input name="visitable" type="checkbox" value="yes"> Bezoekbaar</label>
+    <label class="check"><input name="tastings" type="checkbox" value="yes"> Proeverijen</label>
+    <label class="wide"><span>Belangrijkste cuvées</span><textarea name="cuvees"></textarea></label>
+    <label class="check"><input name="museletAvailable" type="checkbox" value="yes"> Muselet beschikbaar</label>
+    <label><span>Muselet bron</span><input name="museletUrl" type="url"></label>
+    <div class="edit-actions"><span></span><button class="button" type="submit">Huis aanmaken</button></div>
+  </form></div></dialog>`;
   const script = `
 const data=${safeData};
 const csrf=${JSON.stringify(csrf)};
 const esc=(v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody");
+const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody"),newDialog=document.querySelector("#newDialog");
 function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel="noopener noreferrer">\${label}</a>\`:"—"}
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
 function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.region)}
@@ -139,6 +157,8 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.targ
 <details class="edit-panel"><summary>Gegevens bewerken</summary><form class="edit-form" method="post" action="/admin/producers/\${encodeURIComponent(p.id)}">
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
 <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
+<label><span>Plaats</span><input name="city" value="\${esc(p.city||"")}"></label>
+<label class="wide"><span>Adres</span><input name="address" value="\${esc(p.address||"")}"></label>
 <label><span>Locatie / Type</span><input name="locationType" value="\${esc(p.locationType||"")}"></label>
 <label><span>Website</span><input name="website" type="url" value="\${esc(p.website||"")}"></label>
 <label><span>Google Maps</span><input name="mapsUrl" type="url" value="\${esc(p.mapsUrl||"")}"></label>
@@ -148,9 +168,10 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.targ
 <label class="wide"><span>Belangrijkste cuvées</span><textarea name="cuvees">\${esc(p.cuvees||"")}</textarea></label>
 <label class="check"><input name="museletAvailable" type="checkbox" value="yes" \${p.museletAvailable?"checked":""}> Muselet beschikbaar</label>
 <label><span>Muselet bron</span><input name="museletUrl" type="url" value="\${esc(p.museletUrl||"")}"></label>
-<div class="edit-actions"><button class="button" type="submit">Wijzigingen opslaan</button></div>
+<div class="edit-actions"><button class="button danger" type="submit" formaction="/admin/producers/\${encodeURIComponent(p.id)}/delete" onclick="return confirm('Dit champagnehuis definitief verwijderen?')">Verwijderen</button><button class="button" type="submit">Wijzigingen opslaan</button></div>
 </form></details>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
+document.querySelector("#newProducer").addEventListener("click",()=>newDialog.showModal());newDialog.querySelector(".close").addEventListener("click",()=>newDialog.close());newDialog.addEventListener("click",e=>{if(e.target===newDialog)newDialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
   return documentPage("Champagne Atlas beheer", body, script);
 }

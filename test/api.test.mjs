@@ -205,6 +205,54 @@ test("valid admin credentials create a protected session", async () => {
       assert.equal(updated.name, "Paul Bara bijgewerkt");
       assert.equal(updated.cuvees, "Testcuvée");
       assert.equal(updated.editedBy, "test-admin");
+
+      const createResponse = await fetch(`${baseUrl}/admin/producers/new`, {
+        method: "POST",
+        redirect: "manual",
+        headers: {
+          Cookie: sessionCookie.split(";")[0],
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+          csrf,
+          name: "Nieuw Testhuis",
+          city: "Reims",
+          address: "1 Rue de Test",
+          locationType: "Reims",
+          website: "https://example.com/nieuw",
+          mapsUrl: "https://maps.google.com/",
+          region: "Montagne de Reims",
+          visitable: "yes",
+          tastings: "yes",
+          cuvees: "Cuvée Codex",
+          museletAvailable: "yes",
+          museletUrl: "https://muselet.nl/test"
+        })
+      });
+      assert.equal(createResponse.status, 303);
+      const createdId = new URL(
+        createResponse.headers.get("location"),
+        baseUrl
+      ).searchParams.get("saved");
+      assert.match(createdId, /^custom-nieuw-testhuis-[a-f0-9]{8}$/);
+
+      const createdResponse = await fetch(`${baseUrl}/api/v1/producers/${createdId}`);
+      const created = await createdResponse.json();
+      assert.equal(created.name, "Nieuw Testhuis");
+      assert.equal(created.address, "1 Rue de Test");
+      assert.equal(created.isCustom, true);
+
+      const deleteResponse = await fetch(`${baseUrl}/admin/producers/${createdId}/delete`, {
+        method: "POST",
+        redirect: "manual",
+        headers: {
+          Cookie: sessionCookie.split(";")[0],
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({ csrf })
+      });
+      assert.equal(deleteResponse.status, 303);
+      assert.equal((await fetch(`${baseUrl}/api/v1/producers/${createdId}`)).status, 404);
     });
   } finally {
     for (const [key, value] of Object.entries(previous)) {

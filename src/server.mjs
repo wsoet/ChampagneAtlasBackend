@@ -1,4 +1,5 @@
 import http from "node:http";
+import { randomBytes } from "node:crypto";
 import Busboy from "busboy";
 import { producers, sources } from "./catalog.mjs";
 import {
@@ -15,7 +16,12 @@ import {
 import { adminPage, forgotPage, loginPage, resetPage } from "./admin-page.mjs";
 import { regionPage, regionsIndexPage } from "./region-page.mjs";
 import { regionById, regionForName, regionWithProducers } from "./regions.mjs";
-import { producersWithOverrides, saveProducerOverride } from "./producer-store.mjs";
+import {
+  createProducer,
+  deleteProducer,
+  producersWithOverrides,
+  saveProducerOverride
+} from "./producer-store.mjs";
 import { regionAdminPage } from "./region-admin-page.mjs";
 import { allRegions, deleteRegion, regionBanner, saveRegion } from "./region-store.mjs";
 
@@ -141,6 +147,26 @@ function cleanRegionData(form) {
   };
 }
 
+function cleanProducerData(form) {
+  const name = String(form.name || "").trim();
+  if (!name) throw new Error("Producer name is required");
+  const museletUrl = cleanUrl(form.museletUrl);
+  return {
+    name,
+    city: String(form.city || "").trim(),
+    address: String(form.address || "").trim(),
+    locationType: String(form.locationType || "").trim(),
+    website: cleanUrl(form.website),
+    mapsUrl: cleanUrl(form.mapsUrl),
+    region: String(form.region || "").trim(),
+    visitable: form.visitable === "yes",
+    tastings: form.tastings === "yes",
+    cuvees: String(form.cuvees || "").trim(),
+    museletAvailable: form.museletAvailable === "yes" && Boolean(museletUrl),
+    museletUrl
+  };
+}
+
 export function createServer() {
   return http.createServer(async (request, response) => {
     const origin = request.headers.origin || "";
@@ -201,7 +227,49 @@ export function createServer() {
       return;
     }
 
-    const producerEditMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)$/);
+    const isNewProducer = url.pathname === "/admin/producers/new";
+    const producerDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/delete$/);
+    const producerEditMatch = isNewProducer ? null : url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)$/);
+    if (request.method === "POST" && (isNewProducer || producerDeleteMatch)) {
+      const profile = currentAdmin(request, config);
+      if (!profile) {
+        html(response, 401, loginPage(config.ready, "Log opnieuw in om gegevens te beheren."));
+        return;
+      }
+      try {
+        const form = await readForm(request);
+        if (!validCsrf(profile, form.csrf, config)) {
+          html(response, 403, loginPage(true, "De beveiligingscode is verlopen. Log opnieuw in."));
+          return;
+        }
+        const currentRegions = await allRegions();
+        const currentProducers = await producersWithOverrides(producers, currentRegions);
+        if (producerDeleteMatch) {
+          if (!currentProducers.some((producer) => producer.id === producerDeleteMatch[1])) {
+            json(response, 404, { error: "Producer not found" }, origin);
+            return;
+          }
+          await deleteProducer(producerDeleteMatch[1], profile.username);
+          response.writeHead(303, { Location: "/admin?deleted=1", "Cache-Control": "no-store" });
+          response.end();
+          return;
+        }
+        const data = cleanProducerData(form);
+        const baseSlug = data.name.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+          .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "huis";
+        const producerId = `custom-${baseSlug}-${randomBytes(4).toString("hex")}`;
+        await createProducer(producerId, data, profile.username);
+        response.writeHead(303, {
+          Location: `/admin?saved=${encodeURIComponent(producerId)}`,
+          "Cache-Control": "no-store"
+        });
+        response.end();
+      } catch {
+        html(response, 400, loginPage(true, "Het record kon niet worden opgeslagen."));
+      }
+      return;
+    }
+
     if (request.method === "POST" && producerEditMatch) {
       const profile = currentAdmin(request, config);
       if (!profile) {
@@ -214,8 +282,6 @@ export function createServer() {
           html(response, 403, loginPage(true, "De beveiligingscode is verlopen. Log opnieuw in."));
           return;
         }
-        const requiredName = String(form.name || "").trim();
-        if (!requiredName) throw new Error("Producer name is required");
         const currentRegions = await allRegions();
         const currentProducers = await producersWithOverrides(producers, currentRegions);
         if (!currentProducers.some((producer) => producer.id === producerEditMatch[1])) {
@@ -224,18 +290,7 @@ export function createServer() {
         }
         await saveProducerOverride(
           producerEditMatch[1],
-          {
-            name: requiredName,
-            locationType: String(form.locationType || "").trim(),
-            website: cleanUrl(form.website),
-            mapsUrl: cleanUrl(form.mapsUrl),
-            region: String(form.region || "").trim(),
-            visitable: form.visitable === "yes",
-            tastings: form.tastings === "yes",
-            cuvees: String(form.cuvees || "").trim(),
-            museletAvailable: form.museletAvailable === "yes" && Boolean(String(form.museletUrl || "").trim()),
-            museletUrl: cleanUrl(form.museletUrl)
-          },
+          cleanProducerData(form),
           profile.username
         );
         response.writeHead(303, {
