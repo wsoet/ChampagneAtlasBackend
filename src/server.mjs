@@ -1,5 +1,6 @@
 import http from "node:http";
 import { randomBytes } from "node:crypto";
+import { readFileSync } from "node:fs";
 import Busboy from "busboy";
 import { producers, sources } from "./catalog.mjs";
 import {
@@ -27,6 +28,9 @@ import { regionAdminPage } from "./region-admin-page.mjs";
 import { allRegions, deleteRegion, regionBanner, saveRegion } from "./region-store.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
+const champagneAtlasLogo = readFileSync(
+  new URL("../public/champagne-atlas-logo.png", import.meta.url)
+);
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
   .split(",")
   .map((value) => value.trim())
@@ -374,6 +378,17 @@ export function createServer() {
 
     if (request.method !== "GET") {
       json(response, 405, { error: "Method not allowed" }, origin);
+      return;
+    }
+
+    if (url.pathname === "/assets/champagne-atlas-logo.png") {
+      response.writeHead(200, {
+        "Content-Type": "image/png",
+        "Content-Length": champagneAtlasLogo.length,
+        "Cache-Control": "public, max-age=86400",
+        "X-Content-Type-Options": "nosniff"
+      });
+      response.end(champagneAtlasLogo);
       return;
     }
 

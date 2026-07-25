@@ -16,7 +16,7 @@ function documentPage(title, body, script = "") {
 :root{--forest:#0f3b2e;--gold:#c9a227;--cream:#f2ebd6;--ivory:#fdfbf6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2;--red:#8b1731}
 *{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
 header{background:var(--forest);color:#fff;padding:22px 5vw;display:flex;align-items:center;gap:18px}
-header h1{font:500 30px Georgia,serif;margin:0}header .spacer{flex:1}
+header h1{font:500 30px Georgia,serif;margin:0}header .spacer{flex:1}.brand{display:block;background:white;border-radius:10px;padding:4px 8px;line-height:0}.brand img{display:block;width:190px;height:54px;object-fit:contain}
 a{color:var(--forest)}.button{display:inline-block;border:0;border-radius:12px;padding:11px 16px;background:var(--forest);color:white;text-decoration:none;font-weight:650}
 .button.light{background:white;color:var(--forest)}main{width:min(1180px,92vw);margin:28px auto}
 .login{width:min(520px,92vw);margin:12vh auto;padding:36px;border:1px solid var(--line);border-radius:22px;background:white;text-align:center;box-shadow:0 16px 50px #0f3b2e12}
@@ -110,7 +110,7 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
   ).replaceAll("<", "\\u003c");
   const regions = [...new Set(producers.map((item) => item.region).filter(Boolean))]
     .sort((a, b) => a.localeCompare(b, "nl"));
-  const body = `<header><div><h1>Champagne Atlas</h1><small>Databasebeheer · alleen lezen</small></div>
+  const body = `<header><a class="brand" href="/admin" aria-label="Naar hoofdpagina"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a>
     <div class="spacer"></div><span>${escapeHtml(profile.username)}</span>
     <a class="button light" href="/admin/regions">Regio’s beheren</a>
     <a class="button light" href="/auth/logout">Uitloggen</a></header>

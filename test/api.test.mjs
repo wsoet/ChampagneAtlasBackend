@@ -42,6 +42,15 @@ test("producer endpoint exposes the 300 spreadsheet rows", async () => {
   });
 });
 
+test("Champagne Atlas logo asset is served", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/assets/champagne-atlas-logo.png`);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("content-type"), "image/png");
+    assert.ok((await response.arrayBuffer()).byteLength > 1000);
+  });
+});
+
 test("producer search is case insensitive", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/v1/producers?q=BOUZY`);
@@ -170,6 +179,7 @@ test("valid admin credentials create a protected session", async () => {
       assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
       assert.match(body, /\/regions\/montagne-de-reims/);
       assert.match(body, /Gegevens bewerken/);
+      assert.match(body, /href="\/admin" aria-label="Naar hoofdpagina"/);
       assert.match(body, /<select name="region">/);
       assert.match(body, /Montagne de Reims/);
       const csrf = body.match(/const csrf="([^"]+)"/)?.[1];
