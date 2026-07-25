@@ -24,15 +24,33 @@ a{color:var(--forest)}.button{display:inline-block;border:0;border-radius:12px;p
 .toolbar{display:grid;grid-template-columns:1fr 220px auto;gap:12px;margin:20px 0}
 input,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
 .stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:var(--cream);padding:8px 12px;border-radius:999px}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:white}
-table{width:100%;border-collapse:collapse;min-width:1750px}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.table-wrap{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:white}
+table{width:100%;border-collapse:collapse;table-layout:fixed}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+th{font-size:12px}td{font-size:13px}
+th:nth-child(1){width:13%}th:nth-child(2){width:10%}th:nth-child(3),th:nth-child(4){width:7%}
+th:nth-child(5){width:10%}th:nth-child(6),th:nth-child(7),th:nth-child(9){width:6%}
+th:nth-child(8){width:25%}th:nth-child(10){width:10%}
 th{position:sticky;top:0;background:#f7f2e7;color:var(--forest)}tbody tr:hover{background:#fcf8ef;cursor:pointer}
 .yes{color:var(--forest);font-weight:700}.no{color:var(--muted)}
 dialog{width:min(700px,92vw);border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
 dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 30px Georgia,serif;color:var(--forest);margin:0 0 4px}
 .detail-grid{display:grid;grid-template-columns:150px 1fr;gap:8px 18px;margin:22px 0}.detail-grid dt{color:var(--muted)}.detail-grid dd{margin:0;overflow-wrap:anywhere}
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
-@media(max-width:700px){.toolbar{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}}
+@media(max-width:900px){
+  .toolbar{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}
+  .table-wrap{border:0;background:transparent}table,tbody{display:block}thead{display:none}
+  tbody{display:grid;gap:14px}tbody tr{display:grid;grid-template-columns:minmax(120px,35%) 1fr;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
+  tbody td{display:grid;grid-template-columns:1fr;align-content:start;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line)}
+  tbody td::before{color:var(--muted);font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+  tbody td:nth-child(1){grid-column:1/-1;background:#f7f2e7;font-size:16px}
+  tbody td:nth-child(1)::before{content:"Champagnehuis"}tbody td:nth-child(2)::before{content:"Locatie / Type"}
+  tbody td:nth-child(3)::before{content:"Website"}tbody td:nth-child(4)::before{content:"Google Maps"}
+  tbody td:nth-child(5)::before{content:"Regio"}tbody td:nth-child(6)::before{content:"Bezoekbaar"}
+  tbody td:nth-child(7)::before{content:"Proeverijen"}tbody td:nth-child(8)::before{content:"Belangrijkste cuvées"}
+  tbody td:nth-child(9)::before{content:"Muselet"}tbody td:nth-child(10)::before{content:"Muselet bron"}
+  tbody td:nth-child(8),tbody td:nth-child(10){grid-column:1/-1}
+}
+@media(max-width:520px){tbody tr{grid-template-columns:1fr}tbody td,tbody td:nth-child(8),tbody td:nth-child(10){grid-column:1}}
 </style></head><body>${body}${script ? `<script nonce="ca-admin">${script}</script>` : ""}</body></html>`;
 }
 
