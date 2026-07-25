@@ -53,3 +53,15 @@ test("producer search is case insensitive", async () => {
     ));
   });
 });
+
+test("Muselet availability exposes a usable online shop link", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/producers`);
+    const body = await response.json();
+    const online = body.producers.filter((producer) => producer.museletAvailable);
+    assert.equal(online.length, 47);
+    assert.ok(online.every((producer) =>
+      producer.museletUrl.startsWith("https://muselet.nl/")
+    ));
+  });
+});

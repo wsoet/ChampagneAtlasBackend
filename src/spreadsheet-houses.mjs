@@ -1,1207 +1,3605 @@
 const sourceName = "champagne.xlsx";
-const civcDirectoryUrl =
-  "https://www.champagne.fr/fr/visiter-la-champagne/annuaire-caves-champagne";
 
 const rows = [
   {
     "name": "Abelé 1757",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.abele1757.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Abel%C3%A9%201757%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Brut traditionnel; Brut Millésimé; Rosé; Blanc de Blancs (+2)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Adrien Renoir",
-    "location": "Verzy"
+    "location": "Verzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Adrien%20Renoir%2C%20Verzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Agrapart & Fils",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Agrapart%20%26%20Fils%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "A. Bergère",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://champagne-andrebergere.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20A.%20Berg%C3%A8re%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "B15",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Albert Beerens",
-    "location": "Arrentières"
+    "location": "Arrentières",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Albert%20Beerens%2C%20Arrenti%C3%A8res%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Albert Lebrun",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Albert%20Lebrun%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Alexandre Bonnet",
-    "location": "Les Riceys"
+    "location": "Les Riceys",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Alexandre%20Bonnet%2C%20Les%20Riceys%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Alexandre Grimée",
-    "location": "Bonneil"
+    "location": "Bonneil",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Alexandre%20Grim%C3%A9e%2C%20Bonneil%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Alfred Gratien",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.alfredgratien.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Alfred%20Gratien%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Alice Bardot",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Alice%20Bardot%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Amour de Deutz",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-deutz.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Amour%20de%20Deutz%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Deutz Brut Classic; Deutz Brut Rosé non millésimé; Deutz Brut Millésimé; Deutz Blanc de Blancs millésimé (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/deutz-amour-de-deutz-rose-2013/"
   },
   {
     "name": "André Clouet",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Andr%C3%A9%20Clouet%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "André Tixier & Fils",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "http://www.champagne-andre-tixier.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Andr%C3%A9%20Tixier%20%26%20Fils%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Antoine Chevalier",
-    "location": "Vitry-en-Perthois"
+    "location": "Vitry-en-Perthois",
+    "website": "http://www.champagneantoinechevalier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Antoine%20Chevalier%2C%20Vitry-en-Perthois%2C%20France",
+    "region": "Coteaux Vitryats",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Apollonis",
-    "location": "Festigny"
+    "location": "Festigny",
+    "website": "http://www.champagneapollonis.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Apollonis%2C%20Festigny%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": false,
+    "cuvees": "La gamme",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Arlaux",
-    "location": "Vrigny"
+    "location": "Vrigny",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Arlaux%2C%20Vrigny%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Armand de Brignac",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "http://www.cattier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Armand%20de%20Brignac%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Collection LAVENTURE ARGENT Blanc de Blancs Brut Premier Cru 400 ans; Collection LAVENTURE Or Blanc de Blancs Brut Premier Cru 400 ans",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-armand-de-brignac-magnum/"
   },
   {
     "name": "Arnaud de Cheurlin",
-    "location": "Celles-sur-Ource"
+    "location": "Celles-sur-Ource",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Arnaud%20de%20Cheurlin%2C%20Celles-sur-Ource%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Aubry",
-    "location": "Jouy-lès-Reims"
+    "location": "Jouy-lès-Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Aubry%2C%20Jouy-l%C3%A8s-Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Augustin",
-    "location": "Avenay-Val-d'Or"
+    "location": "Avenay-Val-d'Or",
+    "website": "http://www.champagne-augustin.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Augustin%2C%20Avenay-Val-d'Or%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Ayala",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-ayala.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ayala%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Brut MajeurLa cuvée identitaire",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/ayala-rose-majeur-met-giftbox/"
   },
   {
     "name": "Barons de Rothschild",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.champagne-bdr.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Barons%20de%20Rothschild%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Rare Collection Blanc de Blancs 2013; Rare Collection Blanc de Blancs 2014; Rothschild Rare Collection Blanc de Blancs 2014",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/barons-de-rothschild-rose/"
   },
   {
     "name": "Baron-Fuenté",
-    "location": "Charly-sur-Marne"
+    "location": "Charly-sur-Marne",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Baron-Fuent%C3%A9%2C%20Charly-sur-Marne%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Barthélemy",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Barth%C3%A9lemy%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bauget-Jouette",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bauget-Jouette%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Beau Joie",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Beau%20Joie%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Beaumet",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Beaumet%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Beaumont de Crayères",
-    "location": "Mardeuil"
+    "location": "Mardeuil",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Beaumont%20de%20Cray%C3%A8res%2C%20Mardeuil%2C%20France",
+    "region": "Épernay",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Benecki",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Benecki%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Benoit Lahaye",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Benoit%20Lahaye%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Benoît Marguet",
-    "location": "Ambonnay"
+    "location": "Ambonnay",
+    "website": "http://www.champagne-marguet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Beno%C3%AEt%20Marguet%2C%20Ambonnay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Besserat de Bellefon",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "https://maisons-champagne.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Besserat%20de%20Bellefon%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/besserat-de-bellefon-rose-brut/"
   },
   {
     "name": "Billecart-Salmon",
-    "location": "Mareuil-sur-Aÿ"
+    "location": "Mareuil-sur-Aÿ",
+    "website": "http://www.champagne-billecart.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Billecart-Salmon%2C%20Mareuil-sur-A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne Le Rosé; Champagne Le Réserve; Séries limitées & coffrets Des cuvées précieuses et des offres exclusives.",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/billecart-salmon-le-rose/"
   },
   {
     "name": "Binet",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Binet%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bliard-Moriset",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "http://www.champagne-bliard-moriset.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bliard-Moriset%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Blin",
-    "location": "Vincelles"
+    "location": "Vincelles",
+    "website": "http://www.champagne-blin.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Blin%2C%20Vincelles%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Parcellaire 100 % Meunier - 2012; Sélection Parcellaire Rosé de Saignée 100 % meunier",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Boerl & Kroff",
-    "location": "Urville"
+    "location": "Urville",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Boerl%20%26%20Kroff%2C%20Urville%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Boizel",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.boizel.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Boizel%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Les Intemporels : Brut Réserve; Rosé Absolu; Ultime Zéro. - L'Origine : La Côte Blanc de Blancs Premier Cru; La Montagne Blanc de Noirs Premier Cru (+5)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bollinger",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-bollinger.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bollinger%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "La Grande Année Rosé; La Grande Année Rosé 2012; La Grande Année Rosé 2015",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/bollinger-rose-met-giftbox/"
   },
   {
     "name": "Bonnaire",
-    "location": "Cramant"
+    "location": "Cramant",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bonnaire%2C%20Cramant%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "CRAMANT VINTAGE 2014 Grand Cru Blanc de Blancs",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Boulard Bauquaire",
-    "location": "Cormicy"
+    "location": "Cormicy",
+    "website": "http://www.champagne-boulard-bauquaire.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Boulard%20Bauquaire%2C%20Cormicy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bouché Père & Fils",
-    "location": "Pierry"
+    "location": "Pierry",
+    "website": "http://www.champagne-bouche.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bouch%C3%A9%20P%C3%A8re%20%26%20Fils%2C%20Pierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bourdaire-Gallois",
-    "location": "Pouillon"
+    "location": "Pouillon",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bourdaire-Gallois%2C%20Pouillon%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bressant",
-    "location": "Bligny"
+    "location": "Bligny",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bressant%2C%20Bligny%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Brieuil",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Brieuil%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Brosslette",
-    "location": "Troyes"
+    "location": "Troyes",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Brosslette%2C%20Troyes%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Brice",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "http://www.champagne-brice.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Brice%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Brut Héritage; Brut Héritage rose; Héritage Elevage Prolongé Brut Nature; Blanc de Blancs Premier Cru Extra-Brut (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/brice-blanc-de-noirs/"
   },
   {
     "name": "Bruno Michel",
-    "location": "Pierry"
+    "location": "Pierry",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bruno%20Michel%2C%20Pierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Bruno Paillard",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.champagnebrunopaillard.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bruno%20Paillard%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne : Bruno Paillard",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Canard-Duchêne",
-    "location": "Ludes"
+    "location": "Ludes",
+    "website": "http://www.canard-duchene.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Canard-Duch%C3%AAne%2C%20Ludes%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagnes : Brut; Demi-sec; Rosé; Vintage (+9)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Carbon",
-    "location": "Champillon"
+    "location": "Champillon",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Carbon%2C%20Champillon%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Carbot",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Carbot%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Castelnau",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Castelnau%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Cattier",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "http://www.cattier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Cattier%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Collection LAVENTURE ARGENT Blanc de Blancs Brut Premier Cru 400 ans; Collection LAVENTURE Or Blanc de Blancs Brut Premier Cru 400 ans",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/cattier-dry/"
   },
   {
     "name": "Chanoine Frères",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.chanoine-freres.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Chanoine%20Fr%C3%A8res%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Chanoine Frères : Brut; Rosé; Demi-sec; Blanc de Noirs et Vintage / Tsarine : Brut (+5)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Charles de Cazanove",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.champagnedecazanove.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Charles%20de%20Cazanove%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne : Charles de Cazanove.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Charles Collin",
-    "location": "Fontette"
+    "location": "Fontette",
+    "website": "http://champagne-charles-collin.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Charles%20Collin%2C%20Fontette%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Charles Ellner",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.champagne-ellner.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Charles%20Ellner%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Charles Heidsieck",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://charlesheidsieck.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Charles%20Heidsieck%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagnes : Charles Heidsieck Brut Réserve; Charles Heidsieck Rosé Réserve; Charles Heidsieck Blanc de Blancs; Brut Millésime 2006 (+2)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/charles-heidsieck-brut-reserve/"
   },
   {
     "name": "Charles Mignon",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.champagne-mignon.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Charles%20Mignon%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Charles Mignon; Louis Tollet; Fievet Comte de Marne; Léon Launois.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Chartogne-Taillet",
-    "location": "Merfy"
+    "location": "Merfy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Chartogne-Taillet%2C%20Merfy%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Château de Bligny",
-    "location": "Bligny"
+    "location": "Bligny",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ch%C3%A2teau%20de%20Bligny%2C%20Bligny%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Château de Boursault",
-    "location": "Boursault"
+    "location": "Boursault",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ch%C3%A2teau%20de%20Boursault%2C%20Boursault%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Château de la Marquetterie",
-    "location": "Pierry"
+    "location": "Pierry",
+    "website": "http://www.taittinger.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ch%C3%A2teau%20de%20la%20Marquetterie%2C%20Pierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Taittinger Brut Réserve; Brut Prestige Rosé; Brut Millésimé; Prélude \"Grands Crus\" (+5)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Chauvet",
-    "location": "Tours-sur-Marne"
+    "location": "Tours-sur-Marne",
+    "website": "http://www.champagne-forget-chauvet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Chauvet%2C%20Tours-sur-Marne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Cuvée Duo 2014; Rosé de Saignée",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Chéreau-Carré",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ch%C3%A9reau-Carr%C3%A9%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Cheurlin Dangin",
-    "location": "Celles-sur-Ource"
+    "location": "Celles-sur-Ource",
+    "website": "http://www.cheurlin-dangin.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Cheurlin%20Dangin%2C%20Celles-sur-Ource%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Clandestin",
-    "location": "Buxières-sur-Arce"
+    "location": "Buxières-sur-Arce",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Clandestin%2C%20Buxi%C3%A8res-sur-Arce%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Cl de la Chapelle",
-    "location": "Villedommange"
+    "location": "Villedommange",
+    "website": "http://www.cldelachapelle.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Cl%20de%20la%20Chapelle%2C%20Villedommange%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Audace; OUR CHAMPAGNES",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Cochet-Bacha",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Cochet-Bacha%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Collet",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.domaine-collet-champagne.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Collet%2C%20A%C3%BF%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "L'ARC BOUTE; L'EGRAPPEE; L'ORIGINELLE; LA FUSIONNELLE (+3)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Comte de Champagne",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Comte%20de%20Champagne%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-comtes/"
   },
   {
     "name": "Comte de Montaigne",
-    "location": "Celles-sur-Ource"
+    "location": "Celles-sur-Ource",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Comte%20de%20Montaigne%2C%20Celles-sur-Ource%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Comtesse de Cérès",
-    "location": "Verzenay"
+    "location": "Verzenay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Comtesse%20de%20C%C3%A9r%C3%A8s%2C%20Verzenay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Comtesse Lafond",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.comtesselafond.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Comtesse%20Lafond%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Condé de Valdemar",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Cond%C3%A9%20de%20Valdemar%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Coquillette",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Coquillette%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Cristal",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Cristal%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Collection; Vintage; Rosé Vintage; Vintage Blanc de Blancs (+7)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Daniel Dumont",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "http://www.champagne-danieldumont.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Daniel%20Dumont%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "De Castellane",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.castellane.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20De%20Castellane%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Champagne De Castellane : Brut Croix Rouge; Demi-Sec; Rosé; Millésimé (+3)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "De Linières",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20De%20Lini%C3%A8res%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "De Saint-Gall",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20De%20Saint-Gall%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "De Venoge",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.champagnedevenoge.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20De%20Venoge%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Cordon Bleu : Brut; Extra Brut; Rosé; Blanc de Noirs (+4)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/de-venoge-princesse-rose-met-giftbox/"
   },
   {
     "name": "Delamotte",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "http://www.salondelamotte.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Delamotte%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Delamotte Brut; Delamotte Blanc de Blancs; Delamotte Blanc de Blancs Millésimé; Delamotte Rosé.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Delavenne Père & Fils",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Delavenne%20P%C3%A8re%20%26%20Fils%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Delbeck",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Delbeck%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Demoiselle",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.vrankenpommery.comvisites",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Demoiselle%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne VRANKEN : Demi Sec; Rosé; 1ers Crus; Millésimé (+8)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Desbordes-Amiaud",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Desbordes-Amiaud%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Deutz",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-deutz.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Deutz%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Deutz Brut Classic; Deutz Brut Rosé non millésimé; Deutz Brut Millésimé; Deutz Blanc de Blancs millésimé (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/deutz-brut-met-giftbox/"
   },
   {
     "name": "Devaux",
-    "location": "Bar-sur-Seine"
+    "location": "Bar-sur-Seine",
+    "website": "http://www.champagne-devaux.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Devaux%2C%20Bar-sur-Seine%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Dhondt-Grellet",
-    "location": "Flavigny"
+    "location": "Flavigny",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Dhondt-Grellet%2C%20Flavigny%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Diebolt-Vallois",
-    "location": "Cramant"
+    "location": "Cramant",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Diebolt-Vallois%2C%20Cramant%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Diran",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Diran%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Dom Pérignon",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.moet.comfr-fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Dom%20P%C3%A9rignon%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Main navigation",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dom-perignon-2015-met-giftbox/"
   },
   {
     "name": "Dom Caudron",
-    "location": "Passy-Grigny"
+    "location": "Passy-Grigny",
+    "website": "http://www.domcaudron.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Dom%20Caudron%2C%20Passy-Grigny%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Brut-Nature; Cornalyne; Fascinante; Prédiction (+3)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Dom Ruinart",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.ruinart.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Dom%20Ruinart%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne prestige",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-dom-ruinart-blanc-de-blancs-1982/"
   },
   {
     "name": "Dossot",
-    "location": "Baroville"
+    "location": "Baroville",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Dossot%2C%20Baroville%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Doyard",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.champagnedoyard.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Doyard%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Désir; Millésime 2014 Extra Brut",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Doyard-Mahé",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.champagne-doyard-mahe.info/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Doyard-Mah%C3%A9%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Désir; Millésime 2014 Extra Brut",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Drappier",
-    "location": "Urville"
+    "location": "Urville",
+    "website": "https://www.champagne-drappier.comfr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Drappier%2C%20Urville%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Duval-Leroy",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.duval-leroy.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Duval-Leroy%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Gamme CHR et commerce traditionnel et vente aux particuliers : - Range Wine merchants; Hotels and Restaurants and traditional businesses and private sale: Fleur de Champagne - Femme de Champagne - Lady Rose. - Gamme GMS : Champagne Duval-Leroy",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Duménil",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "http://www.champagne-dumenil.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Dum%C3%A9nil%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Les Cuvées",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Egly-Ouriet",
-    "location": "Ambonnay"
+    "location": "Ambonnay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Egly-Ouriet%2C%20Ambonnay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Elodie D.",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.champagneelodied.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Elodie%20D.%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Esterlin",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Esterlin%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/esterlin-brut-eclat/"
   },
   {
     "name": "Feneuil",
-    "location": "Marne"
+    "location": "Marne",
+    "website": "http://www.champagne-fp.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Feneuil%2C%20Marne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Brut Rosé",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Fleury",
-    "location": "Courteron"
+    "location": "Courteron",
+    "website": "http://www.champagne-fleuryetfils.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Fleury%2C%20Courteron%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/fleury-rose-de-saignee-brut/"
   },
   {
     "name": "Fourny",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.champagne-veuve-fourny.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Fourny%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Franck Bonville",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "https://champagne-franck-bonville.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Franck%20Bonville%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Brut Grand Cru; Unisson",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Françoise Bedel",
-    "location": "Port-à-Binson"
+    "location": "Port-à-Binson",
+    "website": "https://www.champagne-bedel.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Fran%C3%A7oise%20Bedel%2C%20Port-%C3%A0-Binson%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Comme Autrefois; L'Âme de la Terre",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "François Secondé",
-    "location": "Sillery"
+    "location": "Sillery",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Fran%C3%A7ois%20Second%C3%A9%2C%20Sillery%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "G.H. Martel & Co.",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20G.H.%20Martel%20%26%20Co.%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne : Comte de Noiron; Balahu; Charles du Roy; Maxim's.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "G.H. Mumm",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.mumm.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20G.H.%20Mumm%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Mumm Demi-Sec; Mumm Grand Cordon Rosé; Mumm Millésimé 2013; RSRV 4.5 (+3)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/mumm-le-rose/"
   },
   {
     "name": "Gaby",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gaby%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gardet",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "http://www.champagne-gardet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gardet%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Brut Tradition; Brut Blanc de Noirs 1er Cru; Brut Réserve 1er Cru; Brut Rosé (+8)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gaston Chiquet",
-    "location": "Dizy"
+    "location": "Dizy",
+    "website": "http://www.gastonchiquet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gaston%20Chiquet%2C%20Dizy%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Blanc de Blancs d'Aÿ; Cuvée de Réserve; Insolent; Or Premier Cru 2016 (+3)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gatinois",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gatinois%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gauthier",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "https://www.champagnedevignerons.frvignerons/champagne-gauthier-christophe/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gauthier%2C%20%C3%89pernay%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Grand Cru Blanc de Blancs; Réserve Brut",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gauthier-Christophe",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "https://www.champagnedevignerons.frvignerons/champagne-gauthier-christophe/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gauthier-Christophe%2C%20%C3%89pernay%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Grand Cru Blanc de Blancs; Réserve Brut",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Geoffroy",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "https://www.champagnejamesgeoffroy.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Geoffroy%2C%20A%C3%BF%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "L'AMBITIEUSE; L'INSTANT SUBTIL; TERRE D'HERITAGE - Brut; TERRE D'HERITAGE - Demi-Sec",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "George de la Chapelle",
-    "location": "Villers-sous-Châtillon"
+    "location": "Villers-sous-Châtillon",
+    "website": "http://www.cldelachapelle.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20George%20de%20la%20Chapelle%2C%20Villers-sous-Ch%C3%A2tillon%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Audace; OUR CHAMPAGNES",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Georges Cartier",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Georges%20Cartier%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Georges Vesselle",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Georges%20Vesselle%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gimonnet-Gonet",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "https://www.champagne-gimonnet-gonet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gimonnet-Gonet%2C%20Bouzy%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gonet-Médeville",
-    "location": "Bisseuil"
+    "location": "Bisseuil",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gonet-M%C3%A9deville%2C%20Bisseuil%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Gosset",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-gosset.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Gosset%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Restons en contact !",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/gosset-brut-grand-rose/"
   },
   {
     "name": "Goutorbe",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-henri-goutorbe.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Goutorbe%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "GB",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Grandes Marques",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Grandes%20Marques%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Grimée",
-    "location": "Bonneil"
+    "location": "Bonneil",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Grim%C3%A9e%2C%20Bonneil%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Guiborat",
-    "location": "Cramant"
+    "location": "Cramant",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Guiborat%2C%20Cramant%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Guy Charlemagne",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "http://www.champagne-guy-charlemagne.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Guy%20Charlemagne%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": false,
+    "cuvees": "BRUT CLASSIC; BRUT NATURE; BRUT ROSE; CUVEE CHARLEMAGNE LES COULMETS GRAND CRU (+2)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Guy Dumangin",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Guy%20Dumangin%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Guy de Chassey",
-    "location": "Louvois"
+    "location": "Louvois",
+    "website": "http://www.champagne-guy-de-chassey.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Guy%20de%20Chassey%2C%20Louvois%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Brut Cuvée Réservée Nicolas d'Olivet 2019",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "H. Blin",
-    "location": "Vincelles"
+    "location": "Vincelles",
+    "website": "http://www.champagne-blin.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20H.%20Blin%2C%20Vincelles%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Parcellaire 100 % Meunier - 2012; Sélection Parcellaire Rosé de Saignée 100 % meunier",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Heidsieck & Co Monopole",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://maisons-champagne.comen/house/heidsieck-co-monopole",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Heidsieck%20%26%20Co%20Monopole%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Henri Abelé",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Henri%20Abel%C3%A9%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Brut traditionnel; Brut Millésimé; Rosé; Blanc de Blancs (+2)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Henri Giraud",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-giraud.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Henri%20Giraud%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "CHAMPAGNES : Argonne 2014; MV17; MV Rosé; Esprit Nature (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/henri-giraud-pr-90-20-met-giftbox/"
   },
   {
     "name": "Henri Mandois",
-    "location": "Pierry"
+    "location": "Pierry",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Henri%20Mandois%2C%20Pierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Henriot",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.champagne-henriot.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Henriot%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne Henriot : Brut Souverain; Blanc de Blancs; Brut Rosé; Brut Millésimé (+3)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Hervieux-Dumez",
-    "location": "Sacy"
+    "location": "Sacy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Hervieux-Dumez%2C%20Sacy%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Hostomme",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "http://www.champagnehostomme.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Hostomme%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Rosé de Saignée; Tradition",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Hubert Paulet",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Hubert%20Paulet%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Hure Frères",
-    "location": "Ludes"
+    "location": "Ludes",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Hure%20Fr%C3%A8res%2C%20Ludes%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Irroy",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://maisons-champagne.comen/house/irroy",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Irroy%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne : Ernest Irroy",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "J. de Telmont",
-    "location": "Damery"
+    "location": "Damery",
+    "website": "http://www.champagne-telmont.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20J.%20de%20Telmont%2C%20Damery%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "J. Lassalle",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20J.%20Lassalle%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "J.M. Gobillard & Fils",
-    "location": "Hautvillers"
+    "location": "Hautvillers",
+    "website": "http://www.champagne-gobillard.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20J.M.%20Gobillard%20%26%20Fils%2C%20Hautvillers%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "J.M. Labruyère",
-    "location": "Verzenay"
+    "location": "Verzenay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20J.M.%20Labruy%C3%A8re%2C%20Verzenay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "J.M. Seleque",
-    "location": "Pierry"
+    "location": "Pierry",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20J.M.%20Seleque%2C%20Pierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jacques Selosse",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jacques%20Selosse%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jacquart",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.champagne-jacquart.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jacquart%2C%20Reims%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Nos Cuvées",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-jacquart-brut-rose/"
   },
   {
     "name": "Jacquesson",
-    "location": "Dizy"
+    "location": "Dizy",
+    "website": "http://www.champagnejacquesson.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jacquesson%2C%20Dizy%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "De 728 à 748, 20 ans de créationdes cuvées 700.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Janisson & Fils",
-    "location": "Verzenay"
+    "location": "Verzenay",
+    "website": "https://maisons-champagne.comen/house/janisson-fils",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Janisson%20%26%20Fils%2C%20Verzenay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Janisson-Baradon",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Janisson-Baradon%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jean Comyn",
-    "location": "Châlons-en-Champagne"
+    "location": "Châlons-en-Champagne",
+    "website": "http://www.champagne-jean-comyn.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jean%20Comyn%2C%20Ch%C3%A2lons-en-Champagne%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "SO HYPE; SO MYSTIC",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jean Diot",
-    "location": "Vinay"
+    "location": "Vinay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jean%20Diot%2C%20Vinay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jean Milan",
-    "location": "Oger"
+    "location": "Oger",
+    "website": "http://www.champagne-milan.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jean%20Milan%2C%20Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jean Laurent",
-    "location": "Celles-sur-Ource"
+    "location": "Celles-sur-Ource",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jean%20Laurent%2C%20Celles-sur-Ource%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jean-Noël Haton",
-    "location": "Damery"
+    "location": "Damery",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jean-No%C3%ABl%20Haton%2C%20Damery%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jeunaux-Robin",
-    "location": "Talus-Saint-Prix"
+    "location": "Talus-Saint-Prix",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jeunaux-Robin%2C%20Talus-Saint-Prix%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Fil de Brume; Les Marnes Blanches",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Joseph Perrier",
-    "location": "Châlons-en-Champagne"
+    "location": "Châlons-en-Champagne",
+    "website": "http://www.josephperrier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Joseph%20Perrier%2C%20Ch%C3%A2lons-en-Champagne%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Cuvée Royale Brut; Cuvée Royale Blanc de Blancs; Cuvée Royale Rosé; Cuvée Royale Demi-Sec (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-joseph-perrier-brut/"
   },
   {
     "name": "Juillet-Lallement",
-    "location": "Verzy"
+    "location": "Verzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Juillet-Lallement%2C%20Verzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Krug",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Krug%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Krug Grande Cuvée; Krug Rosé; Krug Millésime; Krug Clos du Mesnil (+2)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-krug-grande-cuvee/"
   },
   {
     "name": "Laherte Frères",
-    "location": "Chavot"
+    "location": "Chavot",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Laherte%20Fr%C3%A8res%2C%20Chavot%2C%20France",
+    "region": "Épernay",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lallier",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "http://www.champagne-lallier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lallier%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Série R; Blanc de Blancs; Blanc de Noirs; Grand Rosé (+1)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/lallier-rose-met-giftbox/"
   },
   {
     "name": "Lamiable",
-    "location": "Tours-sur-Marne"
+    "location": "Tours-sur-Marne",
+    "website": "http://www.champagnelamiable.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lamiable%2C%20Tours-sur-Marne%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lanson",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.lanson.comnous-rendre-visite.php",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lanson%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne Lanson : Le Black Création; Le Rosé Création; Le Black Réserve; le Blanc de Blancs (+4)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/lanson-rose-met-giftbox/"
   },
   {
     "name": "Larmandier-Bernier",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.larmandier.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Larmandier-Bernier%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "LONGITUDE 1er cru extra-brut; TERRE DE VERTUS 1er cru brut nature",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lassalle",
-    "location": "Chigny-les-Roses"
+    "location": "Chigny-les-Roses",
+    "website": "https://www.champagne-lassalle-hanin.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lassalle%2C%20Chigny-les-Roses%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Laurent-Perrier",
-    "location": "Tours-sur-Marne"
+    "location": "Tours-sur-Marne",
+    "website": "http://www.laurent-perrier.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Laurent-Perrier%2C%20Tours-sur-Marne%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Grand Siècle par Laurent-Perrier; Cuvée Rosé Laurent-Perrier; Ultra Brut; Laurent-Perrier La Cuvée (+4)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/laurent-perrier-la-cuvee-brut/"
   },
   {
     "name": "Le Guédard",
-    "location": "Ambonnay"
+    "location": "Ambonnay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Le%20Gu%C3%A9dard%2C%20Ambonnay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Le Brun de Neuville",
-    "location": "Bethon"
+    "location": "Bethon",
+    "website": "http://www.lebrundeneuville.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Le%20Brun%20de%20Neuville%2C%20Bethon%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Côte Blanche",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Leclerc Briant",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.leclercbriant.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Leclerc%20Briant%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Legras & Haas",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "http://www.legras-et-haas.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Legras%20%26%20Haas%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lété-Vautrain",
-    "location": "Château-Thierry"
+    "location": "Château-Thierry",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20L%C3%A9t%C3%A9-Vautrain%2C%20Ch%C3%A2teau-Thierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lilbert-Fils",
-    "location": "Cramant"
+    "location": "Cramant",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lilbert-Fils%2C%20Cramant%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lombard",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lombard%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Extra Brut Premier Cru - Extra Brut Premier Cru Blanc de Noirs - Brut Rosé Premier Cru - Brut Nature Grand Cru - Brut Nature Grand Cru Blanc de Blancs - Brut Nature Le Mesnil sur Oger Grand Cru - Brut Nature Verzenay Grand Cru - Brut Nature Chouilly Grand Cru - Brut Nature Cramant Grand Cru - Brut Nature Verzenay Grand Cru lieu-dit \"Les Correttes\" - Brut Nature Rosé de Saignée Verzenay Grand Cru lieu-dit \"Les Marquises\" - Brut Nature Avize Grand Cru lieu-dit \"Chemin de Flavigny\" - Brut Nature Grand Cru Millésimé 2008.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Louis Barthélémy",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Louis%20Barth%C3%A9l%C3%A9my%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Louis Casters",
-    "location": "Damery"
+    "location": "Damery",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Louis%20Casters%2C%20Damery%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Louis de Sacy",
-    "location": "Verzy"
+    "location": "Verzy",
+    "website": "http://www.champagnelouisdesacy.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Louis%20de%20Sacy%2C%20Verzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Cuvée Originel; Cuvée Grand Cru; Cuvée Rosé de Saignée; Cuvée Parcellaire\" Les Courtisols\" Millésime 2015 (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Louis Massing",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "http://www.champagne-louis-massing.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Louis%20Massing%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Louis Nicaise",
-    "location": "Hautvillers"
+    "location": "Hautvillers",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Louis%20Nicaise%2C%20Hautvillers%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Louis Roederer",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Louis%20Roederer%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Collection; Vintage; Rosé Vintage; Vintage Blanc de Blancs (+7)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/louis-roederer-244-met-giftbox/"
   },
   {
     "name": "Mansard Baillet",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Mansard%20Baillet%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne Mansard Baillet : Carte Noire; Rosé; Cuvée des Sacres; Cuvée du Triomphe (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Marc Hébrart",
-    "location": "Mareuil-sur-Aÿ"
+    "location": "Mareuil-sur-Aÿ",
+    "website": "http://www.champagne-marc.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Marc%20H%C3%A9brart%2C%20Mareuil-sur-A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/marc-hebrart-rose-brut-premier-cru/"
   },
   {
     "name": "Marie-Courtin",
-    "location": "Polisot"
+    "location": "Polisot",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Marie-Courtin%2C%20Polisot%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Marquis de Pommereuil",
-    "location": "Les Riceys"
+    "location": "Les Riceys",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Marquis%20de%20Pommereuil%2C%20Les%20Riceys%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Marniquet",
-    "location": "Venteuil"
+    "location": "Venteuil",
+    "website": "https://www.champagnedevignerons.frvignerons/champagne-blosseville-marniquet/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Marniquet%2C%20Venteuil%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Brut Tradition; Cuvée André Claude; Extra Brut; Prestige de Cumières (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Maurice Grumier",
-    "location": "Venteuil"
+    "location": "Venteuil",
+    "website": "http://www.champagne-grumier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Maurice%20Grumier%2C%20Venteuil%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Réserve Perpétuelle",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Maxime Blin",
-    "location": "Trigny"
+    "location": "Trigny",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Maxime%20Blin%2C%20Trigny%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Grande Tradition",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Mercier",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.champagnemercier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Mercier%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Blanc de Noirs; Discover our Mercier champagne; Mercier Brut; Mercier Brut Rosé (+1)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/mercier-brut-rose/"
   },
   {
     "name": "Michel Fagot",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "https://www.fagot.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Michel%20Fagot%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Michel Gonet",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.gonet.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Michel%20Gonet%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Moët & Chandon",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.moet.comfr-fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Mo%C3%ABt%20%26%20Chandon%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Main navigation",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/dummy-fles-moet-chandon-brut-magnum/"
   },
   {
     "name": "Moncuit",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "http://www.pierre-moncuit.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Moncuit%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "HUGUES DE COULMET; HUGUES DE COULMET DEMI-SEC; MILLESIME 2008 BRUT; MILLESIME 2008 EXTRA BRUT (+4)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Montaudon",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Montaudon%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Morize",
-    "location": "Les Riceys"
+    "location": "Les Riceys",
+    "website": "http://www.champagnemorize.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Morize%2C%20Les%20Riceys%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "MARC MORIZET BRUT; MARC MORIZET CUVÉE RESERVE; MARC MORIZET DEMI SEC; MARC MORIZET EXTRA BRUT",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Moutard-Diligent",
-    "location": "Buxeuil"
+    "location": "Buxeuil",
+    "website": "https://www.famillemoutard.comfr/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Moutard-Diligent%2C%20Buxeuil%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne Moutard : Brut, Pinot Noir, Chardonnay; Moutard Champagne: Brut, Pinot Noir, Chardonnay; Moutard Distillery1892 and its specialities: Marc de Champagne, Liqueurs, Whisky.; Moutard vineyard in Burgundy: Chablis and Crémant de Bourgogne wines",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Nathalie Falmet",
-    "location": "Rouvres-les-Vignes"
+    "location": "Rouvres-les-Vignes",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Nathalie%20Falmet%2C%20Rouvres-les-Vignes%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Nicolas Feuillatte",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "http://www.nicolas-feuillatte.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Nicolas%20Feuillatte%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/nicolas-feuillatte-cooler/"
   },
   {
     "name": "Nicolas Maillart",
-    "location": "Écueil"
+    "location": "Écueil",
+    "website": "http://www.champagne-maillart.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Nicolas%20Maillart%2C%20%C3%89cueil%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Oudinot",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Oudinot%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Oury-Schreiber",
-    "location": "Mareuil-sur-Aÿ"
+    "location": "Mareuil-sur-Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Oury-Schreiber%2C%20Mareuil-sur-A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paliama",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paliama%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Palmer & Co",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Palmer%20%26%20Co%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/palmer-co-brut-reserve/"
   },
   {
     "name": "Pannier",
-    "location": "Château-Thierry"
+    "location": "Château-Thierry",
+    "website": "http://www.champagnepannier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pannier%2C%20Ch%C3%A2teau-Thierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/pannier-vintage-2018/"
   },
   {
     "name": "Pascal Doquet",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pascal%20Doquet%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paul Bara",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paul%20Bara%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paul Clouet",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "https://homobulla.comcategorie-produit/champagne-bonnaire",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paul%20Clouet%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "BOUZY VINTAGE 2014 Grand Cru Blanc de Noirs",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paul Déthune",
-    "location": "Ambonnay"
+    "location": "Ambonnay",
+    "website": "http://www.champagne-dethune.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paul%20D%C3%A9thune%2C%20Ambonnay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paul-Etienne Saint Germain",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paul-Etienne%20Saint%20Germain%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paul Goerg",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.champagne-goerg.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paul%20Goerg%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Champagne Paul Goerg Blanc de Blancs Brut, Premier Cru; Champagne Paul Goerg Rosé Brut, Premier Cru; Champagne Paul Goerg Tradition Brut, Premier Cru; Champagne Paul Goerg Vintage 2012, Premier Cru (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pehu Simonet",
-    "location": "Verzenay"
+    "location": "Verzenay",
+    "website": "http://www.champagne-pehu-simonet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pehu%20Simonet%2C%20Verzenay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Penet-Chardonnet",
-    "location": "Verzenay"
+    "location": "Verzenay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Penet-Chardonnet%2C%20Verzenay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Perrier-Jouët",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.perrier-jouet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Perrier-Jou%C3%ABt%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Blason Grand Brut; Blason Rosé; Blason Blanc de Blancs; Belle Epoque (+2)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/perrier-jouet-grand-brut/"
   },
   {
     "name": "Philipponnat",
-    "location": "Mareuil-sur-Aÿ"
+    "location": "Mareuil-sur-Aÿ",
+    "website": "http://www.philipponnat.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Philipponnat%2C%20Mareuil-sur-A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Philipponnat; Clos des Goisses; De Saint Marceaux.",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/philipponnat-royale-reserve-brut-met-giftbox/"
   },
   {
     "name": "Philippe Brugnon",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Philippe%20Brugnon%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Philippe Glavier",
-    "location": "Cramant"
+    "location": "Cramant",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Philippe%20Glavier%2C%20Cramant%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Philippe Gonet",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "http://www.champagne-philippe-gonet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Philippe%20Gonet%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Gerbais",
-    "location": "Celles-sur-Ource"
+    "location": "Celles-sur-Ource",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20Gerbais%2C%20Celles-sur-Ource%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Gimonnet & Fils",
-    "location": "Cuis"
+    "location": "Cuis",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20Gimonnet%20%26%20Fils%2C%20Cuis%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Legras",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "http://www.champagne-pierre-legras.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20Legras%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "COSTE BEERT; Monographie Brut Nature",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Moncuit",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "http://www.pierre-moncuit.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20Moncuit%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "HUGUES DE COULMET; HUGUES DE COULMET DEMI-SEC; MILLESIME 2008 BRUT; MILLESIME 2008 EXTRA BRUT (+4)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Paillard",
-    "location": "Bouzy"
+    "location": "Bouzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20Paillard%2C%20Bouzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Péters",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20P%C3%A9ters%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pierre Trichet",
-    "location": "Trois-Puits"
+    "location": "Trois-Puits",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pierre%20Trichet%2C%20Trois-Puits%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Piper-Heidsieck",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Piper-Heidsieck%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Cuvée Brut",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/piper-heidsieck-cuvee-brut/"
   },
   {
     "name": "Pithon",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pithon%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Ployez-Jacquemart",
-    "location": "Ludes"
+    "location": "Ludes",
+    "website": "http://www.ployez-jacquemart.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ployez-Jacquemart%2C%20Ludes%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Pol Roger",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "http://www.polroger.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pol%20Roger%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Actualités; Rosé Vintage Édition Vinothèque",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/pol-roger-champagne-cooler/"
   },
   {
     "name": "Pommery",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.vrankenpommery.comvisites",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Pommery%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Pommery Brut Royal - Brut Silver - Brut Rosé - Brut Millésimé - Louise Brut - Louise Rosé - Greno - POP - Apanage Rosé - Royal Blue Sky - Apanage Brut - Apanage Blanc de Blancs - Apanage Blanc de Noirs - Clos Pompadour",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/pommery-brut-rose/"
   },
   {
     "name": "R. Pouillon & Fils",
-    "location": "Mareuil-sur-Aÿ"
+    "location": "Mareuil-sur-Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20R.%20Pouillon%20%26%20Fils%2C%20Mareuil-sur-A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Rene Geoffroy",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "https://www.champagnejamesgeoffroy.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Rene%20Geoffroy%2C%20A%C3%BF%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "L'AMBITIEUSE; L'INSTANT SUBTIL; TERRE D'HERITAGE - Brut; TERRE D'HERITAGE - Demi-Sec",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Reynold",
-    "location": "Épernay"
+    "location": "Épernay",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Reynold%2C%20%C3%89pernay%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Rocher",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Rocher%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Roger-Constant Lemaire",
-    "location": "Villers-sous-Châtillon"
+    "location": "Villers-sous-Châtillon",
+    "website": "http://www.champagne-lemaire.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Roger-Constant%20Lemaire%2C%20Villers-sous-Ch%C3%A2tillon%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Cuvée Select; Les Hautes-Prieres; Rose de Saignée; Trianon (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Roger Brun",
-    "location": "Aÿ"
+    "location": "Aÿ",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Roger%20Brun%2C%20A%C3%BF%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Roger Coulon",
-    "location": "Vrigny"
+    "location": "Vrigny",
+    "website": "http://www.closdesterressoudees.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Roger%20Coulon%2C%20Vrigny%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Roger Manceaux",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "http://www.champagne-roger-manceaux.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Roger%20Manceaux%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Roland Champion",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "http://www.champagne-champion.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Roland%20Champion%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Ruinart",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.ruinart.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ruinart%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne prestige",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/ruinart-brut/"
   },
   {
     "name": "Sacy",
-    "location": "Verzy"
+    "location": "Verzy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Sacy%2C%20Verzy%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Salon",
-    "location": "Le Mesnil-sur-Oger"
+    "location": "Le Mesnil-sur-Oger",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Salon%2C%20Le%20Mesnil-sur-Oger%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Sancho",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Sancho%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Savart",
-    "location": "Écueil"
+    "location": "Écueil",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Savart%2C%20%C3%89cueil%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Senez",
-    "location": "Fontette"
+    "location": "Fontette",
+    "website": "http://www.champagne-senez.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Senez%2C%20Fontette%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Grande réserve; le Cornoyer; Carte Blanche; Cuvée Renoir (+6)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Soutiran",
-    "location": "Ambonnay"
+    "location": "Ambonnay",
+    "website": "http://www.soutiran.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Soutiran%2C%20Ambonnay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne : Soutiran; Charles Coquet.",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Suenen",
-    "location": "Cramant"
+    "location": "Cramant",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Suenen%2C%20Cramant%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Taittinger",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.taittinger.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Taittinger%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Taittinger Brut Réserve; Brut Prestige Rosé; Brut Millésimé; Prélude \"Grands Crus\" (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/taittinger-brut-giftbox/"
   },
   {
     "name": "Tarlant",
-    "location": "Oeuilly"
+    "location": "Oeuilly",
+    "website": "http://www.tarlant.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Tarlant%2C%20Oeuilly%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Thiénot",
-    "location": "Taissy"
+    "location": "Taissy",
+    "website": "https://www.champagne-thienot.comen/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Thi%C3%A9not%2C%20Taissy%2C%20France",
+    "region": "Niet beschikbaar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Thiénot brut; Thiénot rosé; Thiénot Blanc de Blancs; Thiénot vintage (+4)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Tsarine",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.chanoine-freres.fren/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Tsarine%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Chanoine Frères : Brut; Rosé; Demi-sec; Blanc de Noirs et Vintage / Tsarine : Brut (+5)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/tsarine-rose/"
   },
   {
     "name": "Ulysse Collin",
-    "location": "Congy"
+    "location": "Congy",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ulysse%20Collin%2C%20Congy%2C%20France",
+    "region": "Coteaux du Sézannais",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Vazart-Coquart & Fils",
-    "location": "Chouilly"
+    "location": "Chouilly",
+    "website": "http://www.champagnevazartcoquart.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Vazart-Coquart%20%26%20Fils%2C%20Chouilly%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "82/15; Brut Réserve; Brut Zéro; Cuvée Camille (+7)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Veuve Clicquot",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "http://www.veuve-cliquot.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Veuve%20Clicquot%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Extra Brut Extra Old; RICH & RICH Rosé; Veuve Clicquot Brut Rosé​; Vintage & Cave Privée",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/veuve-clicquot-rose-magnum/"
   },
   {
     "name": "Veuve Devaux",
-    "location": "Bar-sur-Seine"
+    "location": "Bar-sur-Seine",
+    "website": "http://www.champagne-devaux.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Veuve%20Devaux%2C%20Bar-sur-Seine%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Veuve Fourny & Fils",
-    "location": "Vertus"
+    "location": "Vertus",
+    "website": "http://www.champagne-veuve-fourny.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Veuve%20Fourny%20%26%20Fils%2C%20Vertus%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Vignon Père & Fils",
-    "location": "Verzenay"
+    "location": "Verzenay",
+    "website": "http://www.champagne-vignon.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Vignon%20P%C3%A8re%20%26%20Fils%2C%20Verzenay%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Vilmart & Co.",
-    "location": "Rilly-la-Montagne"
+    "location": "Rilly-la-Montagne",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Vilmart%20%26%20Co.%2C%20Rilly-la-Montagne%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Vollereaux",
-    "location": "Pierry"
+    "location": "Pierry",
+    "website": "http://www.champagne-vollereaux.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Vollereaux%2C%20Pierry%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Vranken",
-    "location": "Reims"
+    "location": "Reims",
+    "website": "https://www.vrankenpommery.comvisites",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Vranken%2C%20Reims%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Champagne VRANKEN : Demi Sec; Rosé; 1ers Crus; Millésimé (+8)",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/vranken-diamant-rose/"
   },
   {
     "name": "Vouette & Sorbée",
-    "location": "Buxières-sur-Arce"
+    "location": "Buxières-sur-Arce",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Vouette%20%26%20Sorb%C3%A9e%2C%20Buxi%C3%A8res-sur-Arce%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Waris-Larmandier",
-    "location": "Avize"
+    "location": "Avize",
+    "website": "http://www.waris-larmandier.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Waris-Larmandier%2C%20Avize%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Besserat",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "https://maisons-champagne.comen/house/besserat-de-bellefon",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Besserat%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/besserat-de-bellefon-rose-brut/"
   },
   {
     "name": "Bonnet",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Bonnet%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Burtin",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "https://www.gastonburtin.comen/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Burtin%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Champagne Hommage à GASTON BURTIN : Brut; Rosé; Blanc de Blancs Millésimé; Vintage. Champagne Alfred ROTHSCHILD & Cie : Brut (+5)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Charles de Noailles",
-    "location": "Epernay / Sub-label"
+    "location": "Epernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Charles%20de%20Noailles%2C%20Epernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Chauvet Frères",
-    "location": "Tours-sur-Marne / Sub-label"
+    "location": "Tours-sur-Marne / Sub-label",
+    "website": "http://www.champagne-forget-chauvet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Chauvet%20Fr%C3%A8res%2C%20Tours-sur-Marne%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Cuvée Duo 2014; Rosé de Saignée",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Comte de Noiron",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Comte%20de%20Noiron%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "De Meric",
-    "location": "Aÿ / Sub-label"
+    "location": "Aÿ / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20De%20Meric%2C%20A%C3%BF%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "De Rocheré",
-    "location": "Urville / Sub-label"
+    "location": "Urville / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20De%20Rocher%C3%A9%2C%20Urville%20%2F%20Sub-label%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Delahaie",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "http://www.champagne-delahaie.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Delahaie%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": true,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Duval",
-    "location": "Vertus / Sub-label"
+    "location": "Vertus / Sub-label",
+    "website": "http://www.duval-leroy.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Duval%2C%20Vertus%20%2F%20Sub-label%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Gamme CHR et commerce traditionnel et vente aux particuliers : - Range Wine merchants; Hotels and Restaurants and traditional businesses and private sale: Fleur de Champagne - Femme de Champagne - Lady Rose. - Gamme GMS : Champagne Duval-Leroy",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Ernest Rapeneau",
-    "location": "Epernay / Sub-label"
+    "location": "Epernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ernest%20Rapeneau%2C%20Epernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Ferdinand Bonnet",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "http://www.ferdinandbonnet.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Ferdinand%20Bonnet%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Grande Réserve; Blanc de Noirs; Organic; Rosé (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "G. Fluteau",
-    "location": "Gyé-sur-Seine / Sub-label"
+    "location": "Gyé-sur-Seine / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20G.%20Fluteau%2C%20Gy%C3%A9-sur-Seine%20%2F%20Sub-label%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "George Goulet",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20George%20Goulet%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Giesler",
-    "location": "Avize / Sub-label"
+    "location": "Avize / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Giesler%2C%20Avize%20%2F%20Sub-label%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Goulet",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Goulet%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Heidsieck Monopole",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "https://maisons-champagne.comen/house/heidsieck-co-monopole",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Heidsieck%20Monopole%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Henri de Verlaine",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Henri%20de%20Verlaine%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Hubert de Claminger",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Hubert%20de%20Claminger%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jacques Busin",
-    "location": "Verzenay / Sub-label"
+    "location": "Verzenay / Sub-label",
+    "website": "http://www.champagnejacquesbusin.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jacques%20Busin%2C%20Verzenay%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Cuvée Blanche; Cuvée Marthe Deligny; Cuvée Veilles Vignes; Grand millésime (+3)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Jeanmaire",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Jeanmaire%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Kupferberg",
-    "location": "Mainz/Épernay / Sub-label"
+    "location": "Mainz/Épernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Kupferberg%2C%20Mainz%2F%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lassalle Chigny",
-    "location": "Chigny / Sub-label"
+    "location": "Chigny / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lassalle%20Chigny%2C%20Chigny%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lechere",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lechere%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Lemoine",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "https://www.champagnedevignerons.frvignerons/champagne-yves-lemoine/",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Lemoine%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/bochet-lemoine-brut/"
   },
   {
     "name": "Magenta",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Magenta%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Marie Stuart",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "https://mariestuart.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Marie%20Stuart%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Cuvée de la Reine brut; Cuvée de la Reine brut rosé; Cuvée de la Reine brut Premier cru; Passion d'une Reine (+1)",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Massé",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "http://www.champagne-masse-liebart.fr",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Mass%C3%A9%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "BLANC DE MEUNIER; Nos champagnes",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Maxim's",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Maxim's%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/ferrari-to-the-maximum-brut-blanc-de-blancs/"
   },
   {
     "name": "Oger Grand Cru",
-    "location": "Oger / Sub-label"
+    "location": "Oger / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Oger%20Grand%20Cru%2C%20Oger%20%2F%20Sub-label%2C%20France",
+    "region": "Côte des Blancs",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Paul Dangin",
-    "location": "Celles-sur-Ource / Sub-label"
+    "location": "Celles-sur-Ource / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Paul%20Dangin%2C%20Celles-sur-Ource%20%2F%20Sub-label%2C%20France",
+    "region": "Côte des Bar",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Prince Laurent",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Prince%20Laurent%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Remi Henry",
-    "location": "Verzy / Sub-label"
+    "location": "Verzy / Sub-label",
+    "website": "http://www.champagne-remi-henry.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Remi%20Henry%2C%20Verzy%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Rosé; Tradition",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Rene Florancy",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Rene%20Florancy%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Saint-Réol",
-    "location": "Ambonnay / Sub-label"
+    "location": "Ambonnay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Saint-R%C3%A9ol%2C%20Ambonnay%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   },
   {
     "name": "Veuve Clicquot-Ponsardin",
-    "location": "Reims / Sub-label"
+    "location": "Reims / Sub-label",
+    "website": "http://www.veuve-cliquot.com",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Veuve%20Clicquot-Ponsardin%2C%20Reims%20%2F%20Sub-label%2C%20France",
+    "region": "Montagne de Reims",
+    "visitable": true,
+    "tastings": true,
+    "cuvees": "Extra Brut Extra Old; RICH & RICH Rosé; Veuve Clicquot Brut Rosé​; Vintage & Cave Privée",
+    "museletAvailable": true,
+    "museletUrl": "https://muselet.nl/shop/veuve-clicquot-rose-magnum/"
   },
   {
     "name": "Veuve Monnier",
-    "location": "Épernay / Sub-label"
+    "location": "Épernay / Sub-label",
+    "website": "",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Veuve%20Monnier%2C%20%C3%89pernay%20%2F%20Sub-label%2C%20France",
+    "region": "Vallée de la Marne",
+    "visitable": false,
+    "tastings": false,
+    "cuvees": "Niet beschikbaar",
+    "museletAvailable": false,
+    "museletUrl": ""
   }
 ];
 
@@ -1223,27 +3621,35 @@ function initials(value) {
     .join("");
 }
 
-export const spreadsheetHouses = rows.map(({ name, location }) => {
-  const [cityPart] = location.split("/");
+export const spreadsheetHouses = rows.map((row) => {
+  const [cityPart] = row.location.split("/");
   const city = cityPart.trim() || "Champagne";
-  const isSubLabel = /sub-label/i.test(location);
-  const displayName = /^champagne\s+/i.test(name) ? name : `Champagne ${name}`;
+  const isSubLabel = /sub-label/i.test(row.location);
+  const displayName = /^champagne\s+/i.test(row.name)
+    ? row.name
+    : `Champagne ${row.name}`;
   const address = `${displayName}, ${city}, France`;
   return {
-    id: `xlsx-${slug(name)}-${slug(city)}`,
+    id: `xlsx-${slug(row.name)}-${slug(city)}`,
     name: displayName,
     type: "HOUSE",
     city,
     address,
-    region: isSubLabel ? "Champagne – Sub-label" : "Champagne",
+    region: row.region || (isSubLabel ? "Champagne – Sub-label" : "Champagne"),
     description: isSubLabel
       ? `${displayName} is in de aangeleverde bron gemarkeerd als sub-label.`
       : `${displayName} staat in de aangeleverde champagnecatalogus.`,
-    website: "",
-    directoryUrl: civcDirectoryUrl,
+    website: row.website,
+    directoryUrl: "",
     sourceUrl: "",
-    mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`,
-    initials: initials(name),
+    mapsUrl: row.mapsUrl ||
+      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`,
+    visitable: row.visitable,
+    tastings: row.tastings,
+    cuvees: row.cuvees,
+    museletAvailable: row.museletAvailable && Boolean(row.museletUrl),
+    museletUrl: row.museletUrl,
+    initials: initials(row.name),
     accent: isSubLabel ? "FF87734E" : "FFC7A45A",
     sourceIds: ["user-champagne-xlsx"],
     sourceName
