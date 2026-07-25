@@ -47,7 +47,7 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
   tbody td{display:grid;grid-template-columns:1fr;align-content:start;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line)}
   tbody td::before{color:var(--muted);font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
   tbody td:nth-child(1){grid-column:1/-1;background:#f7f2e7;font-size:16px}
-  tbody td:nth-child(1)::before{content:"Champagnehuis"}tbody td:nth-child(2)::before{content:"Locatie / Type"}
+  tbody td:nth-child(1)::before{content:"Champagnehuis"}tbody td:nth-child(2)::before{content:"Plaats"}
   tbody td:nth-child(3)::before{content:"Website"}tbody td:nth-child(4)::before{content:"Google Maps"}
   tbody td:nth-child(5)::before{content:"Regio"}tbody td:nth-child(6)::before{content:"Bezoekbaar"}
   tbody td:nth-child(7)::before{content:"Proeverijen"}tbody td:nth-child(8)::before{content:"Belangrijkste cuvées"}
@@ -125,7 +125,7 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
     </div>
     <p id="count" class="muted"></p>
     <div class="table-wrap"><table>
-      <thead><tr><th>Champagnehuis</th><th>Locatie / Type</th><th>Website</th><th>Google Maps</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverijen</th><th>Belangrijkste cuvées</th><th>Muselet</th></tr></thead>
+      <thead><tr><th>Champagnehuis</th><th>Plaats</th><th>Website</th><th>Google Maps</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverijen</th><th>Belangrijkste cuvées</th><th>Muselet</th></tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
   </main>
@@ -136,7 +136,6 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
     <label><span>Champagnehuis</span><input name="name" required></label>
     <label><span>Plaats</span><input name="city"></label>
     <label class="wide"><span>Adres</span><input name="address"></label>
-    <label><span>Locatie / Type</span><input name="locationType"></label>
     <label><span>Regio</span><select name="region"><option value="">Geen regio</option>${regionRecords.map((region) =>
       `<option value="${escapeHtml(region.name)}">${escapeHtml(region.name)}</option>`
     ).join("")}</select></label>
@@ -159,14 +158,13 @@ function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
 function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.region)}
 function regionOptions(selected){return '<option value="">Geen regio</option>'+regionData.map(r=>\`<option value="\${esc(r.name)}" \${r.name===selected?"selected":""}>\${esc(r.name)}</option>\`).join("")}
-function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.locationType||p.city)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${regionLink(p)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</td></tr>\`).join("")}
-rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a"))return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Locatie / Type</dt><dd>\${esc(p.locationType||p.city)}</dd><dt>Regio</dt><dd>\${regionLink(p)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd>\${p.editedAt?\`<dt>Laatst gewijzigd</dt><dd>\${esc(p.editedBy)} · \${esc(new Date(p.editedAt).toLocaleString("nl-NL"))}</dd>\`:""}</dl>
+function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.city||p.locationType)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${regionLink(p)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</td></tr>\`).join("")}
+rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a"))return;const p=data.find(x=>x.id===tr.dataset.id);detailBody.innerHTML=\`<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||p.locationType)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Plaats</dt><dd>\${esc(p.city||p.locationType)}</dd><dt>Regio</dt><dd>\${regionLink(p)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd>\${p.editedAt?\`<dt>Laatst gewijzigd</dt><dd>\${esc(p.editedBy)} · \${esc(new Date(p.editedAt).toLocaleString("nl-NL"))}</dd>\`:""}</dl>
 <details class="edit-panel"><summary>Gegevens bewerken</summary><form class="edit-form" method="post" action="/admin/producers/\${encodeURIComponent(p.id)}">
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
 <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
 <label><span>Plaats</span><input name="city" value="\${esc(p.city||"")}"></label>
 <label class="wide"><span>Adres</span><input name="address" value="\${esc(p.address||"")}"></label>
-<label><span>Locatie / Type</span><input name="locationType" value="\${esc(p.locationType||"")}"></label>
 <label><span>Website</span><input name="website" type="url" value="\${esc(p.website||"")}"></label>
 <label><span>Google Maps</span><input name="mapsUrl" type="url" value="\${esc(p.mapsUrl||"")}"></label>
 <label class="wide"><span>Regio</span><select name="region">\${regionOptions(p.region||"")}</select></label>

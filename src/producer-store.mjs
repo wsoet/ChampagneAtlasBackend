@@ -102,6 +102,8 @@ export async function producersWithOverrides(baseProducers, regionList) {
     const matchedRegion = regionForName(merged.region, regionList);
     return [{
       ...merged,
+      city: merged.city || merged.locationType || "",
+      locationType: merged.city || merged.locationType || "",
       regionId: matchedRegion?.id || "",
       regionUrl: matchedRegion ? `/regions/${matchedRegion.id}` : ""
     }];

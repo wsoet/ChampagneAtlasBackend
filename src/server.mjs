@@ -151,6 +151,7 @@ function cleanProducerData(form, regionList) {
   const name = String(form.name || "").trim();
   if (!name) throw new Error("Producer name is required");
   const museletUrl = cleanUrl(form.museletUrl);
+  const city = String(form.city || "").trim();
   const requestedRegion = String(form.region || "").trim();
   const matchedRegion = requestedRegion
     ? regionForName(requestedRegion, regionList)
@@ -158,9 +159,9 @@ function cleanProducerData(form, regionList) {
   if (requestedRegion && !matchedRegion) throw new Error("Unknown region");
   return {
     name,
-    city: String(form.city || "").trim(),
+    city,
     address: String(form.address || "").trim(),
-    locationType: String(form.locationType || "").trim(),
+    locationType: city,
     website: cleanUrl(form.website),
     mapsUrl: cleanUrl(form.mapsUrl),
     region: matchedRegion?.name || "",

@@ -164,7 +164,8 @@ test("valid admin credentials create a protected session", async () => {
       const body = await adminResponse.text();
       assert.equal(adminResponse.status, 200);
       assert.match(body, /300<\/strong> huizen/);
-      assert.match(body, /Locatie \/ Type/);
+      assert.match(body, /<th>Plaats<\/th>/);
+      assert.doesNotMatch(body, /Locatie \/ Type/);
       assert.match(body, /Belangrijkste cuvées/);
       assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
       assert.match(body, /\/regions\/montagne-de-reims/);
@@ -186,6 +187,7 @@ test("valid admin credentials create a protected session", async () => {
           body: new URLSearchParams({
             csrf,
             name: "Paul Bara bijgewerkt",
+            city: "Bouzy",
             locationType: "Bouzy",
             website: "https://example.com/paul-bara",
             mapsUrl: "https://maps.google.com/",
