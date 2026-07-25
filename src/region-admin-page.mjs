@@ -8,6 +8,7 @@ function fields(region = {}, csrf = "", isNew = false) {
   return `<form class="card" method="post" enctype="multipart/form-data"
     action="${isNew ? "/admin/regions/new" : `/admin/regions/${encodeURIComponent(region.id)}`}">
     <input type="hidden" name="csrf" value="${escapeHtml(csrf)}">
+    ${region.hasBanner ? `<div class="wide preview"><img src="/regions/${encodeURIComponent(region.id)}/banner?v=${encodeURIComponent(region.editedAt || "")}" alt="Banner ${escapeHtml(region.name)}"></div>` : ""}
     <label>Naam<input name="name" required value="${escapeHtml(region.name)}"></label>
     <label>Alternatieve naam<input name="alternativeName" value="${escapeHtml(region.alternativeName)}"></label>
     <label class="wide">Korte omschrijving<textarea name="description" required rows="4">${escapeHtml(region.description)}</textarea></label>
@@ -26,7 +27,6 @@ function fields(region = {}, csrf = "", isNew = false) {
     <label class="wide">Banner (JPG, PNG of WebP; maximaal 2 MB)
       <input name="banner" type="file" accept="image/jpeg,image/png,image/webp">
     </label>
-    ${region.hasBanner ? `<div class="wide preview"><img src="/regions/${encodeURIComponent(region.id)}/banner" alt="Banner ${escapeHtml(region.name)}"></div>` : ""}
     <div class="actions wide"><button type="submit">Opslaan</button>
       ${isNew ? "" : `<button class="danger" type="submit" formaction="/admin/regions/${encodeURIComponent(region.id)}/delete" formmethod="post" formenctype="application/x-www-form-urlencoded" onclick="return confirm('Regio ${escapeHtml(region.name)} verwijderen?')">Verwijderen</button>`}
     </div>
@@ -45,7 +45,7 @@ export function regionAdminPage(regions, profile, csrf, message = "") {
   .card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}
   label{display:grid;gap:5px;font-weight:650}.wide{grid-column:1/-1}input,textarea{width:100%;padding:10px;border:1px solid #bfb7aa;border-radius:9px;font:inherit}
   button{border:0;border-radius:9px;background:var(--forest);color:#fff;padding:10px 16px;font-weight:700;cursor:pointer}.danger{background:var(--red)}
-  .actions{display:flex;justify-content:space-between}.preview img{width:100%;height:min(240px,35vw);object-fit:cover;border-radius:12px}
+  .actions{display:flex;justify-content:space-between}.preview{background:#f7f2e7;border-radius:14px;padding:10px}.preview img{display:block;width:100%;height:clamp(180px,30vw,320px);object-fit:contain;object-position:center;border-radius:10px}
   .notice{background:#e7f3ec;border-radius:10px;padding:12px}.top-actions{display:flex;justify-content:flex-end}
   dialog{width:min(1050px,94vw);max-height:90vh;overflow:auto;border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
   dialog::backdrop{background:#071a1488}.dialog-body{padding:22px}.dialog-head{display:flex;align-items:center;justify-content:space-between}
