@@ -142,6 +142,12 @@ test("public place page lists champagne houses in the place", async () => {
     assert.match(body, /Champagnehuizen in Bouzy/);
     assert.match(body, /Paul Bara/);
     assert.match(body, /Montagne de Reims/);
+    assert.match(body, /href="\/places">← Alle plaatsen/);
+
+    const adminPreview = await fetch(`${baseUrl}/places/bouzy?return=admin`);
+    const adminPreviewBody = await adminPreview.text();
+    assert.equal(adminPreview.status, 200);
+    assert.match(adminPreviewBody, /href="\/admin\/places">← Terug naar plaatsenbeheer/);
   });
 });
 

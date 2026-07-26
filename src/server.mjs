@@ -794,7 +794,11 @@ export function createServer() {
     if (placePageMatch) {
       const { places } = await currentPlaces();
       const place = placeById(placePageMatch[1], places);
-      html(response, place ? 200 : 404, place ? placePage(place) : placesIndexPage(places));
+      html(
+        response,
+        place ? 200 : 404,
+        place ? placePage(place, url.searchParams.get("return") === "admin") : placesIndexPage(places)
+      );
       return;
     }
 
