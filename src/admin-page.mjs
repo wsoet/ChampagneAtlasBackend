@@ -13,29 +13,31 @@ function documentPage(title, body, script = "") {
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${escapeHtml(title)}</title>
 <style>
-:root{--forest:#0f3b2e;--gold:#c9a227;--cream:#f2ebd6;--ivory:#fdfbf6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2;--red:#8b1731}
-*{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
-header{background:var(--forest);color:#fff;padding:22px 5vw;display:flex;align-items:center;gap:18px}
-header h1{font:500 30px Georgia,serif;margin:0}header .spacer{flex:1}.brand{display:block;background:white;border-radius:10px;padding:4px 8px;line-height:0}.brand img{display:block;width:190px;height:54px;object-fit:contain}.admin-label{font-weight:750;letter-spacing:.03em}
-a{color:var(--forest)}.button{display:inline-block;border:0;border-radius:12px;padding:11px 16px;background:var(--forest);color:white;text-decoration:none;font-weight:650}
-.button.light{background:white;color:var(--forest)}main{width:min(1180px,92vw);margin:28px auto}
+:root{--forest:#0f3b2e;--forest2:#174f3f;--gold:#c9a227;--cream:#f2ebd6;--ivory:#fdfbf6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2;--red:#8b1731;--shadow:0 18px 50px #0f3b2e12}
+*{box-sizing:border-box}body{margin:0;background:#f7f5ef;color:var(--ink);font:14px/1.5 Arial,system-ui,sans-serif}
+header{height:76px;background:#fff;border-bottom:1px solid var(--line);padding:10px 3vw;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:20}
+header .spacer{flex:1}.brand{display:block;line-height:0}.brand img{display:block;width:176px;height:48px;object-fit:contain}.admin-label{padding-left:16px;border-left:1px solid var(--line);font-size:12px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+a{color:var(--forest)}.button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:10px;padding:10px 15px;background:var(--forest);color:white;text-decoration:none;font-weight:700;cursor:pointer}
+.button:hover{background:var(--forest2)}.button.light{background:#f2f5f3;color:var(--forest)}main{width:min(1440px,94vw);margin:26px auto 60px}
+.page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:0 0 22px}.page-head h1{font:500 34px Georgia,serif;color:var(--forest);margin:0}.page-head p{margin:4px 0 0;color:var(--muted)}
 .login{width:min(520px,92vw);margin:12vh auto;padding:36px;border:1px solid var(--line);border-radius:22px;background:white;text-align:center;box-shadow:0 16px 50px #0f3b2e12}
 .login h1{font:500 38px Georgia,serif;color:var(--forest)}.muted{color:var(--muted)}
 .toolbar{display:grid;grid-template-columns:1fr 220px auto auto;gap:12px;margin:20px 0}
 input,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
-.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:var(--cream);padding:8px 12px;border-radius:999px}
-.table-wrap{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:white}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(140px,1fr));gap:12px;margin-bottom:18px}.stat{background:#fff;border:1px solid var(--line);padding:15px 18px;border-radius:14px;box-shadow:var(--shadow)}.stat strong{display:block;color:var(--forest);font:500 26px Georgia,serif}.stat span{color:var(--muted);font-size:12px}
+.workspace{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:18px}.workspace .toolbar{margin-top:0}
+.table-wrap{overflow:hidden;border:1px solid var(--line);border-radius:13px;background:white}
 table{width:100%;border-collapse:collapse;table-layout:fixed}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
 th{font-size:12px}td{font-size:13px}
 th:nth-child(1){width:6%}th:nth-child(2){width:12%}th:nth-child(3){width:9%}
 th:nth-child(4),th:nth-child(5){width:7%}th:nth-child(6){width:10%}
 th:nth-child(7),th:nth-child(8){width:7%}th:nth-child(9){width:26%}th:nth-child(10){width:9%}
-th{position:sticky;top:0;background:#f7f2e7;color:var(--forest)}tbody tr:hover{background:#fcf8ef;cursor:pointer}
+th{background:#f7f2e7;color:var(--forest)}tbody tr:hover{background:#fcf8ef;cursor:pointer}
 .yes{color:var(--forest);font-weight:700}.no{color:var(--muted)}
 dialog{width:min(700px,92vw);border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
 dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 30px Georgia,serif;color:var(--forest);margin:0 0 4px}
 .detail-grid{display:grid;grid-template-columns:150px 1fr;gap:8px 18px;margin:22px 0}.detail-grid dt{color:var(--muted)}.detail-grid dd{margin:0;overflow-wrap:anywhere}
-.edit-panel{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}.edit-panel summary{color:var(--forest);font-weight:750;cursor:pointer}
+.edit-panel{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}.edit-panel summary{display:none}
 .edit-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.edit-form label{color:var(--muted);font-size:13px}
 .edit-form label span{display:block;margin-bottom:4px}.edit-form .wide{grid-column:1/-1}.edit-form textarea{width:100%;min-height:90px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit}
 .edit-form .check{display:flex;align-items:center;gap:8px;color:var(--ink)}.edit-form .check input{width:auto}.edit-actions{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px}.danger{background:var(--red)}
@@ -44,6 +46,7 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
 .overview-logo{cursor:zoom-in}.logo-lightbox{padding:18px;text-align:center}.logo-lightbox img{display:block;width:min(520px,78vw);height:min(520px,70vh);object-fit:contain;margin:12px auto 0;background:white;border-radius:14px}
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
 @media(max-width:900px){
+  header .admin-label,header>span:not(.admin-label){display:none}.page-head{align-items:flex-start}.stats{grid-template-columns:repeat(3,1fr)}
   .toolbar{grid-template-columns:1fr}.detail-grid,.edit-form{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.edit-actions{grid-column:1}
   .table-wrap{border:0;background:transparent}table,tbody{display:block}thead{display:none}
   tbody{display:grid;gap:14px}tbody tr{display:grid;grid-template-columns:minmax(120px,35%) 1fr;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
@@ -58,6 +61,7 @@ dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 3
   tbody td:nth-child(10)::before{content:"Muselet"}
   tbody td:nth-child(9),tbody td:nth-child(10){grid-column:1/-1}
 }
+@media(max-width:650px){.stats{grid-template-columns:1fr}.page-head{display:block}.page-head .button{margin-top:14px}.workspace{padding:10px}}
 @media(max-width:520px){tbody tr{grid-template-columns:1fr}tbody td,tbody td:nth-child(1),tbody td:nth-child(2),tbody td:nth-child(9),tbody td:nth-child(10){grid-column:1;grid-row:auto}}
 </style></head><body>${body}${script ? `<script nonce="ca-admin">${script}</script>` : ""}</body></html>`;
 }
@@ -115,11 +119,14 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
     <a class="button light" href="/admin/regions">Regio’s beheren</a>
     <a class="button light" href="/auth/logout">Uitloggen</a></header>
   <main>
+    <div class="page-head"><div><h1>Champagnehuizen</h1><p>Beheer de catalogus, contactgegevens en online verkoopinformatie.</p></div>
+      <button id="newProducerTop" class="button" type="button">+ Nieuw huis</button></div>
     <div class="stats">
-      <span class="stat"><strong>${producers.length}</strong> huizen</span>
-      <span class="stat"><strong>${producers.filter((p) => p.museletAvailable).length}</strong> met webwinkel</span>
-      <span class="stat"><strong>${producers.filter((p) => p.visitable).length}</strong> bezoekbaar</span>
+      <div class="stat"><strong>${producers.length}</strong><span>Champagnehuizen</span></div>
+      <div class="stat"><strong>${producers.filter((p) => p.museletAvailable).length}</strong><span>Met Koop online</span></div>
+      <div class="stat"><strong>${producers.filter((p) => p.visitable).length}</strong><span>Bezoekbaar</span></div>
     </div>
+    <section class="workspace">
     <div class="toolbar">
       <input id="search" type="search" placeholder="Zoek op huis, plaats of regio…" autocomplete="off">
       <select id="region"><option value="">Alle regio’s</option>${regions.map((region) =>
@@ -131,7 +138,7 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
     <div class="table-wrap"><table>
       <thead><tr><th>Logo</th><th>Champagnehuis</th><th>Plaats</th><th>Website</th><th>Google Maps</th><th>Regio</th><th>Bezoekbaar</th><th>Proeverijen</th><th>Belangrijkste cuvées</th><th>Muselet</th></tr></thead>
       <tbody id="rows"></tbody>
-    </table></div>
+    </table></div></section>
   </main>
   <dialog id="detail"><div class="detail"><button class="close" aria-label="Sluiten">×</button><div id="detailBody"></div></div></dialog>
   <dialog id="newDialog"><div class="detail"><button class="close" aria-label="Sluiten">×</button><h2>Nieuw champagnehuis</h2>
@@ -166,7 +173,7 @@ function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.regio
 function regionOptions(selected){return '<option value="">Geen regio</option>'+regionData.map(r=>\`<option value="\${esc(r.name)}" \${r.name===selected?"selected":""}>\${esc(r.name)}</option>\`).join("")}
 function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td>\${p.logoUrl?\`<img class="overview-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:"—"}</td><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.city||p.locationType)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${regionLink(p)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</td></tr>\`).join("")}
 rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;const p=data.find(x=>x.id===tr.dataset.id);if(e.target.closest(".overview-logo")){largeLogo.src=p.logoUrl;largeLogo.alt="Logo "+p.name;logoDialog.showModal();return}if(e.target.closest("a"))return;detailBody.innerHTML=\`\${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||p.locationType)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Plaats</dt><dd>\${esc(p.city||p.locationType)}</dd><dt>Regio</dt><dd>\${regionLink(p)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd>\${p.editedAt?\`<dt>Laatst gewijzigd</dt><dd>\${esc(p.editedBy)} · \${esc(new Date(p.editedAt).toLocaleString("nl-NL"))}</dd>\`:""}</dl>
-<details class="edit-panel"><summary>Gegevens bewerken</summary><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
+<details class="edit-panel" open><summary>Gegevens bewerken</summary><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
 <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
 <label><span>Plaats</span><input name="city" value="\${esc(p.city||"")}"></label>
@@ -183,7 +190,7 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;
 <div class="edit-actions"><button class="button danger" type="submit" formaction="/admin/producers/\${encodeURIComponent(p.id)}/delete" formenctype="application/x-www-form-urlencoded" onclick="return confirm('Dit champagnehuis definitief verwijderen?')">Verwijderen</button><button class="button" type="submit">Wijzigingen opslaan</button></div>
 </form></details>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
-document.querySelector("#newProducer").addEventListener("click",()=>newDialog.showModal());newDialog.querySelector(".close").addEventListener("click",()=>newDialog.close());newDialog.addEventListener("click",e=>{if(e.target===newDialog)newDialog.close()});
+[document.querySelector("#newProducer"),document.querySelector("#newProducerTop")].forEach(button=>button.addEventListener("click",()=>newDialog.showModal()));newDialog.querySelector(".close").addEventListener("click",()=>newDialog.close());newDialog.addEventListener("click",e=>{if(e.target===newDialog)newDialog.close()});
 logoDialog.querySelector(".close").addEventListener("click",()=>logoDialog.close());logoDialog.addEventListener("click",e=>{if(e.target===logoDialog)logoDialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
   return documentPage("Champagne Atlas beheer", body + logoDialog, script);

@@ -196,7 +196,7 @@ test("valid admin credentials create a protected session", async () => {
       });
       const body = await adminResponse.text();
       assert.equal(adminResponse.status, 200);
-      assert.match(body, /300<\/strong> huizen/);
+      assert.match(body, /<strong>300<\/strong><span>Champagnehuizen<\/span>/);
       assert.match(body, /<th>Logo<\/th><th>Champagnehuis<\/th><th>Plaats<\/th>/);
       assert.doesNotMatch(body, /Locatie \/ Type/);
       assert.match(body, /Belangrijkste cuvées/);
