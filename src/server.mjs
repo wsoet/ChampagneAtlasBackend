@@ -323,7 +323,23 @@ function cleanPlaceData(form, regionList) {
 async function currentPlaces() {
   const currentRegions = await allRegions();
   const currentProducers = await producersWithOverrides(producers, currentRegions);
-  const places = await allPlaces(basePlaces(currentProducers, currentRegions));
+  const storedPlaces = await allPlaces(basePlaces(currentProducers, currentRegions));
+  const places = storedPlaces.map((place) => {
+    const matches = currentProducers.filter(
+      (producer) => placeId(producer.city || producer.locationType) === place.id
+    );
+    return {
+      ...place,
+      producerCount: matches.length,
+      producerIds: matches.map((producer) => producer.id),
+      producers: matches.map((producer) => ({
+        id: producer.id,
+        name: producer.name,
+        website: producer.website,
+        logoUrl: producer.logoUrl
+      }))
+    };
+  });
   return { currentRegions, currentProducers, places };
 }
 
@@ -601,8 +617,9 @@ export function createServer() {
     }
 
     const placeSaveMatch = url.pathname.match(/^\/admin\/places\/([a-z0-9-]+)$/);
+    const isNewPlace = url.pathname === "/admin/places/new";
     const isPlaceBannerBatch = url.pathname === "/admin/places/banners/batch";
-    if (request.method === "POST" && (placeSaveMatch || isPlaceBannerBatch)) {
+    if (request.method === "POST" && (placeSaveMatch || isNewPlace || isPlaceBannerBatch)) {
       const profile = currentAdmin(request, config);
       if (!profile || profile.username !== "wsoet") {
         html(response, profile ? 403 : 401, loginPage(config.ready, "Alleen admin wsoet kan plaatsen beheren."));
@@ -632,12 +649,15 @@ export function createServer() {
           response.end();
           return;
         }
-        const place = placeById(placeSaveMatch[1], places);
-        if (!place) throw new Error("Unknown place");
         const { fields, file: banner } = await readMultipart(request);
         if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
-        await savePlace(place.id, cleanPlaceData(fields, currentRegions), banner, profile.username);
-        response.writeHead(303, { Location: "/admin/places?saved=1", "Cache-Control": "no-store" });
+        const data = cleanPlaceData(fields, currentRegions);
+        const id = isNewPlace ? placeId(data.name) : placeSaveMatch[1];
+        if (!id) throw new Error("Invalid place ID");
+        if (isNewPlace && placeById(id, places)) throw new Error("Place already exists");
+        if (!isNewPlace && !placeById(id, places)) throw new Error("Unknown place");
+        await savePlace(id, data, banner, profile.username);
+        response.writeHead(303, { Location: `/admin/places?${isNewPlace ? "created" : "saved"}=1`, "Cache-Control": "no-store" });
         response.end();
       } catch (error) {
         console.error("Place admin request failed:", error instanceof Error ? error.message : "Unknown error");
@@ -712,6 +732,7 @@ export function createServer() {
       const { currentRegions, places } = await currentPlaces();
       const message = url.searchParams.has("saved")
         ? "De plaats is opgeslagen."
+        : url.searchParams.has("created") ? "De nieuwe plaats is toegevoegd."
         : url.searchParams.has("error") ? "Opslaan is niet gelukt. Controleer de gegevens en banner." : "";
       html(response, 200, placeAdminPage(places, currentRegions, profile, csrfToken(profile, config), message, {
         uploaded: url.searchParams.get("bannersUploaded"),

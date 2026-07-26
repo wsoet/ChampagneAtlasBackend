@@ -155,6 +155,10 @@ test("place admin overview script is allowed by the content security policy", ()
   assert.match(body, /<script nonce="ca-admin">/);
   assert.match(body, /id="grid" class="grid"/);
   assert.match(body, /function render\(\)/);
+  assert.match(body, /id="search" type="search"/);
+  assert.match(body, /id="result-count"/);
+  assert.match(body, /id="new-place"/);
+  assert.match(body, /action="\/admin\/places\/new"/);
 });
 
 test("public region page renders spreadsheet information", async () => {

@@ -51,8 +51,9 @@ export async function allPlaces(basePlaces) {
     }));
   }
   const byId = new Map(records.map((record) => [record.placeId, record]));
-  return basePlaces.map((place) => {
+  const places = basePlaces.map((place) => {
     const record = byId.get(place.id);
+    byId.delete(place.id);
     return {
       ...place,
       ...(record?.data || {}),
@@ -62,6 +63,24 @@ export async function allPlaces(basePlaces) {
       editedBy: record?.updatedBy || ""
     };
   });
+  for (const record of byId.values()) {
+    if (!record.data?.name) continue;
+    places.push({
+      id: record.placeId,
+      name: record.data.name,
+      regionId: record.data.regionId || "",
+      region: record.data.region || "",
+      description: record.data.description || "",
+      sourceName: "Handmatig toegevoegd",
+      producerCount: 0,
+      producerIds: [],
+      producers: [],
+      hasBanner: Boolean(record.hasBanner),
+      editedAt: record.updatedAt || "",
+      editedBy: record.updatedBy || ""
+    });
+  }
+  return places.sort((a, b) => a.name.localeCompare(b.name, "nl"));
 }
 
 export async function savePlace(placeId, data, banner, updatedBy) {
