@@ -4,6 +4,7 @@ import { regionForName } from "./regions.mjs";
 const memoryOverrides = new Map();
 let pool;
 let initialized;
+let websiteBackfill;
 
 function database() {
   const url = String(process.env.DATABASE_URL || "").trim();
@@ -80,7 +81,42 @@ export async function producerOverrides() {
   ]));
 }
 
+async function backfillMissingProducerWebsites(baseProducers) {
+  const websites = baseProducers
+    .filter((producer) => String(producer.website || "").trim())
+    .map((producer) => [producer.id, String(producer.website).trim()]);
+
+  if (!websites.length) return;
+
+  const db = await ready();
+  if (!db) {
+    for (const [producerId, website] of websites) {
+      const override = memoryOverrides.get(producerId);
+      if (override && !String(override.website || "").trim()) {
+        memoryOverrides.set(producerId, { ...override, website });
+      }
+    }
+    return;
+  }
+
+  const values = websites
+    .map((_, index) => `($${index * 2 + 1}::text, $${index * 2 + 2}::text)`)
+    .join(", ");
+  await db.query(
+    `UPDATE producer_overrides AS overrides
+     SET data = jsonb_set(overrides.data, '{website}', to_jsonb(websites.website), true)
+     FROM (VALUES ${values}) AS websites(producer_id, website)
+     WHERE overrides.producer_id = websites.producer_id
+       AND NOT overrides.deleted
+       AND NOT overrides.is_custom
+       AND COALESCE(NULLIF(BTRIM(overrides.data->>'website'), ''), '') = ''`,
+    websites.flat()
+  );
+}
+
 export async function producersWithOverrides(baseProducers, regionList) {
+  websiteBackfill ||= backfillMissingProducerWebsites(baseProducers);
+  await websiteBackfill;
   const overrides = await producerOverrides();
   const baseIds = new Set(baseProducers.map((producer) => producer.id));
   const custom = [...overrides.entries()]
