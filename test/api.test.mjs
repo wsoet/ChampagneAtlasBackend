@@ -3,6 +3,7 @@ import test from "node:test";
 import { once } from "node:events";
 import { scryptSync } from "node:crypto";
 import { createServer } from "../src/server.mjs";
+import { placeAdminPage } from "../src/place-admin-page.mjs";
 
 async function withServer(run) {
   const server = createServer().listen(0, "127.0.0.1");
@@ -144,6 +145,18 @@ test("public place page lists champagne houses in the place", async () => {
   });
 });
 
+test("place admin overview script is allowed by the content security policy", () => {
+  const body = placeAdminPage(
+    [{ id: "bouzy", name: "Bouzy", regionId: "montagne-de-reims", region: "Montagne de Reims", producerCount: 1, producerIds: ["test"], producers: [{ id: "test", name: "Testhuis" }], hasBanner: true }],
+    [{ id: "montagne-de-reims", name: "Montagne de Reims" }],
+    { username: "wsoet" },
+    "csrf"
+  );
+  assert.match(body, /<script nonce="ca-admin">/);
+  assert.match(body, /id="grid" class="grid"/);
+  assert.match(body, /function render\(\)/);
+});
+
 test("public region page renders spreadsheet information", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/regions/montagne-de-reims`);
@@ -273,6 +286,7 @@ test("valid admin credentials create a protected session", async () => {
       assert.match(body, /Cru-classificatie/);
       assert.match(body, /Bekijk officiële AOC-bron/);
       assert.match(body, /class="cru-badge/);
+      assert.match(body, /href="\/admin\/places">Plaatsen beheren/);
       assert.match(body, /<th>Logo<\/th><th>Champagnehuis<\/th><th>Plaats<\/th>/);
       assert.doesNotMatch(body, /Locatie \/ Type/);
       assert.match(body, /Belangrijkste cuvées/);

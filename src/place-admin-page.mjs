@@ -33,7 +33,7 @@ export function placeAdminPage(places, regions, profile, csrf, message = "", bat
   <details class="batch"><summary>Alle plaatsbanners uploaden</summary><form method="post" enctype="multipart/form-data" action="/admin/places/banners/batch"><input type="hidden" name="csrf" value="${esc(csrf)}"><label>Selecteer banners<input name="banners" type="file" accept="image/jpeg,image/png,image/webp" multiple required><small>Bestandsnaam zoals ambonnay_banner.png, maximaal 3 MB per bestand.</small></label><button type="submit">Banners verwerken</button></form></details>
   <div class="toolbar"><input id="search" type="search" placeholder="Zoek plaats of champagnehuis…"><select id="region"><option value="">Alle regio's</option>${regions.map((r) => `<option value="${esc(r.id)}">${esc(r.name)}</option>`).join("")}</select></div>
   <section id="grid" class="grid"></section></main><div id="dialogs"></div>
-  <script>
+  <script nonce="ca-admin">
   const places=${safePlaces},regions=${safeRegions},csrf=${JSON.stringify(csrf)};
   const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
   const search=document.querySelector("#search"),region=document.querySelector("#region"),grid=document.querySelector("#grid"),dialogs=document.querySelector("#dialogs");
