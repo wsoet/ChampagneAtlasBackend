@@ -38,6 +38,7 @@ dialog{width:min(820px,96vw);max-height:96vh;border:0;border-radius:20px;padding
 dialog::backdrop{background:#071a1488}.detail{padding:0;position:relative}.detail h2{font:500 30px Georgia,serif;color:var(--forest);margin:0 0 4px}.detail>.close{display:none}
 .detail-grid{display:grid;grid-template-columns:150px 1fr;gap:8px 18px;margin:22px 0}.detail-grid dt{color:var(--muted)}.detail-grid dd{margin:0;overflow-wrap:anywhere}
 .editor-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:15px;padding:20px 24px;background:#fff;border-bottom:1px solid var(--line)}.editor-head .house-logo{margin:0;width:62px;height:62px}.editor-head-text{min-width:0;flex:1}.editor-head h2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.editor-head p{margin:0}.editor-head .close{float:none;flex:0 0 auto}
+.editor-nav{display:flex;align-items:center;gap:7px}.editor-nav button{border:1px solid var(--line);border-radius:10px;background:var(--cream);color:var(--forest);padding:9px 12px;font:inherit;font-weight:700;cursor:pointer}.editor-nav button:disabled{opacity:.35;cursor:not-allowed}.editor-position{min-width:58px;text-align:center;color:var(--muted);font-size:12px}
 .edit-panel{margin:0}.edit-panel summary{display:none}.edit-form{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:20px 24px 92px;margin:0;background:#f8f6f1}.edit-form label{color:var(--ink);font-size:13px;font-weight:700}
 .edit-form label span{display:flex;justify-content:space-between;margin-bottom:5px}.edit-form .wide{grid-column:1/-1}.edit-form textarea{width:100%;min-height:96px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit}
 .form-section{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:13px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px}.form-section h3{grid-column:1/-1;margin:0 0 2px;color:var(--forest);font:500 19px Georgia,serif}.form-section .wide{grid-column:1/-1}
@@ -52,7 +53,7 @@ dialog::backdrop{background:#071a1488}.detail{padding:0;position:relative}.detai
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
 @media(max-width:900px){
   header .admin-label,header>span:not(.admin-label){display:none}.page-head{align-items:flex-start}.stats{grid-template-columns:repeat(3,1fr)}
-  .toolbar,.batch-form{grid-template-columns:1fr}.detail-grid,.edit-form,.form-section{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.form-section .wide,.edit-actions{grid-column:1}.toggle-row{grid-template-columns:1fr}
+  .toolbar,.batch-form{grid-template-columns:1fr}.detail-grid,.edit-form,.form-section{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.form-section .wide,.edit-actions{grid-column:1}.toggle-row{grid-template-columns:1fr}.editor-nav{position:absolute;right:68px;bottom:8px}.editor-head{padding-bottom:48px}
   .table-wrap{border:0;background:transparent}table,tbody{display:block}thead{display:none}
   tbody{display:grid;gap:14px}tbody tr{display:grid;grid-template-columns:minmax(120px,35%) 1fr;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
   tbody td{display:grid;grid-template-columns:1fr;align-content:start;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -193,9 +194,10 @@ function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
 function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.region)}
 function regionOptions(selected){return '<option value="">Geen regio</option>'+regionData.map(r=>\`<option value="\${esc(r.name)}" \${r.name===selected?"selected":""}>\${esc(r.name)}</option>\`).join("")}
-function openHouseEditor(p){detailBody.innerHTML=\`<div class="editor-head">
+function openHouseEditor(p){const list=filtered(),index=list.findIndex(item=>item.id===p.id);detailBody.innerHTML=\`<div class="editor-head" data-house-id="\${esc(p.id)}">
   \${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}
   <div class="editor-head-text"><p class="muted">Champagnehuis bewerken</p><h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||"Plaats onbekend")} · \${esc(p.region||"Geen regio")}</p></div>
+  <nav class="editor-nav" aria-label="Navigeren tussen champagnehuizen"><button id="previousHouse" type="button" \${index<=0?"disabled":""}>← Vorige</button><span class="editor-position">\${index+1} / \${list.length}</span><button id="nextHouse" type="button" \${index<0||index>=list.length-1?"disabled":""}>Volgende →</button></nav>
   <button class="close editor-close" type="button" aria-label="Sluiten">×</button>
 </div><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
@@ -242,6 +244,8 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;
 </form></details>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
 detailBody.addEventListener("click",e=>{if(e.target.closest(".editor-close"))dialog.close()});
+detailBody.addEventListener("click",e=>{const button=e.target.closest("#previousHouse,#nextHouse");if(!button)return;const list=filtered(),currentId=detailBody.querySelector(".editor-head")?.dataset.houseId,index=list.findIndex(p=>p.id===currentId);const nextIndex=button.id==="previousHouse"?index-1:index+1;if(nextIndex>=0&&nextIndex<list.length)openHouseEditor(list[nextIndex])});
+dialog.addEventListener("keydown",e=>{if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight")return;const button=detailBody.querySelector(e.key==="ArrowLeft"?"#previousHouse":"#nextHouse");if(button&&!button.disabled)button.click()});
 [document.querySelector("#newProducer"),document.querySelector("#newProducerTop")].forEach(button=>button.addEventListener("click",()=>newDialog.showModal()));newDialog.querySelector(".close").addEventListener("click",()=>newDialog.close());newDialog.addEventListener("click",e=>{if(e.target===newDialog)newDialog.close()});
 logoDialog.querySelector(".close").addEventListener("click",()=>logoDialog.close());logoDialog.addEventListener("click",e=>{if(e.target===logoDialog)logoDialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
