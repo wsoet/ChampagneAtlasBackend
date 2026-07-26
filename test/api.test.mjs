@@ -134,10 +134,37 @@ test("Vallée de la Marne exposes the supplied PDF information", async () => {
     const response = await fetch(`${baseUrl}/api/v1/regions/vallee-de-la-marne`);
     const region = await response.json();
     assert.equal(response.status, 200);
-    assert.match(region.generalFacts, /±12\.000 ha/);
+    assert.match(region.generalFacts, /12\.000 hectare/);
     assert.match(region.history, /Dom Pérignon/);
+    assert.match(region.grapeVarieties, /Pinot Meunier: circa 60%/);
     assert.match(region.cruClassification, /Tours-sur-Marne/);
-    assert.equal(region.sourceName, "01-Vallee_de_la_Marne V.20.pdf");
+    assert.equal(region.sourceName, "01-Vallee_de_la_Marne.pdf");
+  });
+});
+
+test("Côte des Blancs exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/cote-des-blancs`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /3\.400 hectare/);
+    assert.match(region.terroir, /belemnietenkrijt/);
+    assert.match(region.grapeVarieties, /Chardonnay: circa 95%/);
+    assert.match(region.cruClassification, /Le Mesnil-sur-Oger/);
+    assert.equal(region.sourceName, "03-Cotes_des_Blancs.pdf");
+  });
+});
+
+test("Côte des Bar exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/aube`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /8\.000 hectare/);
+    assert.match(region.terroir, /Kimmeridgische kalksteen/);
+    assert.match(region.grapeVarieties, /Pinot Noir: circa 86%/);
+    assert.match(region.cruClassification, /geen Grand Cru- of Premier Cru/);
+    assert.equal(region.sourceName, "05-Cote_des_Bar (Aube).pdf");
   });
 });
 

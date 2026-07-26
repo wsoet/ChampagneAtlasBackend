@@ -4,6 +4,22 @@ import { regions as baseRegions } from "./regions.mjs";
 const memory = new Map();
 let pool;
 let initialized;
+let pdfContentImport;
+
+const pdfRegionImportId = "region-pdfs-2026-07-26-v1";
+const pdfRegionIds = new Set(["vallee-de-la-marne", "cote-des-blancs", "aube"]);
+const pdfContentFields = [
+  "description",
+  "generalFacts",
+  "location",
+  "history",
+  "terroir",
+  "climate",
+  "grapeVarieties",
+  "cruClassification",
+  "sourceName",
+  "sourceUrl"
+];
 
 function database() {
   const url = String(process.env.DATABASE_URL || "").trim();
@@ -27,10 +43,56 @@ async function ready() {
       banner_mime TEXT,
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_by TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS app_migrations (
+      migration_id TEXT PRIMARY KEY,
+      applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `);
   await initialized;
   return db;
+}
+
+async function importPdfRegionContent() {
+  const db = await ready();
+  if (!db) return;
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    const claimed = await client.query(
+      `INSERT INTO app_migrations (migration_id)
+       VALUES ($1)
+       ON CONFLICT (migration_id) DO NOTHING
+       RETURNING migration_id`,
+      [pdfRegionImportId]
+    );
+    if (!claimed.rowCount) {
+      await client.query("COMMIT");
+      return;
+    }
+
+    for (const region of baseRegions.filter((item) => pdfRegionIds.has(item.id))) {
+      const content = Object.fromEntries(
+        pdfContentFields.map((field) => [field, region[field] || ""])
+      );
+      await client.query(
+        `INSERT INTO region_records (region_id, data, deleted, updated_by)
+         VALUES ($1, $2::jsonb, FALSE, 'pdf-import')
+         ON CONFLICT (region_id) DO UPDATE SET
+           data = region_records.data || EXCLUDED.data,
+           deleted = FALSE,
+           updated_at = NOW(),
+           updated_by = EXCLUDED.updated_by`,
+        [region.id, JSON.stringify(content)]
+      );
+    }
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 function mergedRegions(records) {
@@ -54,6 +116,8 @@ function mergedRegions(records) {
 }
 
 export async function allRegions() {
+  pdfContentImport ||= importPdfRegionContent();
+  await pdfContentImport;
   const db = await ready();
   if (!db) return mergedRegions([...memory.values()]);
   const result = await db.query(`
