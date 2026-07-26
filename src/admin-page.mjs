@@ -15,7 +15,7 @@ function documentPage(title, body, script = "") {
 <style>
 :root{--forest:#0f3b2e;--forest2:#174f3f;--gold:#c9a227;--cream:#f2ebd6;--ivory:#fdfbf6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2;--red:#8b1731;--shadow:0 18px 50px #0f3b2e12}
 *{box-sizing:border-box}body{margin:0;background:#f7f5ef;color:var(--ink);font:14px/1.5 Arial,system-ui,sans-serif}
-header{height:76px;background:#fff;border-bottom:1px solid var(--line);padding:10px 3vw;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:20}
+header{height:76px;background:rgb(249,248,250);border-bottom:1px solid var(--line);padding:10px 3vw;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:20}
 header .spacer{flex:1}.brand{display:block;line-height:0}.brand img{display:block;width:176px;height:48px;object-fit:contain}.admin-label{padding-left:16px;border-left:1px solid var(--line);font-size:12px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 a{color:var(--forest)}.button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:10px;padding:10px 15px;background:var(--forest);color:white;text-decoration:none;font-weight:700;cursor:pointer}
 .button:hover{background:var(--forest2)}.button.light{background:#f2f5f3;color:var(--forest)}main{width:min(1440px,94vw);margin:26px auto 60px}
