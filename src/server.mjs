@@ -37,7 +37,7 @@ function html(response, status, body) {
       "default-src 'none'",
       "style-src 'unsafe-inline'",
       "script-src 'nonce-ca-admin'",
-      "img-src 'self' data:",
+      "img-src 'self' data: https:",
       "connect-src 'self'",
       "base-uri 'none'",
       "frame-ancestors 'none'",
