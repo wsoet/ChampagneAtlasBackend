@@ -357,6 +357,35 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
         body: new URLSearchParams({ username: "wsoet", password: "test-password" })
       });
       const cookie = loginResponse.headers.get("set-cookie").split(";")[0];
+      const producerAdminResponse = await fetch(`${baseUrl}/admin`, { headers: { Cookie: cookie } });
+      const producerAdminBody = await producerAdminResponse.text();
+      assert.equal(producerAdminResponse.status, 200);
+      assert.match(producerAdminBody, /action="\/admin\/producers\/logos\/batch"/);
+      assert.match(producerAdminBody, /name="logos"[^>]+multiple/);
+      const producerCsrf = producerAdminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
+      assert.ok(producerCsrf);
+
+      const logoBatch = new FormData();
+      logoBatch.set("csrf", producerCsrf);
+      logoBatch.set("overwrite", "yes");
+      const batchPng = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
+      logoBatch.append("logos", new Blob([batchPng], { type: "image/png" }), "alexandre-bonnet-badge.png");
+      logoBatch.append("logos", new Blob([batchPng], { type: "image/png" }), "Bonnaire logo.png");
+      logoBatch.append("logos", new Blob([batchPng], { type: "image/png" }), "onbekend-huis.png");
+      const logoBatchResponse = await fetch(`${baseUrl}/admin/producers/logos/batch`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: cookie },
+        body: logoBatch
+      });
+      assert.equal(logoBatchResponse.status, 303);
+      assert.match(logoBatchResponse.headers.get("location"), /logosUploaded=2/);
+      assert.match(logoBatchResponse.headers.get("location"), /logosUnmatched=1/);
+      const alexandre = await (await fetch(`${baseUrl}/api/v1/producers/xlsx-alexandre-bonnet-les-riceys`)).json();
+      const bonnaire = await (await fetch(`${baseUrl}/api/v1/producers/xlsx-bonnaire-cramant`)).json();
+      assert.equal(alexandre.logoUrl, "/producers/xlsx-alexandre-bonnet-les-riceys/logo");
+      assert.equal(bonnaire.logoUrl, "/producers/xlsx-bonnaire-cramant/logo");
+
       const adminResponse = await fetch(`${baseUrl}/admin/regions`, { headers: { Cookie: cookie } });
       const adminBody = await adminResponse.text();
       assert.equal(adminResponse.status, 200);

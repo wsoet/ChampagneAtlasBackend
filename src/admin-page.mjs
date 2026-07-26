@@ -44,13 +44,15 @@ dialog::backdrop{background:#071a1488}.detail{padding:0;position:relative}.detai
 .toggle-row{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px}.edit-form .check{display:flex;align-items:center;gap:10px;color:var(--ink);background:#f6f3eb;border-radius:10px;padding:11px}.edit-form .check input{width:18px;height:18px;accent-color:var(--forest)}
 .edit-actions{position:sticky;bottom:0;z-index:4;grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;margin:0 -24px -92px;padding:15px 24px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px #0f3b2e0c}.danger{background:var(--red)}
 .field-hint{font-size:11px;color:var(--muted);font-weight:400}.edit-form input:focus,.edit-form select:focus,.edit-form textarea:focus{outline:2px solid #c9a22766;border-color:var(--gold)}
+.notice{margin:0 0 18px;padding:13px 16px;border:1px solid #b9d0c7;border-radius:12px;background:#edf5f1;color:var(--forest)}.notice.error{border-color:#d7a9b4;background:#fbf0f2;color:var(--red)}
+.batch-upload{margin:0 0 18px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:#fff}.batch-upload summary{cursor:pointer;color:var(--forest);font-weight:750}.batch-form{display:grid;grid-template-columns:1fr auto auto;align-items:end;gap:12px;margin-top:14px}.batch-form label{font-weight:700}.batch-form label span{display:block;margin-bottom:5px}.batch-form .check{display:flex;align-items:center;gap:8px;padding-bottom:10px}.batch-form .check input{width:18px;height:18px;accent-color:var(--forest)}
 .house-logo{width:92px;height:92px;object-fit:contain;border:1px solid var(--line);border-radius:14px;background:white;padding:8px;margin:0 0 14px}
 .overview-logo{width:44px;height:44px;display:block;object-fit:contain;border:1px solid var(--line);border-radius:9px;background:white;padding:4px;margin:auto}
 .overview-logo{cursor:zoom-in}.logo-lightbox{padding:18px;text-align:center}.logo-lightbox img{display:block;width:min(520px,78vw);height:min(520px,70vh);object-fit:contain;margin:12px auto 0;background:white;border-radius:14px}
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
 @media(max-width:900px){
   header .admin-label,header>span:not(.admin-label){display:none}.page-head{align-items:flex-start}.stats{grid-template-columns:repeat(3,1fr)}
-  .toolbar{grid-template-columns:1fr}.detail-grid,.edit-form,.form-section{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.form-section .wide,.edit-actions{grid-column:1}.toggle-row{grid-template-columns:1fr}
+  .toolbar,.batch-form{grid-template-columns:1fr}.detail-grid,.edit-form,.form-section{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.form-section .wide,.edit-actions{grid-column:1}.toggle-row{grid-template-columns:1fr}
   .table-wrap{border:0;background:transparent}table,tbody{display:block}thead{display:none}
   tbody{display:grid;gap:14px}tbody tr{display:grid;grid-template-columns:minmax(120px,35%) 1fr;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
   tbody td{display:grid;grid-template-columns:1fr;align-content:start;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -110,18 +112,24 @@ export function resetPage(token, message = "") {
   </section>`);
 }
 
-export function adminPage(producers, profile, csrf, regionRecords = []) {
+export function adminPage(producers, profile, csrf, regionRecords = [], logoBatchResult = {}) {
   const safeData = JSON.stringify(producers).replaceAll("<", "\\u003c");
   const safeRegions = JSON.stringify(
     regionRecords.map(({ id, name }) => ({ id, name }))
   ).replaceAll("<", "\\u003c");
   const regions = [...new Set(producers.map((item) => item.region).filter(Boolean))]
     .sort((a, b) => a.localeCompare(b, "nl"));
+  const batchMessage = logoBatchResult.error
+    ? `<p class="notice error">De logo-upload is niet verwerkt. Gebruik maximaal 100 geldige PNG-, JPG- of WebP-bestanden van maximaal 2 MB per bestand.</p>`
+    : logoBatchResult.uploaded !== null && logoBatchResult.uploaded !== undefined
+      ? `<p class="notice"><strong>${escapeHtml(logoBatchResult.uploaded)}</strong> logo's geüpload · ${escapeHtml(logoBatchResult.skipped || 0)} overgeslagen · ${escapeHtml(logoBatchResult.unmatched || 0)} niet automatisch gekoppeld.</p>`
+      : "";
   const body = `<header><a class="brand" href="/admin" aria-label="Naar hoofdpagina"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a><span class="admin-label">Admin / Beheerpaneel</span>
     <div class="spacer"></div><span>${escapeHtml(profile.username)}</span>
     <a class="button light" href="/admin/regions">Regio’s beheren</a>
     <a class="button light" href="/auth/logout">Uitloggen</a></header>
   <main>
+    ${batchMessage}
     <div class="page-head"><div><h1>Champagnehuizen</h1><p>Beheer de catalogus, contactgegevens en online verkoopinformatie.</p></div>
       <button id="newProducerTop" class="button" type="button">+ Nieuw huis</button></div>
     <div class="stats">
@@ -129,6 +137,17 @@ export function adminPage(producers, profile, csrf, regionRecords = []) {
       <div class="stat"><strong>${producers.filter((p) => p.museletAvailable).length}</strong><span>Met Koop online</span></div>
       <div class="stat"><strong>${producers.filter((p) => p.visitable).length}</strong><span>Bezoekbaar</span></div>
     </div>
+    <details class="batch-upload">
+      <summary>Meerdere huislogo's uploaden</summary>
+      <form class="batch-form" method="post" enctype="multipart/form-data" action="/admin/producers/logos/batch">
+        <input type="hidden" name="csrf" value="${escapeHtml(csrf)}">
+        <label><span>Selecteer logo's</span><input name="logos" type="file" accept="image/jpeg,image/png,image/webp" multiple required>
+          <small class="muted">De bestandsnaam moet overeenkomen met de naam van het huis. Achtervoegsels zoals “logo” en “badge” worden genegeerd.</small>
+        </label>
+        <label class="check"><input name="overwrite" type="checkbox" value="yes"> Bestaande logo's overschrijven</label>
+        <button class="button" type="submit">Logo's verwerken</button>
+      </form>
+    </details>
     <section class="workspace">
     <div class="toolbar">
       <input id="search" type="search" placeholder="Zoek op huis, plaats of regio…" autocomplete="off">

@@ -154,6 +154,18 @@ export async function saveProducerOverride(producerId, patch, updatedBy, logo = 
   await persist(producerId, data, updatedBy, Boolean(existing?.isCustom), false, logo);
 }
 
+export async function saveProducerLogo(producerId, logo, updatedBy) {
+  const existing = (await producerOverrides()).get(producerId);
+  await persist(
+    producerId,
+    cleanPatch(existing || {}),
+    updatedBy,
+    Boolean(existing?.isCustom),
+    false,
+    logo
+  );
+}
+
 export async function createProducer(producerId, patch, updatedBy, logo = null) {
   await persist(producerId, cleanPatch(patch), updatedBy, true, false, logo);
 }

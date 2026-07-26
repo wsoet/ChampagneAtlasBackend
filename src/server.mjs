@@ -23,6 +23,7 @@ import {
   deleteProducerLogo,
   producerLogo,
   producersWithOverrides,
+  saveProducerLogo,
   saveProducerOverride
 } from "./producer-store.mjs";
 import { regionAdminPage } from "./region-admin-page.mjs";
@@ -128,6 +129,74 @@ async function readMultipart(request, fileField = "banner") {
     parser.on("finish", () => failed ? reject(new Error("Invalid image")) : resolve({ fields, file }));
     request.pipe(parser);
   });
+}
+
+const acceptedImageTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+
+function validImageSignature(data, mimeType) {
+  return (
+    (mimeType === "image/jpeg" && data[0] === 0xff && data[1] === 0xd8 && data[2] === 0xff) ||
+    (mimeType === "image/png" && data.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) ||
+    (mimeType === "image/webp" && data.subarray(0, 4).toString() === "RIFF" && data.subarray(8, 12).toString() === "WEBP")
+  );
+}
+
+async function readLogoBatch(request) {
+  return new Promise((resolve, reject) => {
+    const fields = {};
+    const files = [];
+    let failed = false;
+    const parser = Busboy({
+      headers: request.headers,
+      limits: { files: 100, fileSize: 2 * 1024 * 1024, fields: 5, fieldSize: 32768 }
+    });
+    parser.on("field", (name, value) => { fields[name] = value; });
+    parser.on("file", (name, stream, info) => {
+      if (name !== "logos" || !info.filename) {
+        stream.resume();
+        return;
+      }
+      if (!acceptedImageTypes.has(info.mimeType)) {
+        failed = true;
+        stream.resume();
+        return;
+      }
+      const chunks = [];
+      let limited = false;
+      stream.on("data", (chunk) => chunks.push(chunk));
+      stream.on("limit", () => { limited = true; failed = true; });
+      stream.on("end", () => {
+        if (limited) return;
+        const data = Buffer.concat(chunks);
+        if (!validImageSignature(data, info.mimeType)) {
+          failed = true;
+          return;
+        }
+        files.push({
+          filename: info.filename,
+          logo: { data, mime: info.mimeType }
+        });
+      });
+    });
+    parser.on("filesLimit", () => { failed = true; });
+    parser.on("error", reject);
+    parser.on("finish", () => {
+      if (failed) reject(new Error("Invalid logo batch"));
+      else resolve({ fields, files });
+    });
+    request.pipe(parser);
+  });
+}
+
+function logoMatchKey(value) {
+  return String(value || "")
+    .replace(/\.[^.]+$/, "")
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .replace(/\b(?:badge|logo|processed|transparent)\b/g, " ")
+    .replace(/^champagne\b/, "")
+    .replace(/[^a-z0-9]+/g, "");
 }
 
 async function readProducerForm(request) {
@@ -253,6 +322,7 @@ export function createServer() {
     }
 
     const isNewProducer = url.pathname === "/admin/producers/new";
+    const isProducerLogoBatch = url.pathname === "/admin/producers/logos/batch";
     const producerDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/delete$/);
     const producerLogoDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/logo\/delete$/);
     const producerEditMatch = isNewProducer ? null : url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)$/);
@@ -276,6 +346,63 @@ export function createServer() {
       await deleteProducerLogo(producerLogoDeleteMatch[1], profile.username);
       response.writeHead(303, { Location: "/admin?logoDeleted=1", "Cache-Control": "no-store" });
       response.end();
+      return;
+    }
+    if (request.method === "POST" && isProducerLogoBatch) {
+      const profile = currentAdmin(request, config);
+      if (!profile || profile.username !== "wsoet") {
+        html(response, profile ? 403 : 401, loginPage(config.ready, "Alleen admin wsoet kan logo's in bulk beheren."));
+        return;
+      }
+      try {
+        const { fields, files } = await readLogoBatch(request);
+        if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
+        if (!files.length) throw new Error("No logos");
+        const currentRegions = await allRegions();
+        const currentProducers = await producersWithOverrides(producers, currentRegions);
+        const producersByKey = new Map();
+        for (const producer of currentProducers) {
+          const key = logoMatchKey(producer.name);
+          const matches = producersByKey.get(key) || [];
+          matches.push(producer);
+          producersByKey.set(key, matches);
+        }
+        const overwrite = fields.overwrite === "yes";
+        let uploaded = 0;
+        let skipped = 0;
+        let unmatched = 0;
+        for (const file of files) {
+          const matches = producersByKey.get(logoMatchKey(file.filename)) || [];
+          if (matches.length !== 1) {
+            unmatched += 1;
+            continue;
+          }
+          const producer = matches[0];
+          if (producer.logoUrl && !overwrite) {
+            skipped += 1;
+            continue;
+          }
+          await saveProducerLogo(producer.id, file.logo, profile.username);
+          uploaded += 1;
+        }
+        const params = new URLSearchParams({
+          logosUploaded: String(uploaded),
+          logosSkipped: String(skipped),
+          logosUnmatched: String(unmatched)
+        });
+        response.writeHead(303, {
+          Location: `/admin?${params}`,
+          "Cache-Control": "no-store"
+        });
+        response.end();
+      } catch (error) {
+        console.error("Producer logo batch failed:", error instanceof Error ? error.message : "Unknown error");
+        response.writeHead(303, {
+          Location: "/admin?logoBatchError=1",
+          "Cache-Control": "no-store"
+        });
+        response.end();
+      }
       return;
     }
     if (request.method === "POST" && (isNewProducer || producerDeleteMatch)) {
@@ -431,7 +558,12 @@ export function createServer() {
         response,
         profile ? 200 : config.ready ? 401 : 503,
         profile
-          ? adminPage(currentProducers, profile, csrfToken(profile, config), currentRegions)
+          ? adminPage(currentProducers, profile, csrfToken(profile, config), currentRegions, {
+              uploaded: url.searchParams.get("logosUploaded"),
+              skipped: url.searchParams.get("logosSkipped"),
+              unmatched: url.searchParams.get("logosUnmatched"),
+              error: url.searchParams.has("logoBatchError")
+            })
           : loginPage(config.ready)
       );
       return;
