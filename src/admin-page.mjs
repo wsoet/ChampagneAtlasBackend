@@ -130,6 +130,7 @@ export function adminPage(producers, profile, csrf, regionRecords = [], logoBatc
   const body = `<header><a class="brand" href="/admin" aria-label="Naar hoofdpagina"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a><span class="admin-label">Admin / Beheerpaneel</span>
     <div class="spacer"></div><span>${escapeHtml(profile.username)}</span>
     <a class="button light" href="/admin/regions">Regio’s beheren</a>
+    <a class="button light" href="/admin/places">Plaatsen beheren</a>
     <a class="button light" href="/auth/logout">Uitloggen</a></header>
   <main>
     ${batchMessage}

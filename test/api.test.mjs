@@ -118,6 +118,32 @@ test("region API exposes the five spreadsheet regions and producer links", async
   });
 });
 
+test("place API exposes banner-folder places with region and producer links", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/places`);
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(body.count, 74);
+    const epernay = body.places.find((place) => place.id === "epernay");
+    assert.equal(epernay.name, "Épernay");
+    assert.equal(epernay.region, "Vallée de la Marne");
+    assert.ok(epernay.producerCount > 40);
+    assert.equal(epernay.producerIds.length, epernay.producerCount);
+    assert.ok(epernay.producers.some((producer) => producer.name === "Moët & Chandon"));
+  });
+});
+
+test("public place page lists champagne houses in the place", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/places/bouzy`);
+    const body = await response.text();
+    assert.equal(response.status, 200);
+    assert.match(body, /Champagnehuizen in Bouzy/);
+    assert.match(body, /Paul Bara/);
+    assert.match(body, /Montagne de Reims/);
+  });
+});
+
 test("public region page renders spreadsheet information", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/regions/montagne-de-reims`);

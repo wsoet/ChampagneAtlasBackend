@@ -82,7 +82,7 @@ export function regionAdminPage(regions, profile, csrf, message = "") {
   <title>Regio's beheren · Champagne Atlas</title><style>
   :root{--forest:#0f3b2e;--forest2:#174f3f;--gold:#c9a227;--ivory:#fdfbf6;--cream:#f2ebd6;--ink:#1d1d1b;--muted:#68665f;--line:#e4ded2;--red:#8b1731;--shadow:0 18px 50px #0f3b2e12}
   *{box-sizing:border-box}body{margin:0;background:#f7f5ef;color:var(--ink);font:14px/1.5 Arial,system-ui,sans-serif}
-  header{height:76px;background:#fff;border-bottom:1px solid var(--line);padding:10px 3vw;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:20}
+  header{height:76px;background:rgb(249,248,250);border-bottom:1px solid var(--line);padding:10px 3vw;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:20}
   .brand{display:block;line-height:0}.brand img{display:block;width:176px;height:48px;object-fit:contain}.admin-label{padding-left:16px;border-left:1px solid var(--line);font-size:12px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
   header nav{margin-left:auto;display:flex;align-items:center;gap:8px}header a{color:var(--forest);text-decoration:none;font-weight:700;padding:9px 12px;border-radius:9px}header a.active{background:#eef3f0}
   main{width:min(1320px,94vw);margin:28px auto 70px}.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:24px}
@@ -102,7 +102,7 @@ export function regionAdminPage(regions, profile, csrf, message = "") {
   @media(max-width:760px){header .admin-label,header .user{display:none}.editor-grid,.two,.content-fields{grid-template-columns:1fr}.content{grid-column:auto}.page-head{display:block}.page-head button{margin-top:14px}}
   </style></head><body>
   <header><a class="brand" href="/admin"><img src="/assets/champagne-atlas-logo.png" alt="Champagne Atlas"></a><span class="admin-label">Beheeromgeving</span>
-    <nav><a href="/admin">Huizen</a><a class="active" href="/admin/regions">Regio's</a><a href="/regions" target="_blank">Publieke pagina's</a><span class="user">${escapeHtml(profile.username)}</span></nav></header>
+    <nav><a href="/admin">Huizen</a><a class="active" href="/admin/regions">Regio's</a><a href="/admin/places">Plaatsen</a><a href="/regions" target="_blank">Publieke pagina's</a><span class="user">${escapeHtml(profile.username)}</span></nav></header>
   <main><div class="page-head"><div><h1>Regio's</h1><p>Beheer regiopagina's, inhoud en beeldmateriaal vanuit één overzicht.</p></div><button id="newRegionButton" type="button">+ Nieuwe regio</button></div>
     ${message ? `<p class="notice">${escapeHtml(message)}</p>` : ""}
     <section class="region-grid">${regions.map(regionCard).join("")}</section>

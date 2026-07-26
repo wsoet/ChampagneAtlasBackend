@@ -28,6 +28,10 @@ import {
 } from "./producer-store.mjs";
 import { regionAdminPage } from "./region-admin-page.mjs";
 import { allRegions, deleteRegion, regionBanner, saveRegion } from "./region-store.mjs";
+import { placeAdminPage } from "./place-admin-page.mjs";
+import { placePage, placesIndexPage } from "./place-page.mjs";
+import { basePlaces, placeById, placeId } from "./places.mjs";
+import { allPlaces, placeBanner, savePlace, savePlaceBanner } from "./place-store.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const champagneAtlasLogo = readFileSync(
@@ -95,7 +99,7 @@ async function readMultipart(request, fileField = "banner") {
     let failed = false;
     const parser = Busboy({
       headers: request.headers,
-      limits: { files: 1, fileSize: 2 * 1024 * 1024, fields: 20, fieldSize: 32768 }
+      limits: { files: 1, fileSize: 3 * 1024 * 1024, fields: 20, fieldSize: 32768 }
     });
     parser.on("field", (name, value) => { fields[name] = value; });
     parser.on("file", (name, stream, info) => {
@@ -188,6 +192,47 @@ async function readLogoBatch(request) {
   });
 }
 
+async function readPlaceBannerBatch(request) {
+  return new Promise((resolve, reject) => {
+    const fields = {};
+    const files = [];
+    let failed = false;
+    const parser = Busboy({
+      headers: request.headers,
+      limits: { files: 100, fileSize: 3 * 1024 * 1024, fields: 5, fieldSize: 32768 }
+    });
+    parser.on("field", (name, value) => { fields[name] = value; });
+    parser.on("file", (name, stream, info) => {
+      if (name !== "banners" || !info.filename) {
+        stream.resume();
+        return;
+      }
+      if (!acceptedImageTypes.has(info.mimeType)) {
+        failed = true;
+        stream.resume();
+        return;
+      }
+      const chunks = [];
+      let limited = false;
+      stream.on("data", (chunk) => chunks.push(chunk));
+      stream.on("limit", () => { limited = true; failed = true; });
+      stream.on("end", () => {
+        if (limited) return;
+        const data = Buffer.concat(chunks);
+        if (!validImageSignature(data, info.mimeType)) {
+          failed = true;
+          return;
+        }
+        files.push({ filename: info.filename, banner: { data, mime: info.mimeType } });
+      });
+    });
+    parser.on("filesLimit", () => { failed = true; });
+    parser.on("error", reject);
+    parser.on("finish", () => failed ? reject(new Error("Invalid banner batch")) : resolve({ fields, files }));
+    request.pipe(parser);
+  });
+}
+
 function logoMatchKey(value) {
   return String(value || "")
     .replace(/\.[^.]+$/, "")
@@ -259,6 +304,27 @@ function cleanProducerData(form, regionList) {
     museletAvailable: form.museletAvailable === "yes" && Boolean(museletUrl),
     museletUrl
   };
+}
+
+function cleanPlaceData(form, regionList) {
+  const name = String(form.name || "").trim();
+  if (!name) throw new Error("Place name is required");
+  const regionId = String(form.regionId || "").trim();
+  const region = regionId ? regionById(regionId, regionList) : null;
+  if (regionId && !region) throw new Error("Unknown region");
+  return {
+    name,
+    regionId: region?.id || "",
+    region: region?.name || "",
+    description: String(form.description || "").trim()
+  };
+}
+
+async function currentPlaces() {
+  const currentRegions = await allRegions();
+  const currentProducers = await producersWithOverrides(producers, currentRegions);
+  const places = await allPlaces(basePlaces(currentProducers, currentRegions));
+  return { currentRegions, currentProducers, places };
 }
 
 export function createServer() {
@@ -534,6 +600,53 @@ export function createServer() {
       return;
     }
 
+    const placeSaveMatch = url.pathname.match(/^\/admin\/places\/([a-z0-9-]+)$/);
+    const isPlaceBannerBatch = url.pathname === "/admin/places/banners/batch";
+    if (request.method === "POST" && (placeSaveMatch || isPlaceBannerBatch)) {
+      const profile = currentAdmin(request, config);
+      if (!profile || profile.username !== "wsoet") {
+        html(response, profile ? 403 : 401, loginPage(config.ready, "Alleen admin wsoet kan plaatsen beheren."));
+        return;
+      }
+      try {
+        const { currentRegions, places } = await currentPlaces();
+        if (isPlaceBannerBatch) {
+          const { fields, files } = await readPlaceBannerBatch(request);
+          if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
+          const placeIds = new Set(places.map((place) => place.id));
+          let uploaded = 0;
+          let unmatched = 0;
+          for (const file of files) {
+            const id = placeId(file.filename.replace(/\.[^.]+$/, "").replace(/_banner$/i, ""));
+            if (!placeIds.has(id)) {
+              unmatched += 1;
+              continue;
+            }
+            await savePlaceBanner(id, file.banner, profile.username);
+            uploaded += 1;
+          }
+          response.writeHead(303, {
+            Location: `/admin/places?bannersUploaded=${uploaded}&bannersUnmatched=${unmatched}`,
+            "Cache-Control": "no-store"
+          });
+          response.end();
+          return;
+        }
+        const place = placeById(placeSaveMatch[1], places);
+        if (!place) throw new Error("Unknown place");
+        const { fields, file: banner } = await readMultipart(request);
+        if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
+        await savePlace(place.id, cleanPlaceData(fields, currentRegions), banner, profile.username);
+        response.writeHead(303, { Location: "/admin/places?saved=1", "Cache-Control": "no-store" });
+        response.end();
+      } catch (error) {
+        console.error("Place admin request failed:", error instanceof Error ? error.message : "Unknown error");
+        response.writeHead(303, { Location: "/admin/places?error=1", "Cache-Control": "no-store" });
+        response.end();
+      }
+      return;
+    }
+
     if (request.method !== "GET") {
       json(response, 405, { error: "Method not allowed" }, origin);
       return;
@@ -590,6 +703,23 @@ export function createServer() {
       return;
     }
 
+    if (url.pathname === "/admin/places") {
+      const profile = currentAdmin(request, config);
+      if (!profile || profile.username !== "wsoet") {
+        html(response, profile ? 403 : 401, loginPage(config.ready, "Alleen admin wsoet kan plaatsen beheren."));
+        return;
+      }
+      const { currentRegions, places } = await currentPlaces();
+      const message = url.searchParams.has("saved")
+        ? "De plaats is opgeslagen."
+        : url.searchParams.has("error") ? "Opslaan is niet gelukt. Controleer de gegevens en banner." : "";
+      html(response, 200, placeAdminPage(places, currentRegions, profile, csrfToken(profile, config), message, {
+        uploaded: url.searchParams.get("bannersUploaded"),
+        unmatched: url.searchParams.get("bannersUnmatched")
+      }));
+      return;
+    }
+
     if (url.pathname === "/auth/reset") {
       html(response, 200, resetPage(url.searchParams.get("token") || ""));
       return;
@@ -608,6 +738,42 @@ export function createServer() {
         200,
         regionsIndexPage(currentRegions.map((region) => regionWithProducers(region, currentProducers, currentRegions)))
       );
+      return;
+    }
+
+    if (url.pathname === "/places") {
+      const { places } = await currentPlaces();
+      html(response, 200, placesIndexPage(places));
+      return;
+    }
+
+    const placeBannerMatch = url.pathname.match(/^\/places\/([a-z0-9-]+)\/banner$/);
+    if (placeBannerMatch) {
+      const { places } = await currentPlaces();
+      if (!placeById(placeBannerMatch[1], places)) {
+        response.writeHead(404).end();
+        return;
+      }
+      const banner = await placeBanner(placeBannerMatch[1]);
+      if (!banner) {
+        response.writeHead(404).end();
+        return;
+      }
+      response.writeHead(200, {
+        "Content-Type": banner.mime,
+        "Content-Length": banner.data.length,
+        "Cache-Control": "public, max-age=300",
+        "X-Content-Type-Options": "nosniff"
+      });
+      response.end(banner.data);
+      return;
+    }
+
+    const placePageMatch = url.pathname.match(/^\/places\/([a-z0-9-]+)$/);
+    if (placePageMatch) {
+      const { places } = await currentPlaces();
+      const place = placeById(placePageMatch[1], places);
+      html(response, place ? 200 : 404, place ? placePage(place) : placesIndexPage(places));
       return;
     }
 
@@ -703,6 +869,20 @@ export function createServer() {
         region ? regionWithProducers(region, currentProducers, currentRegions) : { error: "Region not found" },
         origin
       );
+      return;
+    }
+
+    if (url.pathname === "/api/v1/places") {
+      const { places } = await currentPlaces();
+      json(response, 200, { count: places.length, places }, origin);
+      return;
+    }
+
+    const placeApiMatch = url.pathname.match(/^\/api\/v1\/places\/([a-z0-9-]+)$/);
+    if (placeApiMatch) {
+      const { places } = await currentPlaces();
+      const place = placeById(placeApiMatch[1], places);
+      json(response, place ? 200 : 404, place || { error: "Place not found" }, origin);
       return;
     }
 
