@@ -320,13 +320,50 @@ function cleanPlaceData(form, regionList) {
   };
 }
 
+function selectedProducerIds(form, currentProducers) {
+  let values;
+  try {
+    values = JSON.parse(String(form.producerIdsJson || "[]"));
+  } catch {
+    throw new Error("Invalid producer selection");
+  }
+  if (!Array.isArray(values)) throw new Error("Invalid producer selection");
+  const knownIds = new Set(currentProducers.map((producer) => producer.id));
+  const selected = new Set(values.map(String));
+  if ([...selected].some((id) => !knownIds.has(id))) throw new Error("Unknown producer");
+  return selected;
+}
+
+async function syncPlaceProducers(place, placeName, selectedIds, currentProducers, updatedBy) {
+  const oldPlaceKeys = new Set([place?.id, placeId(place?.name)].filter(Boolean));
+  for (const producer of currentProducers) {
+    const producerPlaceKey = placeId(producer.city || producer.locationType);
+    const wasLinked = oldPlaceKeys.has(producerPlaceKey);
+    const shouldBeLinked = selectedIds.has(producer.id);
+    if (shouldBeLinked && producer.city !== placeName) {
+      await saveProducerOverride(
+        producer.id,
+        { ...producer, city: placeName, locationType: placeName },
+        updatedBy
+      );
+    } else if (wasLinked && !shouldBeLinked) {
+      await saveProducerOverride(
+        producer.id,
+        { ...producer, city: "", locationType: "" },
+        updatedBy
+      );
+    }
+  }
+}
+
 async function currentPlaces() {
   const currentRegions = await allRegions();
   const currentProducers = await producersWithOverrides(producers, currentRegions);
   const storedPlaces = await allPlaces(basePlaces(currentProducers, currentRegions));
   const places = storedPlaces.map((place) => {
+    const placeKeys = new Set([place.id, placeId(place.name)]);
     const matches = currentProducers.filter(
-      (producer) => placeId(producer.city || producer.locationType) === place.id
+      (producer) => placeKeys.has(placeId(producer.city || producer.locationType))
     );
     return {
       ...place,
@@ -626,7 +663,7 @@ export function createServer() {
         return;
       }
       try {
-        const { currentRegions, places } = await currentPlaces();
+        const { currentRegions, currentProducers, places } = await currentPlaces();
         if (isPlaceBannerBatch) {
           const { fields, files } = await readPlaceBannerBatch(request);
           if (!validCsrf(profile, fields.csrf, config)) throw new Error("Invalid CSRF");
@@ -656,7 +693,10 @@ export function createServer() {
         if (!id) throw new Error("Invalid place ID");
         if (isNewPlace && placeById(id, places)) throw new Error("Place already exists");
         if (!isNewPlace && !placeById(id, places)) throw new Error("Unknown place");
+        const selectedIds = selectedProducerIds(fields, currentProducers);
+        const existingPlace = isNewPlace ? null : placeById(id, places);
         await savePlace(id, data, banner, profile.username);
+        await syncPlaceProducers(existingPlace, data.name, selectedIds, currentProducers, profile.username);
         response.writeHead(303, { Location: `/admin/places?${isNewPlace ? "created" : "saved"}=1`, "Cache-Control": "no-store" });
         response.end();
       } catch (error) {
@@ -687,6 +727,9 @@ export function createServer() {
       const profile = currentAdmin(request, config);
       const currentRegions = profile ? await allRegions() : [];
       const currentProducers = profile ? await producersWithOverrides(producers, currentRegions) : [];
+      const currentPlaceRecords = profile
+        ? await allPlaces(basePlaces(currentProducers, currentRegions))
+        : [];
       html(
         response,
         profile ? 200 : config.ready ? 401 : 503,
@@ -696,7 +739,7 @@ export function createServer() {
               skipped: url.searchParams.get("logosSkipped"),
               unmatched: url.searchParams.get("logosUnmatched"),
               error: url.searchParams.has("logoBatchError")
-            })
+            }, currentPlaceRecords)
           : loginPage(config.ready)
       );
       return;
@@ -729,15 +772,23 @@ export function createServer() {
         html(response, profile ? 403 : 401, loginPage(config.ready, "Alleen admin wsoet kan plaatsen beheren."));
         return;
       }
-      const { currentRegions, places } = await currentPlaces();
+      const { currentRegions, currentProducers, places } = await currentPlaces();
       const message = url.searchParams.has("saved")
         ? "De plaats is opgeslagen."
         : url.searchParams.has("created") ? "De nieuwe plaats is toegevoegd."
         : url.searchParams.has("error") ? "Opslaan is niet gelukt. Controleer de gegevens en banner." : "";
-      html(response, 200, placeAdminPage(places, currentRegions, profile, csrfToken(profile, config), message, {
-        uploaded: url.searchParams.get("bannersUploaded"),
-        unmatched: url.searchParams.get("bannersUnmatched")
-      }));
+      html(response, 200, placeAdminPage(
+        places,
+        currentRegions,
+        profile,
+        csrfToken(profile, config),
+        message,
+        {
+          uploaded: url.searchParams.get("bannersUploaded"),
+          unmatched: url.searchParams.get("bannersUnmatched")
+        },
+        currentProducers
+      ));
       return;
     }
 

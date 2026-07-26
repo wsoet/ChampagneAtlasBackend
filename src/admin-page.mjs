@@ -115,10 +115,20 @@ export function resetPage(token, message = "") {
   </section>`);
 }
 
-export function adminPage(producers, profile, csrf, regionRecords = [], logoBatchResult = {}) {
+export function adminPage(
+  producers,
+  profile,
+  csrf,
+  regionRecords = [],
+  logoBatchResult = {},
+  placeRecords = []
+) {
   const safeData = JSON.stringify(producers).replaceAll("<", "\\u003c");
   const safeRegions = JSON.stringify(
     regionRecords.map(({ id, name }) => ({ id, name }))
+  ).replaceAll("<", "\\u003c");
+  const safePlaces = JSON.stringify(
+    placeRecords.map(({ id, name }) => ({ id, name }))
   ).replaceAll("<", "\\u003c");
   const regions = [...new Set(producers.map((item) => item.region).filter(Boolean))]
     .sort((a, b) => a.localeCompare(b, "nl"));
@@ -173,7 +183,9 @@ export function adminPage(producers, profile, csrf, regionRecords = [], logoBatc
   <form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/new">
     <input type="hidden" name="csrf" value="${escapeHtml(csrf)}">
     <label><span>Champagnehuis</span><input name="name" required></label>
-    <label><span>Plaats</span><input name="city"></label>
+    <label><span>Plaats</span><select name="city"><option value="">Geen plaats</option>${placeRecords.map((place) =>
+      `<option value="${escapeHtml(place.name)}">${escapeHtml(place.name)}</option>`
+    ).join("")}</select></label>
     <label class="wide"><span>Adres</span><input name="address"></label>
     <label class="wide"><span>Huislogo (JPG, PNG of WebP; maximaal 2 MB)</span><input name="logo" type="file" accept="image/jpeg,image/png,image/webp"></label>
     <label><span>Regio</span><select name="region"><option value="">Geen regio</option>${regionRecords.map((region) =>
@@ -192,6 +204,7 @@ export function adminPage(producers, profile, csrf, regionRecords = [], logoBatc
   const script = `
 const data=${safeData};
 const regionData=${safeRegions};
+const placeData=${safePlaces};
 const csrf=${JSON.stringify(csrf)};
 const esc=(v)=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const search=document.querySelector("#search"),region=document.querySelector("#region"),shop=document.querySelector("#shop"),rows=document.querySelector("#rows"),count=document.querySelector("#count"),dialog=document.querySelector("#detail"),detailBody=document.querySelector("#detailBody"),newDialog=document.querySelector("#newDialog"),logoDialog=document.querySelector("#logoDialog"),largeLogo=document.querySelector("#largeLogo");
@@ -200,6 +213,7 @@ function cruBadge(p){return p.cruLabel?\`<a class="cru-badge \${p.cruStatus==="P
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees,p.cruLabel,p.cruCommune].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
 function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.region)}
 function regionOptions(selected){return '<option value="">Geen regio</option>'+regionData.map(r=>\`<option value="\${esc(r.name)}" \${r.name===selected?"selected":""}>\${esc(r.name)}</option>\`).join("")}
+function placeOptions(selected){const known=placeData.some(p=>p.name===selected);return '<option value="">Geen plaats</option>'+(!known&&selected?\`<option value="\${esc(selected)}" selected>\${esc(selected)} (nog niet in plaatsentabel)</option>\`:"")+placeData.map(p=>\`<option value="\${esc(p.name)}" \${p.name===selected?"selected":""}>\${esc(p.name)}</option>\`).join("")}
 function openHouseEditor(p){const list=filtered(),index=list.findIndex(item=>item.id===p.id);detailBody.innerHTML=\`<div class="editor-head" data-house-id="\${esc(p.id)}">
   \${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}
   <div class="editor-head-text"><p class="muted">Champagnehuis bewerken</p><h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||"Plaats onbekend")} · \${esc(p.region||"Geen regio")} \${cruBadge(p)}</p></div>
@@ -209,7 +223,7 @@ function openHouseEditor(p){const list=filtered(),index=list.findIndex(item=>ite
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
 <section class="form-section"><h3>Basisgegevens</h3>
   <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
-  <label><span>Plaats</span><input name="city" value="\${esc(p.city||"")}"></label>
+  <label><span>Plaats</span><select name="city">\${placeOptions(p.city||"")}</select></label>
   <label class="wide"><span>Adres</span><input name="address" value="\${esc(p.address||"")}"></label>
   <label><span>Regio</span><select name="region">\${regionOptions(p.region||"")}</select></label>
   <label><span>Huislogo <em class="field-hint">PNG, JPG of WebP · max. 2 MB</em></span><input name="logo" type="file" accept="image/jpeg,image/png,image/webp"></label>
@@ -236,7 +250,7 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;
 <details class="edit-panel" open><summary>Gegevens bewerken</summary><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
 <input type="hidden" name="csrf" value="\${esc(csrf)}">
 <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
-<label><span>Plaats</span><input name="city" value="\${esc(p.city||"")}"></label>
+<label><span>Plaats</span><select name="city">\${placeOptions(p.city||"")}</select></label>
 <label class="wide"><span>Adres</span><input name="address" value="\${esc(p.address||"")}"></label>
 <label class="wide"><span>Huislogo (JPG, PNG of WebP; maximaal 2 MB)</span><input name="logo" type="file" accept="image/jpeg,image/png,image/webp"></label>
 <label><span>Website</span><input name="website" type="url" value="\${esc(p.website||"")}"></label>

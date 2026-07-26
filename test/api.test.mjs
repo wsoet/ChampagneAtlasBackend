@@ -307,6 +307,9 @@ test("valid admin credentials create a protected session", async () => {
       assert.match(body, /href="\/admin" aria-label="Naar hoofdpagina"/);
       assert.match(body, /Admin \/ Beheerpaneel/);
       assert.match(body, /<select name="region">/);
+      assert.match(body, /const placeData=/);
+      assert.match(body, /<select name="city">/);
+      assert.match(body, /function placeOptions\(selected\)/);
       assert.match(body, /Montagne de Reims/);
       const csrf = body.match(/const csrf="([^"]+)"/)?.[1];
       assert.ok(csrf);
@@ -465,6 +468,38 @@ test("only wsoet can manage regions, including a persistent banner", async () =>
       assert.match(producerAdminBody, /name="logos"[^>]+multiple/);
       const producerCsrf = producerAdminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
       assert.ok(producerCsrf);
+
+      const placeAdminResponse = await fetch(`${baseUrl}/admin/places`, {
+        headers: { Cookie: cookie }
+      });
+      const placeAdminBody = await placeAdminResponse.text();
+      assert.equal(placeAdminResponse.status, 200);
+      assert.match(placeAdminBody, /function producerLookup\(selected=\[\]\)/);
+      assert.match(placeAdminBody, /name="producerIdsJson"/);
+      assert.match(placeAdminBody, /placeholder="Zoek champagnehuis/);
+      const placeCsrf = placeAdminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
+      assert.ok(placeCsrf);
+
+      const placeForm = new FormData();
+      placeForm.set("csrf", placeCsrf);
+      placeForm.set("name", "Testplaats");
+      placeForm.set("regionId", "montagne-de-reims");
+      placeForm.set("description", "Lookup-test voor champagnehuizen.");
+      placeForm.set("producerIdsJson", JSON.stringify(["xlsx-paul-bara-bouzy"]));
+      const placeSaveResponse = await fetch(`${baseUrl}/admin/places/new`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: cookie },
+        body: placeForm
+      });
+      assert.equal(placeSaveResponse.status, 303);
+      const testPlace = await (await fetch(`${baseUrl}/api/v1/places/testplaats`)).json();
+      assert.equal(testPlace.producerCount, 1);
+      assert.equal(testPlace.producers[0].id, "xlsx-paul-bara-bouzy");
+      const movedProducer = await (await fetch(
+        `${baseUrl}/api/v1/producers/xlsx-paul-bara-bouzy`
+      )).json();
+      assert.equal(movedProducer.city, "Testplaats");
 
       const logoBatch = new FormData();
       logoBatch.set("csrf", producerCsrf);
