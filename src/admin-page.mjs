@@ -135,6 +135,8 @@ export function adminPage(producers, profile, csrf, regionRecords = [], logoBatc
       <button id="newProducerTop" class="button" type="button">+ Nieuw huis</button></div>
     <div class="stats">
       <div class="stat"><strong>${producers.length}</strong><span>Champagnehuizen</span></div>
+      <div class="stat"><strong>${producers.filter((p) => p.cruStatus === "GRAND_CRU").length}</strong><span>Gevestigd in Grand Cru</span></div>
+      <div class="stat"><strong>${producers.filter((p) => p.cruStatus === "PREMIER_CRU").length}</strong><span>Gevestigd in Premier Cru</span></div>
       <div class="stat"><strong>${producers.filter((p) => p.museletAvailable).length}</strong><span>Met Koop online</span></div>
       <div class="stat"><strong>${producers.filter((p) => p.visitable).length}</strong><span>Bezoekbaar</span></div>
     </div>

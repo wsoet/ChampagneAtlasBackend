@@ -1,10 +1,12 @@
 import pg from "pg";
 import { regionForName } from "./regions.mjs";
+import { cruClassificationForCity } from "./cru-classification.mjs";
 
 const memoryOverrides = new Map();
 let pool;
 let initialized;
 let websiteBackfill;
+let cruBackfill;
 
 function database() {
   const url = String(process.env.DATABASE_URL || "").trim();
@@ -114,9 +116,35 @@ async function backfillMissingProducerWebsites(baseProducers) {
   );
 }
 
+async function backfillCruClassifications(baseProducers) {
+  const classifications = baseProducers.map((producer) => [
+    producer.id,
+    JSON.stringify(cruClassificationForCity(producer.city || producer.locationType))
+  ]);
+  if (!classifications.length) return;
+
+  const db = await ready();
+  if (!db) return;
+
+  const values = classifications
+    .map((_, index) => `($${index * 2 + 1}::text, $${index * 2 + 2}::jsonb)`)
+    .join(", ");
+  await db.query(
+    `UPDATE producer_overrides AS overrides
+     SET data = overrides.data || classifications.data
+     FROM (VALUES ${values}) AS classifications(producer_id, data)
+     WHERE overrides.producer_id = classifications.producer_id
+       AND NOT overrides.deleted
+       AND NOT overrides.is_custom`,
+    classifications.flat()
+  );
+}
+
 export async function producersWithOverrides(baseProducers, regionList) {
   websiteBackfill ||= backfillMissingProducerWebsites(baseProducers);
   await websiteBackfill;
+  cruBackfill ||= backfillCruClassifications(baseProducers);
+  await cruBackfill;
   const overrides = await producerOverrides();
   const baseIds = new Set(baseProducers.map((producer) => producer.id));
   const custom = [...overrides.entries()]
@@ -141,7 +169,11 @@ export async function producersWithOverrides(baseProducers, regionList) {
   return [...baseProducers, ...custom].flatMap((producer) => {
     const override = overrides.get(producer.id) || {};
     if (override.deleted) return [];
-    const merged = { ...producer, ...override };
+    const merged = {
+      ...producer,
+      ...cruClassificationForCity(producer.city || producer.locationType),
+      ...override
+    };
     const matchedRegion = regionForName(merged.region, regionList);
     return [{
       ...merged,

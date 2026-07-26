@@ -67,6 +67,24 @@ test("producer search is case insensitive", async () => {
   });
 });
 
+test("producer API exposes legally sourced cru classification by commune", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/producers`);
+    const body = await response.json();
+    const agrapart = body.producers.find((producer) => producer.name === "Agrapart & Fils");
+    const maillart = body.producers.find((producer) => producer.name === "Nicolas Maillart");
+    const krug = body.producers.find((producer) => producer.name === "Krug");
+
+    assert.equal(agrapart.cruStatus, "GRAND_CRU");
+    assert.equal(agrapart.grandCru, true);
+    assert.equal(agrapart.premierCru, true);
+    assert.equal(maillart.cruStatus, "PREMIER_CRU");
+    assert.equal(maillart.grandCru, false);
+    assert.equal(krug.cruStatus, "");
+    assert.match(agrapart.cruSourceUrl, /Cahier_des_charges_appellation\.pdf$/);
+  });
+});
+
 test("Muselet availability exposes a usable online shop link", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/api/v1/producers`);
