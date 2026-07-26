@@ -34,20 +34,23 @@ th:nth-child(4),th:nth-child(5){width:7%}th:nth-child(6){width:10%}
 th:nth-child(7),th:nth-child(8){width:7%}th:nth-child(9){width:26%}th:nth-child(10){width:9%}
 th{background:#f7f2e7;color:var(--forest)}tbody tr:hover{background:#fcf8ef;cursor:pointer}
 .yes{color:var(--forest);font-weight:700}.no{color:var(--muted)}
-dialog{width:min(700px,92vw);border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
-dialog::backdrop{background:#071a1488}.detail{padding:26px}.detail h2{font:500 30px Georgia,serif;color:var(--forest);margin:0 0 4px}
+dialog{width:min(820px,96vw);max-height:96vh;border:0;border-radius:20px;padding:0;box-shadow:0 25px 80px #0005}
+dialog::backdrop{background:#071a1488}.detail{padding:0;position:relative}.detail h2{font:500 30px Georgia,serif;color:var(--forest);margin:0 0 4px}.detail>.close{display:none}
 .detail-grid{display:grid;grid-template-columns:150px 1fr;gap:8px 18px;margin:22px 0}.detail-grid dt{color:var(--muted)}.detail-grid dd{margin:0;overflow-wrap:anywhere}
-.edit-panel{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}.edit-panel summary{display:none}
-.edit-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.edit-form label{color:var(--muted);font-size:13px}
-.edit-form label span{display:block;margin-bottom:4px}.edit-form .wide{grid-column:1/-1}.edit-form textarea{width:100%;min-height:90px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit}
-.edit-form .check{display:flex;align-items:center;gap:8px;color:var(--ink)}.edit-form .check input{width:auto}.edit-actions{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px}.danger{background:var(--red)}
+.editor-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:15px;padding:20px 24px;background:#fff;border-bottom:1px solid var(--line)}.editor-head .house-logo{margin:0;width:62px;height:62px}.editor-head-text{min-width:0;flex:1}.editor-head h2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.editor-head p{margin:0}.editor-head .close{float:none;flex:0 0 auto}
+.edit-panel{margin:0}.edit-panel summary{display:none}.edit-form{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:20px 24px 92px;margin:0;background:#f8f6f1}.edit-form label{color:var(--ink);font-size:13px;font-weight:700}
+.edit-form label span{display:flex;justify-content:space-between;margin-bottom:5px}.edit-form .wide{grid-column:1/-1}.edit-form textarea{width:100%;min-height:96px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit}
+.form-section{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:13px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px}.form-section h3{grid-column:1/-1;margin:0 0 2px;color:var(--forest);font:500 19px Georgia,serif}.form-section .wide{grid-column:1/-1}
+.toggle-row{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px}.edit-form .check{display:flex;align-items:center;gap:10px;color:var(--ink);background:#f6f3eb;border-radius:10px;padding:11px}.edit-form .check input{width:18px;height:18px;accent-color:var(--forest)}
+.edit-actions{position:sticky;bottom:0;z-index:4;grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;margin:0 -24px -92px;padding:15px 24px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px #0f3b2e0c}.danger{background:var(--red)}
+.field-hint{font-size:11px;color:var(--muted);font-weight:400}.edit-form input:focus,.edit-form select:focus,.edit-form textarea:focus{outline:2px solid #c9a22766;border-color:var(--gold)}
 .house-logo{width:92px;height:92px;object-fit:contain;border:1px solid var(--line);border-radius:14px;background:white;padding:8px;margin:0 0 14px}
 .overview-logo{width:44px;height:44px;display:block;object-fit:contain;border:1px solid var(--line);border-radius:9px;background:white;padding:4px;margin:auto}
 .overview-logo{cursor:zoom-in}.logo-lightbox{padding:18px;text-align:center}.logo-lightbox img{display:block;width:min(520px,78vw);height:min(520px,70vh);object-fit:contain;margin:12px auto 0;background:white;border-radius:14px}
 .close{float:right;border:0;background:var(--cream);border-radius:50%;width:38px;height:38px;font-size:22px}
 @media(max-width:900px){
   header .admin-label,header>span:not(.admin-label){display:none}.page-head{align-items:flex-start}.stats{grid-template-columns:repeat(3,1fr)}
-  .toolbar{grid-template-columns:1fr}.detail-grid,.edit-form{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.edit-actions{grid-column:1}
+  .toolbar{grid-template-columns:1fr}.detail-grid,.edit-form,.form-section{grid-template-columns:1fr}.detail-grid dd{margin-bottom:8px}.edit-form .wide,.form-section .wide,.edit-actions{grid-column:1}.toggle-row{grid-template-columns:1fr}
   .table-wrap{border:0;background:transparent}table,tbody{display:block}thead{display:none}
   tbody{display:grid;gap:14px}tbody tr{display:grid;grid-template-columns:minmax(120px,35%) 1fr;border:1px solid var(--line);border-radius:16px;background:white;overflow:hidden}
   tbody td{display:grid;grid-template-columns:1fr;align-content:start;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -171,6 +174,35 @@ function link(label,url){return url?\`<a href="\${esc(url)}" target="_blank" rel
 function filtered(){const q=search.value.trim().toLocaleLowerCase("nl");return data.filter(p=>(!q||[p.name,p.locationType,p.city,p.region,p.cuvees].some(v=>String(v||"").toLocaleLowerCase("nl").includes(q)))&&(!region.value||p.region===region.value)&&(!shop.value||p.museletAvailable))}
 function regionLink(p){return p.regionUrl?link(p.region,p.regionUrl):esc(p.region)}
 function regionOptions(selected){return '<option value="">Geen regio</option>'+regionData.map(r=>\`<option value="\${esc(r.name)}" \${r.name===selected?"selected":""}>\${esc(r.name)}</option>\`).join("")}
+function openHouseEditor(p){detailBody.innerHTML=\`<div class="editor-head">
+  \${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}
+  <div class="editor-head-text"><p class="muted">Champagnehuis bewerken</p><h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||"Plaats onbekend")} · \${esc(p.region||"Geen regio")}</p></div>
+  <button class="close editor-close" type="button" aria-label="Sluiten">×</button>
+</div><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
+<input type="hidden" name="csrf" value="\${esc(csrf)}">
+<section class="form-section"><h3>Basisgegevens</h3>
+  <label><span>Champagnehuis</span><input name="name" value="\${esc(p.name)}" required></label>
+  <label><span>Plaats</span><input name="city" value="\${esc(p.city||"")}"></label>
+  <label class="wide"><span>Adres</span><input name="address" value="\${esc(p.address||"")}"></label>
+  <label><span>Regio</span><select name="region">\${regionOptions(p.region||"")}</select></label>
+  <label><span>Huislogo <em class="field-hint">PNG, JPG of WebP · max. 2 MB</em></span><input name="logo" type="file" accept="image/jpeg,image/png,image/webp"></label>
+</section>
+<section class="form-section"><h3>Online & route</h3>
+  <label><span>Website</span><input name="website" type="url" value="\${esc(p.website||"")}" placeholder="https://"></label>
+  <label><span>Google Maps</span><input name="mapsUrl" type="url" value="\${esc(p.mapsUrl||"")}" placeholder="https://maps.google.com/..."></label>
+</section>
+<section class="form-section"><h3>Bezoek & aanbod</h3>
+  <div class="toggle-row"><label class="check"><input name="visitable" type="checkbox" value="yes" \${p.visitable?"checked":""}> Huis is bezoekbaar</label>
+  <label class="check"><input name="tastings" type="checkbox" value="yes" \${p.tastings?"checked":""}> Proeverijen beschikbaar</label></div>
+  <label class="wide"><span>Belangrijkste cuvées</span><textarea name="cuvees" placeholder="Bijv. Brut Réserve, Rosé, Blanc de Blancs">\${esc(p.cuvees||"")}</textarea></label>
+</section>
+<section class="form-section"><h3>Koop online</h3>
+  <label class="check"><input name="museletAvailable" type="checkbox" value="yes" \${p.museletAvailable?"checked":""}> Koop online tonen</label>
+  <label><span>Webshop-URL</span><input name="museletUrl" type="url" value="\${esc(p.museletUrl||"")}" placeholder="https://"></label>
+</section>
+<div class="edit-actions"><button class="button danger" type="submit" formaction="/admin/producers/\${encodeURIComponent(p.id)}/delete" formenctype="application/x-www-form-urlencoded" onclick="return confirm('Dit champagnehuis definitief verwijderen?')">Huis verwijderen</button><button class="button" type="submit">Wijzigingen opslaan</button></div>
+</form>\`;dialog.showModal()}
+rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr||e.target.closest("a")||e.target.closest(".overview-logo"))return;e.stopImmediatePropagation();const p=data.find(x=>x.id===tr.dataset.id);if(p)openHouseEditor(p)},true);
 function render(){const list=filtered();count.textContent=list.length+" resultaten";rows.innerHTML=list.map(p=>\`<tr data-id="\${esc(p.id)}"><td>\${p.logoUrl?\`<img class="overview-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:"—"}</td><td><strong>\${esc(p.name)}</strong></td><td>\${esc(p.city||p.locationType)}</td><td>\${link("Website",p.website)}</td><td>\${link("Kaart",p.mapsUrl)}</td><td>\${regionLink(p)}</td><td class="\${p.visitable?"yes":"no"}">\${p.visitable?"Ja":"Nee"}</td><td class="\${p.tastings?"yes":"no"}">\${p.tastings?"Ja":"Nee"}</td><td>\${esc(p.cuvees||"—")}</td><td class="\${p.museletAvailable?"yes":"no"}">\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</td></tr>\`).join("")}
 rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;const p=data.find(x=>x.id===tr.dataset.id);if(e.target.closest(".overview-logo")){largeLogo.src=p.logoUrl;largeLogo.alt="Logo "+p.name;logoDialog.showModal();return}if(e.target.closest("a"))return;detailBody.innerHTML=\`\${p.logoUrl?\`<img class="house-logo" src="\${esc(p.logoUrl)}" alt="Logo \${esc(p.name)}">\`:""}<h2>\${esc(p.name)}</h2><p class="muted">\${esc(p.city||p.locationType)} · \${esc(p.region)}</p><dl class="detail-grid"><dt>Plaats</dt><dd>\${esc(p.city||p.locationType)}</dd><dt>Regio</dt><dd>\${regionLink(p)}</dd><dt>Adres</dt><dd>\${esc(p.address)}</dd><dt>Website</dt><dd>\${link("Open website",p.website)}</dd><dt>Google Maps</dt><dd>\${link("Open kaart",p.mapsUrl)}</dd><dt>Bezoekbaar</dt><dd>\${p.visitable?"Ja":"Nee"}</dd><dt>Proeverijen</dt><dd>\${p.tastings?"Ja":"Nee"}</dd><dt>Belangrijkste cuvées</dt><dd>\${esc(p.cuvees||"—")}</dd><dt>Muselet</dt><dd>\${p.museletAvailable?link("Ja",p.museletUrl):"Nee"}</dd><dt>Database-ID</dt><dd><code>\${esc(p.id)}</code></dd>\${p.editedAt?\`<dt>Laatst gewijzigd</dt><dd>\${esc(p.editedBy)} · \${esc(new Date(p.editedAt).toLocaleString("nl-NL"))}</dd>\`:""}</dl>
 <details class="edit-panel" open><summary>Gegevens bewerken</summary><form class="edit-form" method="post" enctype="multipart/form-data" action="/admin/producers/\${encodeURIComponent(p.id)}">
@@ -190,6 +222,7 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;
 <div class="edit-actions"><button class="button danger" type="submit" formaction="/admin/producers/\${encodeURIComponent(p.id)}/delete" formenctype="application/x-www-form-urlencoded" onclick="return confirm('Dit champagnehuis definitief verwijderen?')">Verwijderen</button><button class="button" type="submit">Wijzigingen opslaan</button></div>
 </form></details>\`;dialog.showModal()});
 dialog.querySelector(".close").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});
+detailBody.addEventListener("click",e=>{if(e.target.closest(".editor-close"))dialog.close()});
 [document.querySelector("#newProducer"),document.querySelector("#newProducerTop")].forEach(button=>button.addEventListener("click",()=>newDialog.showModal()));newDialog.querySelector(".close").addEventListener("click",()=>newDialog.close());newDialog.addEventListener("click",e=>{if(e.target===newDialog)newDialog.close()});
 logoDialog.querySelector(".close").addEventListener("click",()=>logoDialog.close());logoDialog.addEventListener("click",e=>{if(e.target===logoDialog)logoDialog.close()});
 [search,region,shop].forEach(el=>el.addEventListener("input",render));render();`;
