@@ -171,6 +171,27 @@ export async function producerLogo(producerId) {
   return row?.logo_data ? { data: row.logo_data, mime: row.logo_mime } : null;
 }
 
+export async function deleteProducerLogo(producerId, updatedBy) {
+  const db = await ready();
+  if (!db) {
+    const existing = memoryOverrides.get(producerId) || {};
+    memoryOverrides.set(producerId, {
+      ...existing,
+      hasLogo: false,
+      logo: null,
+      editedAt: new Date().toISOString(),
+      editedBy: updatedBy
+    });
+    return;
+  }
+  await db.query(
+    `UPDATE producer_overrides
+     SET logo_data = NULL, logo_mime = NULL, updated_at = NOW(), updated_by = $2
+     WHERE producer_id = $1 AND NOT deleted`,
+    [producerId, updatedBy]
+  );
+}
+
 export async function deleteProducer(producerId, updatedBy) {
   const existing = (await producerOverrides()).get(producerId);
   await persist(

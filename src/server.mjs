@@ -20,6 +20,7 @@ import { regionById, regionForName, regionWithProducers } from "./regions.mjs";
 import {
   createProducer,
   deleteProducer,
+  deleteProducerLogo,
   producerLogo,
   producersWithOverrides,
   saveProducerOverride
@@ -253,7 +254,30 @@ export function createServer() {
 
     const isNewProducer = url.pathname === "/admin/producers/new";
     const producerDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/delete$/);
+    const producerLogoDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/logo\/delete$/);
     const producerEditMatch = isNewProducer ? null : url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)$/);
+    if (request.method === "POST" && producerLogoDeleteMatch) {
+      const profile = currentAdmin(request, config);
+      if (!profile) {
+        html(response, 401, loginPage(config.ready, "Log opnieuw in om logo's te beheren."));
+        return;
+      }
+      const form = await readForm(request);
+      if (!validCsrf(profile, form.csrf, config)) {
+        html(response, 403, loginPage(true, "De beveiligingscode is verlopen. Log opnieuw in."));
+        return;
+      }
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
+      if (!currentProducers.some((producer) => producer.id === producerLogoDeleteMatch[1])) {
+        json(response, 404, { error: "Producer not found" }, origin);
+        return;
+      }
+      await deleteProducerLogo(producerLogoDeleteMatch[1], profile.username);
+      response.writeHead(303, { Location: "/admin?logoDeleted=1", "Cache-Control": "no-store" });
+      response.end();
+      return;
+    }
     if (request.method === "POST" && (isNewProducer || producerDeleteMatch)) {
       const profile = currentAdmin(request, config);
       if (!profile) {
