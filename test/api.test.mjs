@@ -159,6 +159,7 @@ test("place admin overview script is allowed by the content security policy", ()
   assert.match(body, /id="result-count"/);
   assert.match(body, /id="new-place"/);
   assert.match(body, /action="\/admin\/places\/new"/);
+  assert.match(body, /<span>Omschrijving<\/span><textarea name="description"/);
 });
 
 test("public region page renders spreadsheet information", async () => {
