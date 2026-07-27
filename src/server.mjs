@@ -33,6 +33,7 @@ import { placeAdminPage } from "./place-admin-page.mjs";
 import { placePage, placesIndexPage } from "./place-page.mjs";
 import { basePlaces, placeById, placeId } from "./places.mjs";
 import { allPlaces, placeBanner, savePlace, savePlaceBanner } from "./place-store.mjs";
+import { museletProductsForProducer } from "./muselet-products.mjs";
 
 const port = Number.parseInt(process.env.PORT || "3000", 10);
 const champagneAtlasLogo = readFileSync(
@@ -1030,6 +1031,35 @@ export function createServer() {
         count: result.length,
         producers: result
       }, origin);
+      return;
+    }
+
+    const museletProductsMatch = url.pathname.match(
+      /^\/api\/v1\/producers\/([a-z0-9-]+)\/muselet-products$/
+    );
+    if (museletProductsMatch) {
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
+      const producer = currentProducers.find((item) => item.id === museletProductsMatch[1]);
+      if (!producer) {
+        json(response, 404, { error: "Producer not found" }, origin);
+        return;
+      }
+      if (!producer.museletAvailable) {
+        json(response, 200, { producerId: producer.id, count: 0, products: [] }, origin);
+        return;
+      }
+      try {
+        const products = await museletProductsForProducer(producer.name);
+        json(response, 200, {
+          producerId: producer.id,
+          source: "Muselet.nl",
+          count: products.length,
+          products
+        }, origin);
+      } catch {
+        json(response, 502, { error: "Muselet assortment temporarily unavailable" }, origin);
+      }
       return;
     }
 

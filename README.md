@@ -10,6 +10,7 @@ Node.js API voor de Champagne Atlas Android-app.
 - `GET /api/v1/producers?q=bouzy`
 - `GET /api/v1/producers?source=club-tresors`
 - `GET /api/v1/producers/:id`
+- `GET /api/v1/producers/:id/muselet-products`
 - `GET /api/v1/regions`
 - `GET /api/v1/regions/:id`
 - `GET /regions`
