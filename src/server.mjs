@@ -21,6 +21,7 @@ import {
   createProducer,
   deleteProducer,
   deleteProducerLogo,
+  importProducerGeodata,
   producerLogo,
   producersWithOverrides,
   saveProducerLogo,
@@ -90,6 +91,17 @@ async function readForm(request) {
   return Object.fromEntries(
     new URLSearchParams(Buffer.concat(chunks).toString("utf8"))
   );
+}
+
+async function readJson(request, maxSize = 256 * 1024) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > maxSize) throw new Error("JSON body too large");
+    chunks.push(chunk);
+  }
+  return JSON.parse(Buffer.concat(chunks).toString("utf8"));
 }
 
 async function readMultipart(request, fileField = "banner") {
@@ -442,9 +454,39 @@ export function createServer() {
 
     const isNewProducer = url.pathname === "/admin/producers/new";
     const isProducerLogoBatch = url.pathname === "/admin/producers/logos/batch";
+    const isProducerGeodataImport = url.pathname === "/admin/producers/geodata/import";
     const producerDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/delete$/);
     const producerLogoDeleteMatch = url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)\/logo\/delete$/);
     const producerEditMatch = isNewProducer ? null : url.pathname.match(/^\/admin\/producers\/([a-z0-9-]+)$/);
+    if (request.method === "POST" && isProducerGeodataImport) {
+      const profile = currentAdmin(request, config);
+      if (!profile || profile.username !== "wsoet") {
+        json(response, profile ? 403 : 401, { error: "Alleen admin wsoet kan geodata importeren." }, origin);
+        return;
+      }
+      try {
+        const body = await readJson(request);
+        if (!validCsrf(profile, body.csrf, config)) {
+          json(response, 403, { error: "De beveiligingscode is verlopen." }, origin);
+          return;
+        }
+        const currentRegions = await allRegions();
+        const currentProducers = await producersWithOverrides(producers, currentRegions);
+        const knownIds = new Set(currentProducers.map((producer) => producer.id));
+        const records = Array.isArray(body.records)
+          ? body.records.filter((record) => knownIds.has(String(record.producerId || "")))
+          : [];
+        const imported = await importProducerGeodata(records, profile.username);
+        json(response, 200, {
+          imported,
+          skipped: Array.isArray(body.records) ? body.records.length - records.length : 0
+        }, origin);
+      } catch (error) {
+        console.error("Producer geodata import failed:", error instanceof Error ? error.message : "Unknown error");
+        json(response, 400, { error: "De geodata kon niet worden geïmporteerd." }, origin);
+      }
+      return;
+    }
     if (request.method === "POST" && producerLogoDeleteMatch) {
       const profile = currentAdmin(request, config);
       if (!profile) {

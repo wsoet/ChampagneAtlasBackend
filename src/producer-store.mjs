@@ -45,6 +45,10 @@ const editableFields = new Set([
   "name",
   "city",
   "address",
+  "latitude",
+  "longitude",
+  "formattedAddress",
+  "googlePlaceId",
   "locationType",
   "website",
   "mapsUrl",
@@ -220,6 +224,58 @@ export async function saveProducerOverride(producerId, patch, updatedBy, logo = 
   const data = cleanPatch(patch);
   const existing = (await producerOverrides()).get(producerId);
   await persist(producerId, data, updatedBy, Boolean(existing?.isCustom), false, logo);
+}
+
+export async function importProducerGeodata(records, updatedBy) {
+  const cleanRecords = records.map((record) => ({
+    producerId: String(record.producerId || "").trim(),
+    data: {
+      latitude: Number(record.latitude),
+      longitude: Number(record.longitude),
+      formattedAddress: String(record.formattedAddress || "").trim(),
+      googlePlaceId: String(record.googlePlaceId || "").trim()
+    }
+  })).filter(({ producerId, data }) =>
+    producerId &&
+    Number.isFinite(data.latitude) &&
+    Number.isFinite(data.longitude) &&
+    data.formattedAddress &&
+    data.googlePlaceId
+  );
+
+  const db = await ready();
+  if (!db) {
+    for (const { producerId, data } of cleanRecords) {
+      const existing = memoryOverrides.get(producerId) || {};
+      memoryOverrides.set(producerId, {
+        ...existing,
+        ...data,
+        editedAt: new Date().toISOString(),
+        editedBy: updatedBy
+      });
+    }
+    return cleanRecords.length;
+  }
+
+  if (!cleanRecords.length) return 0;
+  const values = cleanRecords
+    .map((_, index) => `($${index * 2 + 1}::text, $${index * 2 + 2}::jsonb)`)
+    .join(", ");
+  await db.query(
+    `INSERT INTO producer_overrides
+       (producer_id, data, deleted, is_custom, updated_at, updated_by)
+     SELECT incoming.producer_id, incoming.data, FALSE, FALSE, NOW(), $${cleanRecords.length * 2 + 1}
+     FROM (VALUES ${values}) AS incoming(producer_id, data)
+     ON CONFLICT (producer_id) DO UPDATE SET
+       data = producer_overrides.data || EXCLUDED.data,
+       updated_at = NOW(),
+       updated_by = EXCLUDED.updated_by`,
+    [
+      ...cleanRecords.flatMap(({ producerId, data }) => [producerId, JSON.stringify(data)]),
+      updatedBy
+    ]
+  );
+  return cleanRecords.length;
 }
 
 export async function saveProducerLogo(producerId, logo, updatedBy) {
