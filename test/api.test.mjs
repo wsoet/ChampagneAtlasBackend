@@ -43,6 +43,18 @@ test("producer endpoint exposes the 300 spreadsheet rows", async () => {
   });
 });
 
+test("producer API exposes imported Google geodata", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/producers/xlsx-a-bergere-epernay`);
+    const producer = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(producer.latitude, 49.042029);
+    assert.equal(producer.longitude, 3.9642418);
+    assert.equal(producer.formattedAddress, "40 Av. de Champagne, 51200 Épernay, France");
+    assert.equal(producer.googlePlaceId, "ChIJqe0xnURr6UcRnuSYUSvtHJk");
+  });
+});
+
 test("Champagne Atlas logo asset is served", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(`${baseUrl}/assets/champagne-atlas-logo.png`);

@@ -1,12 +1,16 @@
 import pg from "pg";
 import { regionForName } from "./regions.mjs";
 import { cruClassificationForCity } from "./cru-classification.mjs";
+import { producerGeodata } from "./producer-geodata.mjs";
 
 const memoryOverrides = new Map();
 let pool;
 let initialized;
 let websiteBackfill;
 let cruBackfill;
+let geodataBackfill;
+
+const producerGeodataImportId = "producer-geodata-2026-07-27-v1";
 
 function database() {
   const url = String(process.env.DATABASE_URL || "").trim();
@@ -35,7 +39,11 @@ async function ready() {
     ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS deleted BOOLEAN NOT NULL DEFAULT FALSE;
     ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS is_custom BOOLEAN NOT NULL DEFAULT FALSE;
     ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS logo_data BYTEA;
-    ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS logo_mime TEXT
+    ALTER TABLE producer_overrides ADD COLUMN IF NOT EXISTS logo_mime TEXT;
+    CREATE TABLE IF NOT EXISTS app_migrations (
+      migration_id TEXT PRIMARY KEY,
+      applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
   `);
   await initialized;
   return db;
@@ -145,6 +153,8 @@ async function backfillCruClassifications(baseProducers) {
 }
 
 export async function producersWithOverrides(baseProducers, regionList) {
+  geodataBackfill ||= importBundledProducerGeodata();
+  await geodataBackfill;
   websiteBackfill ||= backfillMissingProducerWebsites(baseProducers);
   await websiteBackfill;
   cruBackfill ||= backfillCruClassifications(baseProducers);
@@ -224,6 +234,52 @@ export async function saveProducerOverride(producerId, patch, updatedBy, logo = 
   const data = cleanPatch(patch);
   const existing = (await producerOverrides()).get(producerId);
   await persist(producerId, data, updatedBy, Boolean(existing?.isCustom), false, logo);
+}
+
+async function importBundledProducerGeodata() {
+  const db = await ready();
+  if (!db) {
+    await importProducerGeodata(producerGeodata, "geodata-import");
+    return;
+  }
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+    const claimed = await client.query(
+      `INSERT INTO app_migrations (migration_id)
+       VALUES ($1)
+       ON CONFLICT (migration_id) DO NOTHING
+       RETURNING migration_id`,
+      [producerGeodataImportId]
+    );
+    if (!claimed.rowCount) {
+      await client.query("COMMIT");
+      return;
+    }
+    const values = producerGeodata
+      .map((_, index) => `($${index * 2 + 1}::text, $${index * 2 + 2}::jsonb)`)
+      .join(", ");
+    await client.query(
+      `INSERT INTO producer_overrides
+         (producer_id, data, deleted, is_custom, updated_at, updated_by)
+       SELECT incoming.producer_id, incoming.data, FALSE, FALSE, NOW(), 'geodata-import'
+       FROM (VALUES ${values}) AS incoming(producer_id, data)
+       ON CONFLICT (producer_id) DO UPDATE SET
+         data = producer_overrides.data || EXCLUDED.data,
+         updated_at = NOW(),
+         updated_by = EXCLUDED.updated_by`,
+      producerGeodata.flatMap(({ producerId, ...data }) => [
+        producerId,
+        JSON.stringify(data)
+      ])
+    );
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 export async function importProducerGeodata(records, updatedBy) {
