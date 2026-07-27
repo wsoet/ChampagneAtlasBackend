@@ -80,12 +80,12 @@ function html(response, status, body) {
   response.end(body);
 }
 
-async function readForm(request) {
+async function readForm(request, maxSize = 32768) {
   const chunks = [];
   let size = 0;
   for await (const chunk of request) {
     size += chunk.length;
-    if (size > 32768) throw new Error("Form too large");
+    if (size > maxSize) throw new Error("Form too large");
     chunks.push(chunk);
   }
   return Object.fromEntries(
@@ -465,7 +465,13 @@ export function createServer() {
         return;
       }
       try {
-        const body = await readJson(request);
+        const contentType = String(request.headers["content-type"] || "");
+        const body = contentType.includes("application/json")
+          ? await readJson(request)
+          : await readForm(request, 256 * 1024);
+        const submittedRecords = Array.isArray(body.records)
+          ? body.records
+          : JSON.parse(String(body.records || "[]"));
         if (!validCsrf(profile, body.csrf, config)) {
           json(response, 403, { error: "De beveiligingscode is verlopen." }, origin);
           return;
@@ -473,13 +479,12 @@ export function createServer() {
         const currentRegions = await allRegions();
         const currentProducers = await producersWithOverrides(producers, currentRegions);
         const knownIds = new Set(currentProducers.map((producer) => producer.id));
-        const records = Array.isArray(body.records)
-          ? body.records.filter((record) => knownIds.has(String(record.producerId || "")))
-          : [];
+        const records = submittedRecords
+          .filter((record) => knownIds.has(String(record.producerId || "")));
         const imported = await importProducerGeodata(records, profile.username);
         json(response, 200, {
           imported,
-          skipped: Array.isArray(body.records) ? body.records.length - records.length : 0
+          skipped: submittedRecords.length - records.length
         }, origin);
       } catch (error) {
         console.error("Producer geodata import failed:", error instanceof Error ? error.message : "Unknown error");
