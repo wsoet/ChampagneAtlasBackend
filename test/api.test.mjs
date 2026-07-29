@@ -27,6 +27,17 @@ test("health endpoint reports the catalog version", async () => {
   });
 });
 
+test("revision endpoint exposes a compact catalog fingerprint", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/revision`);
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(body.revision, /^[a-f0-9]{24}$/);
+    assert.equal(body.producerCount, 300);
+    assert.ok(body.regionCount >= 5);
+  });
+});
+
 test("producer endpoint exposes the 300 spreadsheet rows", async () => {
   await withServer(async (baseUrl) => {
     const response = await fetch(

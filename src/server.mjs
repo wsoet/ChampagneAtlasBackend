@@ -1,5 +1,5 @@
 import http from "node:http";
-import { randomBytes } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { readFileSync } from "node:fs";
 import Busboy from "busboy";
 import { producers, sources } from "./catalog.mjs";
@@ -47,6 +47,15 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || "*")
 function corsOrigin(requestOrigin) {
   if (allowedOrigins.includes("*")) return "*";
   return allowedOrigins.includes(requestOrigin) ? requestOrigin : allowedOrigins[0] || "";
+}
+
+function catalogRevision(currentProducers, currentRegions) {
+  const fingerprint = JSON.stringify({
+    build: process.env.RENDER_GIT_COMMIT || "local",
+    producers: currentProducers.map(({ id, editedAt, logoUrl }) => [id, editedAt || "", logoUrl || ""]),
+    regions: currentRegions.map(({ id, editedAt, hasBanner }) => [id, editedAt || "", Boolean(hasBanner)])
+  });
+  return createHash("sha256").update(fingerprint).digest("hex").slice(0, 24);
 }
 
 function json(response, status, body, requestOrigin = "") {
@@ -969,6 +978,17 @@ export function createServer() {
       return;
     }
 
+    if (url.pathname === "/api/v1/revision") {
+      const currentRegions = await allRegions();
+      const currentProducers = await producersWithOverrides(producers, currentRegions);
+      json(response, 200, {
+        revision: catalogRevision(currentProducers, currentRegions),
+        producerCount: currentProducers.length,
+        regionCount: currentRegions.length
+      }, origin);
+      return;
+    }
+
     if (url.pathname === "/api/v1/sources") {
       json(response, 200, { count: sources.length, sources }, origin);
       return;
@@ -1081,6 +1101,7 @@ export function createServer() {
       error: "Not found",
       endpoints: [
         "/health",
+        "/api/v1/revision",
         "/api/v1/sources",
         "/api/v1/producers",
         "/api/v1/regions",
