@@ -3,9 +3,12 @@ import test from "node:test";
 import { once } from "node:events";
 import { scryptSync } from "node:crypto";
 import { createServer } from "../src/server.mjs";
+import { placeAdminPage } from "../src/place-admin-page.mjs";
 
 async function withServer(run) {
-  const server = createServer().listen(0, "127.0.0.1");
+  const server = createServer({
+    museletLinker: async () => ({ status: "unmatched", candidates: [] })
+  }).listen(0, "127.0.0.1");
   await once(server, "listening");
   const { port } = server.address();
   try {
@@ -36,6 +39,42 @@ test("producer endpoint exposes the 300 spreadsheet rows", async () => {
     assert.ok(body.producers.every((producer) =>
       producer.sourceIds.includes("user-champagne-xlsx")
     ));
+    assert.ok(body.producers.every((producer) =>
+      typeof producer.locationType === "string" && producer.locationType.length > 0
+    ));
+  });
+});
+
+test("producer API exposes imported Google geodata", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/producers/xlsx-a-bergere-epernay`);
+    const producer = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(producer.latitude, 49.042029);
+    assert.equal(producer.longitude, 3.9642418);
+    assert.equal(producer.formattedAddress, "40 Av. de Champagne, 51200 Épernay, France");
+    assert.equal(producer.googlePlaceId, "ChIJqe0xnURr6UcRnuSYUSvtHJk");
+  });
+});
+
+test("producer API exposes verified Google geodata for Moet and Chandon", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/producers/xlsx-moet-chandon-epernay`);
+    const producer = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(producer.latitude, 49.0428539);
+    assert.equal(producer.longitude, 3.9597722);
+    assert.equal(producer.formattedAddress, "20 Av. de Champagne, 51200 Épernay, France");
+    assert.equal(producer.googlePlaceId, "ChIJM7T7XkVr6UcRJ2fRLEVCubU");
+  });
+});
+
+test("Champagne Atlas logo asset is served", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/assets/champagne-atlas-logo.png`);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("content-type"), "image/png");
+    assert.ok((await response.arrayBuffer()).byteLength > 1000);
   });
 });
 
@@ -45,13 +84,31 @@ test("producer search is case insensitive", async () => {
     const body = await response.json();
     assert.ok(body.count >= 1);
     assert.ok(body.producers.some(
-      (producer) => producer.name === "Champagne Paul Bara"
+      (producer) => producer.name === "Paul Bara"
     ));
     assert.ok(body.producers.every((producer) =>
       `${producer.name} ${producer.city} ${producer.region}`
         .toLowerCase()
         .includes("bouzy")
     ));
+  });
+});
+
+test("producer API exposes legally sourced cru classification by commune", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/producers`);
+    const body = await response.json();
+    const agrapart = body.producers.find((producer) => producer.name === "Agrapart & Fils");
+    const maillart = body.producers.find((producer) => producer.name === "Nicolas Maillart");
+    const krug = body.producers.find((producer) => producer.name === "Krug");
+
+    assert.equal(agrapart.cruStatus, "GRAND_CRU");
+    assert.equal(agrapart.grandCru, true);
+    assert.equal(agrapart.premierCru, true);
+    assert.equal(maillart.cruStatus, "PREMIER_CRU");
+    assert.equal(maillart.grandCru, false);
+    assert.equal(krug.cruStatus, "");
+    assert.match(agrapart.cruSourceUrl, /Cahier_des_charges_appellation\.pdf$/);
   });
 });
 
@@ -64,6 +121,154 @@ test("Muselet availability exposes a usable online shop link", async () => {
     assert.ok(online.every((producer) =>
       producer.museletUrl.startsWith("https://muselet.nl/")
     ));
+  });
+});
+
+test("region API exposes the five spreadsheet regions and producer links", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions`);
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(body.count, 5);
+    const aube = body.regions.find((region) => region.id === "aube");
+    assert.equal(aube.alternativeName, "Côte des Bar");
+    assert.ok(aube.producerCount > 0);
+    assert.equal(aube.producerIds.length, aube.producerCount);
+
+    const producersResponse = await fetch(`${baseUrl}/api/v1/producers`);
+    const producersBody = await producersResponse.json();
+    const linked = producersBody.producers.filter((producer) => producer.regionId);
+    assert.ok(linked.length > 250);
+    assert.ok(linked.every((producer) =>
+      producer.regionUrl === `/regions/${producer.regionId}`
+    ));
+  });
+});
+
+test("place API exposes banner-folder places with region and producer links", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/places`);
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(body.count, 74);
+    const epernay = body.places.find((place) => place.id === "epernay");
+    assert.equal(epernay.name, "Épernay");
+    assert.equal(epernay.region, "Vallée de la Marne");
+    assert.ok(epernay.producerCount > 40);
+    assert.equal(epernay.producerIds.length, epernay.producerCount);
+    assert.ok(epernay.producers.some((producer) => producer.name === "Moët & Chandon"));
+  });
+});
+
+test("public place page lists champagne houses in the place", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/places/bouzy`);
+    const body = await response.text();
+    assert.equal(response.status, 200);
+    assert.match(body, /Champagnehuizen in Bouzy/);
+    assert.match(body, /Paul Bara/);
+    assert.match(body, /Montagne de Reims/);
+    assert.match(body, /href="\/places">← Alle plaatsen/);
+
+    const adminPreview = await fetch(`${baseUrl}/places/bouzy?return=admin`);
+    const adminPreviewBody = await adminPreview.text();
+    assert.equal(adminPreview.status, 200);
+    assert.match(adminPreviewBody, /href="\/admin\/places">← Terug naar plaatsenbeheer/);
+  });
+});
+
+test("place admin overview script is allowed by the content security policy", () => {
+  const body = placeAdminPage(
+    [{ id: "bouzy", name: "Bouzy", regionId: "montagne-de-reims", region: "Montagne de Reims", producerCount: 1, producerIds: ["test"], producers: [{ id: "test", name: "Testhuis" }], hasBanner: true }],
+    [{ id: "montagne-de-reims", name: "Montagne de Reims" }],
+    { username: "wsoet" },
+    "csrf"
+  );
+  assert.match(body, /<script nonce="ca-admin">/);
+  assert.match(body, /id="grid" class="grid"/);
+  assert.match(body, /function render\(\)/);
+  assert.match(body, /id="search" type="search"/);
+  assert.match(body, /id="result-count"/);
+  assert.match(body, /id="new-place"/);
+  assert.match(body, /action="\/admin\/places\/new"/);
+  assert.match(body, /<span>Omschrijving(?: \(NL\))?<\/span><textarea name="description"/);
+  assert.match(body, /name="descriptionEn"/);
+});
+
+test("public region page renders spreadsheet information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/regions/montagne-de-reims`);
+    const body = await response.text();
+    assert.equal(response.status, 200);
+    assert.match(body, /Heuvelachtig gebied rond Reims/);
+    assert.match(body, /Champagnehuizen in Montagne de Reims/);
+    assert.match(body, /De krachtige ruggengraat van Champagne/);
+    assert.match(body, /02-Montagne_de_Reims\.pdf/);
+  });
+});
+
+test("Vallée de la Marne exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/vallee-de-la-marne`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /12\.000 hectare/);
+    assert.match(region.history, /Dom Pérignon/);
+    assert.match(region.grapeVarieties, /Pinot Meunier: circa 60%/);
+    assert.match(region.cruClassification, /Tours-sur-Marne/);
+    assert.equal(region.sourceName, "01-Vallee_de_la_Marne.pdf");
+  });
+});
+
+test("Côte des Blancs exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/cote-des-blancs`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /3\.400 hectare/);
+    assert.match(region.terroir, /belemnietenkrijt/);
+    assert.match(region.grapeVarieties, /Chardonnay: circa 95%/);
+    assert.match(region.cruClassification, /Le Mesnil-sur-Oger/);
+    assert.equal(region.sourceName, "03-Cotes_des_Blancs.pdf");
+  });
+});
+
+test("Côte des Bar exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/aube`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /8\.000 hectare/);
+    assert.match(region.terroir, /Kimmeridgische kalksteen/);
+    assert.match(region.grapeVarieties, /Pinot Noir: circa 86%/);
+    assert.match(region.cruClassification, /geen Grand Cru- of Premier Cru/);
+    assert.equal(region.sourceName, "05-Cote_des_Bar (Aube).pdf");
+    assert.equal(region.editorialTheme, "Pinot Noir en zuidelijke energie");
+    assert.equal(region.introTitle, "Champagne met een zuidelijk temperament");
+    assert.equal(region.portraitTitle, "Zuidelijke energie en Pinot Noir");
+    assert.equal(region.climateTitle, "Warmer en zonniger, met frisse nachten");
+    assert.equal(region.accentColor, "#5e6843");
+
+    const pageResponse = await fetch(`${baseUrl}/regions/aube`);
+    const page = await pageResponse.text();
+    assert.equal(pageResponse.status, 200);
+    assert.match(page, /Pinot Noir en zuidelijke energie/);
+    assert.match(page, /Champagne met een zuidelijk temperament/);
+    assert.match(page, /Zuidelijke energie en Pinot Noir/);
+    assert.match(page, /De bodem onder je voeten/);
+    assert.match(page, /Warmer en zonniger, met frisse nachten/);
+  });
+});
+
+test("Montagne de Reims exposes the supplied PDF information", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/v1/regions/montagne-de-reims`);
+    const region = await response.json();
+    assert.equal(response.status, 200);
+    assert.match(region.generalFacts, /8\.500 hectare/);
+    assert.match(region.grapeVarieties, /circa 56%/);
+    assert.match(region.cruClassification, /Beaumont-sur-Vesle/);
+    assert.equal(region.sourceName, "02-Montagne_de_Reims.pdf");
   });
 });
 
@@ -82,7 +287,7 @@ test("admin page does not expose producer data before authentication", async () 
       const response = await fetch(`${baseUrl}/admin`);
       const body = await response.text();
       assert.equal(response.status, 503);
-      assert.match(body, /adminlogin is nog niet geconfigureerd/);
+      assert.match(body, /adminlogin is nog niet volledig geconfigureerd/);
       assert.doesNotMatch(body, /Champagne Bollinger/);
       assert.equal(response.headers.get("x-frame-options"), "DENY");
       assert.match(response.headers.get("content-security-policy"), /default-src 'none'/);
@@ -103,11 +308,13 @@ test("valid admin credentials create a protected session", async () => {
   const previous = {
     ADMIN_USERNAME: process.env.ADMIN_USERNAME,
     ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
-    SESSION_SECRET: process.env.SESSION_SECRET
+    SESSION_SECRET: process.env.SESSION_SECRET,
+    ADMIN_PASSWORD_LOGIN_ENABLED: process.env.ADMIN_PASSWORD_LOGIN_ENABLED
   };
   process.env.ADMIN_USERNAME = "test-admin";
   process.env.ADMIN_PASSWORD_HASH = passwordHash;
   process.env.SESSION_SECRET = "test-session-secret-that-is-longer-than-32-characters";
+  process.env.ADMIN_PASSWORD_LOGIN_ENABLED = "true";
   try {
     await withServer(async (baseUrl) => {
       const loginResponse = await fetch(`${baseUrl}/auth/login`, {
@@ -128,7 +335,317 @@ test("valid admin credentials create a protected session", async () => {
       });
       const body = await adminResponse.text();
       assert.equal(adminResponse.status, 200);
-      assert.match(body, /300<\/strong> huizen/);
+      assert.match(body, /<strong>300<\/strong><span>Champagnehuizen<\/span>/);
+      assert.match(body, /<strong>84<\/strong><span>Gevestigd in Grand Cru<\/span>/);
+      assert.match(body, /<strong>55<\/strong><span>Gevestigd in Premier Cru<\/span>/);
+      assert.match(body, /Cru-classificatie/);
+      assert.match(body, /Bekijk officiële AOC-bron/);
+      assert.match(body, /class="cru-badge/);
+      assert.match(body, /name="cruVerificationMode"/);
+      assert.match(body, /MANUAL_GRAND_CRU/);
+      assert.match(body, /MANUAL_PREMIER_CRU/);
+      assert.match(body, /MANUAL_NONE/);
+      assert.match(body, /href="\/admin\/places">Plaatsen beheren/);
+      assert.match(body, /<th>Logo<\/th><th>Champagnehuis<\/th><th>Plaats<\/th>/);
+      assert.doesNotMatch(body, /Locatie \/ Type/);
+      assert.match(body, /Belangrijkste cuvées/);
+      assert.doesNotMatch(body, /<th>Muselet bron<\/th>/);
+      assert.match(body, /\/regions\/montagne-de-reims/);
+      assert.match(body, /Gegevens bewerken/);
+      assert.match(body, /href="\/admin" aria-label="Naar hoofdpagina"/);
+      assert.match(body, /Admin \/ Beheerpaneel/);
+      assert.match(body, /<select name="region">/);
+      assert.match(body, /const placeData=/);
+      assert.match(body, /<select name="city">/);
+      assert.match(body, /function placeOptions\(selected\)/);
+      assert.match(body, /Montagne de Reims/);
+      const csrf = body.match(/const csrf="([^"]+)"/)?.[1];
+      assert.ok(csrf);
+
+      const editResponse = await fetch(
+        `${baseUrl}/admin/producers/xlsx-paul-bara-bouzy`,
+        {
+          method: "POST",
+          redirect: "manual",
+          headers: {
+            Cookie: sessionCookie.split(";")[0],
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({
+            csrf,
+            name: "Paul Bara bijgewerkt",
+            city: "Bouzy",
+            locationType: "Bouzy",
+            website: "https://example.com/paul-bara",
+            mapsUrl: "https://maps.google.com/",
+            region: "Montagne de Reims",
+            visitable: "yes",
+            tastings: "yes",
+            cuvees: "Testcuvée",
+            cruVerificationMode: "MANUAL_NONE",
+            museletAvailable: "yes",
+            museletUrl: "https://muselet.nl/test"
+          })
+        }
+      );
+      assert.equal(editResponse.status, 303);
+
+      const updatedResponse = await fetch(
+        `${baseUrl}/api/v1/producers/xlsx-paul-bara-bouzy`
+      );
+      const updated = await updatedResponse.json();
+      assert.equal(updated.name, "Paul Bara bijgewerkt");
+      assert.equal(updated.cuvees, "Testcuvée");
+      assert.equal(updated.editedBy, "test-admin");
+      assert.equal(updated.cruLabel, "");
+      assert.equal(updated.cruVerificationMode, "MANUAL_NONE");
+
+      const createResponse = await fetch(`${baseUrl}/admin/producers/new`, {
+        method: "POST",
+        redirect: "manual",
+        headers: {
+          Cookie: sessionCookie.split(";")[0],
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+          csrf,
+          name: "Nieuw Testhuis",
+          city: "Reims",
+          address: "1 Rue de Test",
+          locationType: "Reims",
+          website: "https://example.com/nieuw",
+          mapsUrl: "https://maps.google.com/",
+          region: "Montagne de Reims",
+          visitable: "yes",
+          tastings: "yes",
+          cuvees: "Cuvée Codex",
+          museletAvailable: "yes",
+          museletUrl: "https://muselet.nl/test"
+        })
+      });
+      assert.equal(createResponse.status, 303);
+      const createdId = new URL(
+        createResponse.headers.get("location"),
+        baseUrl
+      ).searchParams.get("saved");
+      assert.match(createdId, /^custom-nieuw-testhuis-[a-f0-9]{8}$/);
+
+      const createdResponse = await fetch(`${baseUrl}/api/v1/producers/${createdId}`);
+      const created = await createdResponse.json();
+      assert.equal(created.name, "Nieuw Testhuis");
+      assert.equal(created.address, "1 Rue de Test");
+      assert.equal(created.isCustom, true);
+
+      const logoForm = new FormData();
+      logoForm.set("csrf", csrf);
+      logoForm.set("name", created.name);
+      logoForm.set("city", created.city);
+      logoForm.set("address", created.address);
+      logoForm.set("website", created.website);
+      logoForm.set("mapsUrl", created.mapsUrl);
+      logoForm.set("region", created.region);
+      logoForm.set("cuvees", created.cuvees);
+      logoForm.set("visitable", "yes");
+      logoForm.set("tastings", "yes");
+      logoForm.set("museletAvailable", "yes");
+      logoForm.set("museletUrl", created.museletUrl);
+      const logoPng = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
+      logoForm.set("logo", new Blob([logoPng], { type: "image/png" }), "logo.png");
+      const logoUploadResponse = await fetch(`${baseUrl}/admin/producers/${createdId}`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: sessionCookie.split(";")[0] },
+        body: logoForm
+      });
+      assert.equal(logoUploadResponse.status, 303);
+      const withLogo = await (await fetch(`${baseUrl}/api/v1/producers/${createdId}`)).json();
+      assert.equal(withLogo.logoUrl, `/producers/${createdId}/logo`);
+      const refreshedAdmin = await (await fetch(`${baseUrl}/admin`, {
+        headers: { Cookie: sessionCookie.split(";")[0] }
+      })).text();
+      assert.match(refreshedAdmin, /overview-logo/);
+      assert.match(refreshedAdmin, /id="logoDialog"/);
+      assert.match(refreshedAdmin, /showModal\(\)/);
+      assert.match(refreshedAdmin, new RegExp(`/producers/${createdId}/logo`));
+      const logoResponse = await fetch(`${baseUrl}${withLogo.logoUrl}`);
+      assert.equal(logoResponse.status, 200);
+      assert.equal(logoResponse.headers.get("content-type"), "image/png");
+
+      const deleteResponse = await fetch(`${baseUrl}/admin/producers/${createdId}/delete`, {
+        method: "POST",
+        redirect: "manual",
+        headers: {
+          Cookie: sessionCookie.split(";")[0],
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({ csrf })
+      });
+      assert.equal(deleteResponse.status, 303);
+      assert.equal((await fetch(`${baseUrl}/api/v1/producers/${createdId}`)).status, 404);
+    });
+  } finally {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
+});
+
+test("only wsoet can manage regions, including a persistent banner", async () => {
+  const salt = Buffer.from("champagne-atlas-region-test");
+  const previous = {
+    ADMIN_USERNAME: process.env.ADMIN_USERNAME,
+    ADMIN_PASSWORD_HASH: process.env.ADMIN_PASSWORD_HASH,
+    SESSION_SECRET: process.env.SESSION_SECRET,
+    ADMIN_PASSWORD_LOGIN_ENABLED: process.env.ADMIN_PASSWORD_LOGIN_ENABLED
+  };
+  process.env.ADMIN_USERNAME = "wsoet";
+  process.env.ADMIN_PASSWORD_HASH =
+    `scrypt$${salt.toString("base64url")}$` +
+    scryptSync("test-password", salt, 32).toString("base64url");
+  process.env.SESSION_SECRET = "region-test-session-secret-longer-than-32-characters";
+  process.env.ADMIN_PASSWORD_LOGIN_ENABLED = "true";
+  try {
+    await withServer(async (baseUrl) => {
+      const loginResponse = await fetch(`${baseUrl}/auth/login`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ username: "wsoet", password: "test-password" })
+      });
+      const cookie = loginResponse.headers.get("set-cookie").split(";")[0];
+      const producerAdminResponse = await fetch(`${baseUrl}/admin`, { headers: { Cookie: cookie } });
+      const producerAdminBody = await producerAdminResponse.text();
+      assert.equal(producerAdminResponse.status, 200);
+      assert.match(producerAdminBody, /action="\/admin\/producers\/logos\/batch"/);
+      assert.match(producerAdminBody, /name="logos"[^>]+multiple/);
+      const producerCsrf = producerAdminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
+      assert.ok(producerCsrf);
+
+      const placeAdminResponse = await fetch(`${baseUrl}/admin/places`, {
+        headers: { Cookie: cookie }
+      });
+      const placeAdminBody = await placeAdminResponse.text();
+      assert.equal(placeAdminResponse.status, 200);
+      assert.match(placeAdminBody, /function producerLookup\(selected=\[\]\)/);
+      assert.match(placeAdminBody, /name="producerIdsJson"/);
+      assert.match(placeAdminBody, /placeholder="Zoek champagnehuis/);
+      const placeCsrf = placeAdminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
+      assert.ok(placeCsrf);
+
+      const placeForm = new FormData();
+      placeForm.set("csrf", placeCsrf);
+      placeForm.set("name", "Testplaats");
+      placeForm.set("regionId", "montagne-de-reims");
+      placeForm.set("description", "Lookup-test voor champagnehuizen.");
+      placeForm.set("producerIdsJson", JSON.stringify(["xlsx-paul-bara-bouzy"]));
+      const placeSaveResponse = await fetch(`${baseUrl}/admin/places/new`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: cookie },
+        body: placeForm
+      });
+      assert.equal(placeSaveResponse.status, 303);
+      const testPlace = await (await fetch(`${baseUrl}/api/v1/places/testplaats`)).json();
+      assert.equal(testPlace.producerCount, 1);
+      assert.equal(testPlace.producers[0].id, "xlsx-paul-bara-bouzy");
+      const movedProducer = await (await fetch(
+        `${baseUrl}/api/v1/producers/xlsx-paul-bara-bouzy`
+      )).json();
+      assert.equal(movedProducer.city, "Testplaats");
+
+      const logoBatch = new FormData();
+      logoBatch.set("csrf", producerCsrf);
+      logoBatch.set("overwrite", "yes");
+      const batchPng = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
+      logoBatch.append("logos", new Blob([batchPng], { type: "image/png" }), "alexandre-bonnet-badge.png");
+      logoBatch.append("logos", new Blob([batchPng], { type: "image/png" }), "Bonnaire logo.png");
+      logoBatch.append("logos", new Blob([batchPng], { type: "image/png" }), "onbekend-huis.png");
+      const logoBatchResponse = await fetch(`${baseUrl}/admin/producers/logos/batch`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: cookie },
+        body: logoBatch
+      });
+      assert.equal(logoBatchResponse.status, 303);
+      assert.match(logoBatchResponse.headers.get("location"), /logosUploaded=2/);
+      assert.match(logoBatchResponse.headers.get("location"), /logosUnmatched=1/);
+      const alexandre = await (await fetch(`${baseUrl}/api/v1/producers/xlsx-alexandre-bonnet-les-riceys`)).json();
+      const bonnaire = await (await fetch(`${baseUrl}/api/v1/producers/xlsx-bonnaire-cramant`)).json();
+      assert.equal(alexandre.logoUrl, "/producers/xlsx-alexandre-bonnet-les-riceys/logo");
+      assert.equal(bonnaire.logoUrl, "/producers/xlsx-bonnaire-cramant/logo");
+
+      const adminResponse = await fetch(`${baseUrl}/admin/regions`, { headers: { Cookie: cookie } });
+      const adminBody = await adminResponse.text();
+      assert.equal(adminResponse.status, 200);
+      assert.match(adminBody, /Nieuwe regio/);
+      assert.match(adminBody, /id="newRegionButton"/);
+      assert.match(adminBody, /id="newRegionDialog"/);
+      assert.match(adminBody, /Presentatie in app en web/);
+      const csrf = adminBody.match(/name="csrf" value="([^"]+)"/)?.[1];
+      assert.ok(csrf);
+
+      const form = new FormData();
+      form.set("csrf", csrf);
+      form.set("name", "Test regio");
+      form.set("description", "Een tijdelijke testregio.");
+      form.set("generalFacts", "Algemene testfeiten.");
+      form.set("location", "Ten noorden van de teststad.");
+      form.set("history", "Een lange testgeschiedenis.");
+      form.set("terroir", "Krijt en testgrond.");
+      form.set("climate", "Koel testklimaat.");
+      form.set("grapeVarieties", "Chardonnay en Pinot noir.");
+      form.set("cruClassification", "Eén Premier Cru testdorp.");
+      form.set("editorialTheme", "Testsignatuur");
+      form.set("introTitle", "Testintroductie");
+      form.set("portraitTitle", "Testlandschap");
+      form.set("portraitCaption", "Een redactioneel testverhaal.");
+      form.set("climateTitle", "Testklimaat in beeld");
+      form.set("accentColor", "#123456");
+      form.set("softColor", "#abcdef");
+      form.set("classification", "Test");
+      form.set("aliases", "Testgebied");
+      form.set("sourceName", "Testbron");
+      form.set("sourceUrl", "https://example.com/");
+      const png = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
+      form.set("banner", new Blob([png], { type: "image/png" }), "banner.png");
+      const saveResponse = await fetch(`${baseUrl}/admin/regions/new`, {
+        method: "POST",
+        redirect: "manual",
+        headers: { Cookie: cookie },
+        body: form
+      });
+      assert.equal(saveResponse.status, 303);
+
+      const regionResponse = await fetch(`${baseUrl}/api/v1/regions/test-regio`);
+      const region = await regionResponse.json();
+      assert.equal(region.name, "Test regio");
+      assert.equal(region.generalFacts, "Algemene testfeiten.");
+      assert.equal(region.grapeVarieties, "Chardonnay en Pinot noir.");
+      assert.equal(region.editorialTheme, "Testsignatuur");
+      assert.equal(region.portraitCaption, "Een redactioneel testverhaal.");
+      assert.equal(region.hasBanner, true);
+      const publicRegion = await (await fetch(`${baseUrl}/regions/test-regio`)).text();
+      assert.match(publicRegion, /class="region-hero"/);
+      assert.match(publicRegion, /Testintroductie/);
+      assert.match(publicRegion, /Testlandschap/);
+      assert.match(publicRegion, /Cru’s &amp; dorpen/);
+      assert.match(publicRegion, /Eén Premier Cru testdorp/);
+      const bannerResponse = await fetch(`${baseUrl}/regions/test-regio/banner`);
+      assert.equal(bannerResponse.status, 200);
+      assert.equal(bannerResponse.headers.get("content-type"), "image/png");
+
+      const deleteResponse = await fetch(`${baseUrl}/admin/regions/test-regio/delete`, {
+        method: "POST",
+        redirect: "manual",
+        headers: {
+          Cookie: cookie,
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({ csrf })
+      });
+      assert.equal(deleteResponse.status, 303);
+      assert.equal((await fetch(`${baseUrl}/api/v1/regions/test-regio`)).status, 404);
     });
   } finally {
     for (const [key, value] of Object.entries(previous)) {

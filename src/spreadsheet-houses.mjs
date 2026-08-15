@@ -1,3 +1,5 @@
+import { regionForName } from "./regions.mjs";
+
 const sourceName = "champagne.xlsx";
 
 const rows = [
@@ -854,7 +856,7 @@ const rows = [
     "museletUrl": ""
   },
   {
-    "name": "Comte de Champagne",
+    "name": "Comte de",
     "location": "Reims",
     "website": "",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Champagne%20Comte%20de%20Champagne%2C%20Reims%2C%20France",
@@ -3625,17 +3627,22 @@ export const spreadsheetHouses = rows.map((row) => {
   const [cityPart] = row.location.split("/");
   const city = cityPart.trim() || "Champagne";
   const isSubLabel = /sub-label/i.test(row.location);
-  const displayName = /^champagne\s+/i.test(row.name)
-    ? row.name
-    : `Champagne ${row.name}`;
+  const displayName = row.name
+    .replace(/\bChampagne\b\s*/giu, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
   const address = `${displayName}, ${city}, France`;
+  const matchedRegion = regionForName(row.region);
   return {
     id: `xlsx-${slug(row.name)}-${slug(city)}`,
     name: displayName,
     type: "HOUSE",
     city,
+    locationType: row.location,
     address,
     region: row.region || (isSubLabel ? "Champagne – Sub-label" : "Champagne"),
+    regionId: matchedRegion?.id || "",
+    regionUrl: matchedRegion ? `/regions/${matchedRegion.id}` : "",
     description: isSubLabel
       ? `${displayName} is in de aangeleverde bron gemarkeerd als sub-label.`
       : `${displayName} staat in de aangeleverde champagnecatalogus.`,
