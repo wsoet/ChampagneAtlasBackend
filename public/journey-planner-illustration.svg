@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Reis door Champagne plannen</title>
+  <desc id="desc">Een rustige route met drie stappen: bewaren, plannen en vertrekken.</desc>
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#082b21" flood-opacity=".16"/>
+    </filter>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf1"/>
+      <stop offset="1" stop-color="#f2e8d6"/>
+    </linearGradient>
+    <pattern id="grain" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="5" r="1" fill="#0f3b2e" opacity=".035"/>
+      <circle cx="25" cy="19" r=".8" fill="#0f3b2e" opacity=".025"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="1000" fill="#174d3e"/>
+  <path d="M-40 190C210 35 389 55 565 146s353 68 675-89M-76 280C205 112 391 142 562 223s364 75 697-76M-99 870c257-168 470-185 644-83s366 82 708-92" fill="none" stroke="#c9a227" stroke-width="2" opacity=".15"/>
+
+  <rect x="74" y="60" width="1052" height="880" rx="42" fill="url(#paper)" filter="url(#shadow)"/>
+  <rect x="74" y="60" width="1052" height="880" rx="42" fill="url(#grain)"/>
+
+  <g fill="none" stroke="#0f3b2e" stroke-linecap="round" opacity=".09">
+    <path d="M75 640c168-154 347-169 516-45 166 122 336 103 535-46" stroke-width="2"/>
+    <path d="M75 678c170-145 348-158 514-38 169 122 342 103 537-47" stroke-width="2"/>
+    <path d="M75 716c172-136 350-147 512-31 171 121 347 102 539-49" stroke-width="2"/>
+    <path d="M75 754c176-127 351-136 509-24 176 123 351 101 542-51" stroke-width="2"/>
+    <path d="M75 792c180-118 352-125 507-17 179 124 356 101 544-54" stroke-width="2"/>
+    <path d="M75 830c182-108 354-114 504-9 184 125 362 100 547-58" stroke-width="2"/>
+  </g>
+
+  <g fill="#0f3b2e" opacity=".08">
+    <path d="M74 812c122-85 244-104 366-58v186H74z"/>
+    <path d="M755 766c117-62 241-61 371 4v170H755z"/>
+  </g>
+
+  <path d="M250 275C335 332 356 420 429 446c93 33 192-41 277 18 72 49 45 139 116 190 52 37 104 59 155 90" fill="none" stroke="#c9a227" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 26"/>
+
+  <g filter="url(#shadow)">
+    <circle cx="246" cy="270" r="91" fill="#fffdf8" stroke="#c9a227" stroke-width="4"/>
+    <circle cx="692" cy="455" r="91" fill="#fffdf8" stroke="#c9a227" stroke-width="4"/>
+    <circle cx="968" cy="748" r="91" fill="#0f3b2e" stroke="#c9a227" stroke-width="4"/>
+  </g>
+
+  <g font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle">
+    <circle cx="182" cy="206" r="27" fill="#c9a227"/><text x="182" y="215" fill="#0f3b2e">1</text>
+    <circle cx="628" cy="391" r="27" fill="#c9a227"/><text x="628" y="400" fill="#0f3b2e">2</text>
+    <circle cx="904" cy="684" r="27" fill="#c9a227"/><text x="904" y="693" fill="#0f3b2e">3</text>
+  </g>
+
+  <g fill="none" stroke="#0f3b2e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M246 309s-50-30-50-69c0-37 46-52 50-17 5-35 51-20 51 17 0 39-51 69-51 69z"/>
+    <rect x="651" y="421" width="82" height="72" rx="12"/>
+    <path d="M671 405v31m42-31v31m-44 24h46"/>
+  </g>
+
+  <g fill="none" stroke="#f2e8d6" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M937 775l66-60-25 68-41-8z"/>
+    <path d="M978 783l18 27"/>
+  </g>
+
+  <g stroke="#0f3b2e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M365 787h227v97H365z" fill="#fffaf1"/>
+    <path d="M350 787l129-91 129 91" fill="#f2e8d6"/>
+    <path d="M446 884v-65h66v65m-112-62h23m112 0h23" fill="none"/>
+    <path d="M778 879h108v-102H778z" fill="#fffaf1"/>
+    <path d="M765 777l67-48 67 48" fill="#f2e8d6"/>
+    <path d="M815 879v-62h34v62" fill="none"/>
+  </g>
+
+  <g fill="none" stroke="#c9a227" stroke-width="4" opacity=".8">
+    <path d="M132 548c63-61 124-74 181-41m-164 73c60-51 115-62 166-32m642-323c41-32 83-38 127-16m-102 46c36-25 72-28 107-9"/>
+  </g>
+</svg>

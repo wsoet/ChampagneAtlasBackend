@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f3b2e">
+  <meta name="description" content="Ontdek de Champagnestreek, bezoek bijzondere huizen en bouw je persoonlijke Champagne Atlas.">
+  <title>Champagne Atlas — Discover · Visit · Collect</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png">
+  <link rel="stylesheet" href="/atlas.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Naar inhoud</a>
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#top" aria-label="Champagne Atlas home">
+      <img src="/champagne-atlas-logo-transparent.png" alt="Champagne Atlas">
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="Hoofdnavigatie">
+      <a href="#kaart">Kaart</a><a href="#regios">Regio’s</a><a href="#huizen">Huizen</a><a href="#explore">Explore</a><a href="#reizen">Reizen</a><a href="#pro">Pro</a>
+    </nav>
+    <div class="header-actions">
+      <button class="language-button" id="languageButton" type="button" aria-label="Switch to English" title="Switch to English">🇬🇧 <span>EN</span></button>
+      <button class="ghost-button" id="savedButton" type="button" aria-label="Open Mijn Atlas"><span aria-hidden="true">♡</span><span class="desktop-label">Mijn Atlas</span></button>
+      <button class="primary-button compact" id="accountButton" type="button">Inloggen</button>
+      <button class="menu-button" id="menuButton" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Menu openen"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-overlay"></div>
+      <div class="hero-content reveal">
+        <p class="eyebrow light">Jouw gids door Champagne</p>
+        <h1>Discover <i>·</i> Visit <i>·</i> Collect</h1>
+        <p class="hero-copy">Van iconische maisons tot verborgen vignerons. Vind het huis dat bij je past en neem je ontdekkingen mee in één persoonlijke atlas.</p>
+        <form class="hero-search" id="heroSearch" role="search">
+          <span aria-hidden="true">⌕</span>
+          <label class="sr-only" for="heroSearchInput">Zoek huis, plaats of regio</label>
+          <input id="heroSearchInput" autocomplete="off" placeholder="Zoek huis, plaats of regio">
+          <button type="submit">Ontdek</button>
+          <div class="search-suggestions" id="searchSuggestions" hidden></div>
+        </form>
+        <div class="hero-stats" aria-label="Champagne Atlas in cijfers">
+          <div><strong id="houseCount">—</strong><span>huizen</span></div>
+          <div><strong id="regionCount">—</strong><span>regio’s</span></div>
+          <div><strong id="placeCount">—</strong><span>plaatsen</span></div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#intro"><span>Verken de streek</span><b aria-hidden="true">↓</b></a>
+    </section>
+
+    <section class="intro section" id="intro">
+      <div class="section-heading centered reveal">
+        <p class="eyebrow">Champagne begint met een plek</p>
+        <h2>Een streek om laag voor laag te ontdekken</h2>
+        <p>Lees het landschap, ontmoet de makers en bouw een reis die bij jouw smaak past.</p>
+      </div>
+      <div class="feature-grid reveal">
+        <a class="feature-card" href="#kaart"><span class="feature-icon">⌖</span><h3>Vind je weg</h3><p>Bekijk huizen en regio’s in één interactief overzicht.</p><b>Open de kaart →</b></a>
+        <a class="feature-card" href="#huizen"><span class="feature-icon">⌂</span><h3>Ontmoet de huizen</h3><p>Van grote namen tot kleine familieproducenten.</p><b>Bekijk de huizen →</b></a>
+        <a class="feature-card" href="#explore"><span class="feature-icon">✦</span><h3>Beleef Champagne</h3><p>Evenementen, tours en bijzondere plekken voor onderweg.</p><b>Bekijk wat er speelt →</b></a>
+      </div>
+    </section>
+
+    <section class="map-section section dark-section" id="kaart">
+      <div class="section-shell">
+        <div class="section-heading split reveal">
+          <div><p class="eyebrow light">Verken</p><h2>De Champagnestreek</h2><p>Kies een filter en tik op een marker om een huis te ontdekken.</p></div>
+          <div class="map-legend"><span><i class="pin-dot visitable"></i> Bezoekbaar</span><span><i class="pin-dot standard"></i> Overige huizen</span></div>
+        </div>
+        <div class="map-layout reveal">
+          <aside class="map-panel">
+            <h3>Wat wil je zien?</h3>
+            <div class="filter-chips" id="mapFilters">
+              <button class="chip active" data-filter="all" type="button">Alle huizen</button>
+              <button class="chip" data-filter="visitable" type="button">Bezoekbaar</button>
+              <button class="chip" data-filter="tastings" type="button">Proeverijen</button>
+              <button class="chip" data-filter="saved" type="button">Bewaard</button>
+            </div>
+            <div class="map-selection" id="mapSelection"><p>Klik op een marker voor naam, plaats en bezoekinformatie.</p></div>
+          </aside>
+          <div class="atlas-map" id="atlasMap" role="region" aria-label="Interactieve kaart van Champagne">
+            <div class="map-world" id="mapWorld">
+              <div class="map-grid" aria-hidden="true"></div>
+              <div class="river river-one" aria-hidden="true"></div><div class="river river-two" aria-hidden="true"></div>
+              <span class="map-city reims">Reims</span><span class="map-city epernay">Épernay</span><span class="map-city troyes">Troyes</span>
+            </div>
+            <div class="map-pins-layer" id="mapPins"></div>
+            <div class="map-zoom-controls" aria-label="Kaartweergave">
+              <button type="button" id="mapZoomIn" aria-label="Inzoomen" title="Inzoomen">+</button>
+              <button type="button" id="mapZoomOut" aria-label="Uitzoomen" title="Uitzoomen">−</button>
+              <button class="map-zoom-reset" type="button" id="mapZoomReset" aria-label="Hele kaart tonen" title="Hele kaart tonen">⌂</button>
+            </div>
+            <output class="map-zoom-level" id="mapZoomLevel" aria-live="polite">100%</output>
+            <div class="map-empty" id="mapEmpty" hidden>Geen huizen binnen dit filter.</div>
+          </div>
+          <aside class="map-region-guide" aria-labelledby="mapRegionGuideTitle">
+            <div class="map-guide-heading">
+              <p class="eyebrow" id="mapRegionGuideEyebrow">De wijnregio’s van Champagne</p>
+              <h3 id="mapRegionGuideTitle">Terroirs van Champagne</h3>
+              <p id="mapRegionGuideIntro">Kies een regio om de bijbehorende champagnehuizen op de kaart te tonen.</p>
+            </div>
+            <button class="map-region-reset active" type="button" data-map-region-name="" id="mapRegionReset">Alle regio’s</button>
+            <div class="map-region-list">
+              <button type="button" data-map-region-name="Montagne de Reims"><i style="--region-color:#8f3545"></i><span><strong>Montagne de Reims</strong><small>Pinot Noir · kracht en contrast</small></span></button>
+              <button type="button" data-map-region-name="Vallée de la Marne"><i style="--region-color:#296b59"></i><span><strong>Vallée de la Marne</strong><small>Meunier · fruit en souplesse</small></span></button>
+              <button type="button" data-map-region-name="Côte des Blancs"><i style="--region-color:#c7961e"></i><span><strong>Côte des Blancs</strong><small>Chardonnay · finesse en mineraliteit</small></span></button>
+              <button type="button" data-map-region-name="Côte des Bar"><i style="--region-color:#69703e"></i><span><strong>Côte des Bar (Aube)</strong><small>Pinot Noir · zuidelijke energie</small></span></button>
+              <button type="button" data-map-region-name="Côte de Sézanne"><i style="--region-color:#bd7657"></i><span><strong>Côte de Sézanne</strong><small>Diepte en authenticiteit</small></span></button>
+              <button type="button" data-map-region-name="Montgueux"><i style="--region-color:#709195"></i><span><strong>Montgueux</strong><small>Chardonnay · rondheid en balans</small></span></button>
+              <button type="button" data-map-region-name="Coteaux Vitryats"><i style="--region-color:#caa456"></i><span><strong>Coteaux Vitryats</strong><small>Pinot Noir en Chardonnay</small></span></button>
+              <button type="button" data-map-region-name="Massif de Saint-Thierry"><i style="--region-color:#7d8967"></i><span><strong>Massif de Saint-Thierry</strong><small>Frisheid en kalksteen</small></span></button>
+              <button type="button" data-map-region-name="Vallée de l’Ardre"><i style="--region-color:#927187"></i><span><strong>Vallée de l’Ardre</strong><small>Elegantie en lengte</small></span></button>
+            </div>
+          </aside>
+          <div class="map-facts" id="mapFacts" aria-label="Champagne in cijfers">
+            <article><span class="map-fact-icon">⌂</span><strong>±34.300 ha</strong><small>wijngaarden</small></article>
+            <article><span class="map-fact-icon">♛</span><strong>319</strong><small>crus</small></article>
+            <article><span class="map-fact-icon">★</span><strong>17</strong><small>Grand Cru</small></article>
+            <article><span class="map-fact-icon">✦</span><strong>42</strong><small>Premier Cru</small></article>
+            <article><span class="map-fact-icon">▥</span><strong>UNESCO</strong><small>werelderfgoed</small></article>
+            <article><span class="map-fact-icon">⌖</span><strong>49° N</strong><small>noordelijke wijnbouwgrens</small></article>
+            <article class="map-grape-fact"><div class="map-grape-icons" aria-hidden="true"><i class="pinot"></i><i class="chardonnay"></i><i class="meunier"></i></div><strong>3 hoofddruiven</strong><small>Pinot Noir · Chardonnay · Meunier</small></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="regions-section section" id="regios">
+      <div class="section-heading split reveal"><div><p class="eyebrow">Terroir & karakter</p><h2>De regio’s van Champagne</h2><p>Elke helling vertelt een ander verhaal.</p></div><a class="text-link" href="https://api.champagneatlas.nl/regions">Alle regio’s bekijken →</a></div>
+      <div class="horizontal-cards region-cards" id="regionCards" aria-live="polite"><div class="loading-card"></div><div class="loading-card"></div><div class="loading-card"></div></div>
+    </section>
+
+    <section class="houses-section section soft-section" id="huizen">
+      <div class="section-heading split reveal"><div><p class="eyebrow">Maisons & vignerons</p><h2>Champagnehuizen</h2><p>Zoek op naam, plaats, regio of bezoekmogelijkheid.</p></div><button class="text-link button-link" id="showAllHouses" type="button">Bekijk volledige catalogus →</button></div>
+      <div class="catalog-toolbar reveal">
+        <label class="catalog-search"><span aria-hidden="true">⌕</span><span class="sr-only">Zoek champagnehuizen</span><input id="houseSearch" placeholder="Zoek een champagnehuis"></label>
+        <select id="houseRegion"><option value="">Alle regio’s</option></select>
+        <label class="toggle"><input id="visitableOnly" type="checkbox"><span></span>Alleen bezoekbaar</label>
+      </div>
+      <div class="house-grid" id="houseGrid" aria-live="polite"><div class="loading-card"></div><div class="loading-card"></div><div class="loading-card"></div></div>
+      <p class="result-note" id="houseResultNote"></p>
+    </section>
+
+    <section class="explore-section section" id="explore">
+      <div class="section-heading split reveal"><div><p class="eyebrow">Nu in Champagne</p><h2>Agenda & belevenissen</h2><p>Actuele evenementen en zorgvuldig gekozen ervaringen.</p></div><div class="section-tabs" role="tablist"><button class="active" data-explore-tab="events" type="button">Evenementen</button><button data-explore-tab="tours" type="button">Tours</button><button data-explore-tab="places" type="button">Plekken</button></div></div>
+      <div class="explore-grid" id="exploreGrid" aria-live="polite"><div class="loading-card"></div><div class="loading-card"></div><div class="loading-card"></div></div>
+    </section>
+
+    <section class="journey-section section" id="reizen">
+      <div class="journey-art" aria-hidden="true"></div>
+      <div class="journey-copy reveal">
+        <p class="eyebrow light">Van inspiratie naar vertrek</p>
+        <h2>Bouw jouw reis door Champagne</h2>
+        <p>Bewaar huizen op je laptop, maak een eenvoudige reis en neem alles automatisch mee in de app.</p>
+        <ul><li>Eén eenvoudige reis is gratis</li><li>Alles gekoppeld aan hetzelfde Atlas-account</li><li>Pro-planning en onderwegbegeleiding blijven in de app</li></ul>
+        <button class="gold-button" id="journeyButton" type="button">Begin met plannen</button>
+      </div>
+    </section>
+
+    <section class="pricing-section section soft-section" id="pro">
+      <div class="section-heading centered reveal">
+        <p class="eyebrow">Champagne Atlas abonnementen</p>
+        <h2>Kies wat bij jouw Champagne-reis past</h2>
+        <p>Begin gratis, kies een maandabonnement voor blijvend meer ruimte of activeer een Trip Pass voor één intensieve reisweek.</p>
+      </div>
+      <div class="pricing-table-shell reveal" role="region" aria-label="Vergelijk Champagne Atlas abonnementen" tabindex="0">
+        <table class="pricing-table">
+          <thead>
+            <tr><th scope="col">Functie</th><th scope="col"><strong>Free</strong><span>€ 0</span></th><th scope="col" class="recommended"><small>MEEST GEKOZEN</small><strong>Pro</strong><span>€ 4,99 / maand</span></th><th scope="col"><strong>Pro Plus</strong><span>€ 9,99 / maand</span></th><th scope="col"><strong>Trip Pass</strong><span>€ 3,99 / week</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Antoine</th><td>5 per week</td><td>30 per week</td><td>50 per week</td><td>30 per week</td></tr>
+            <tr><th scope="row">Waarvan fotoanalyses</th><td>2 per week</td><td>5 per week</td><td>20 per week</td><td>5 per week</td></tr>
+            <tr><th scope="row">Favoriete huizen</th><td>20</td><td>Onbeperkt</td><td>Onbeperkt</td><td>Onbeperkt</td></tr>
+            <tr><th scope="row">Favoriete champagnes</th><td>20</td><td>Onbeperkt</td><td>Onbeperkt</td><td>Onbeperkt</td></tr>
+            <tr><th scope="row">Proefboek</th><td>30</td><td>150</td><td>Onbeperkt</td><td>150</td></tr>
+            <tr><th scope="row">Proefboek-fotoscan</th><td><span class="feature-no">—</span></td><td><span class="feature-yes">✓</span></td><td><span class="feature-yes">✓</span></td><td><span class="feature-yes">✓</span></td></tr>
+            <tr><th scope="row">Offline kaarten</th><td><span class="feature-no">—</span></td><td><span class="feature-yes">✓</span></td><td><span class="feature-yes">✓</span></td><td><span class="feature-yes">✓</span></td></tr>
+            <tr><th scope="row">Slimme reisplanning</th><td><span class="feature-no">—</span></td><td><span class="feature-yes">✓</span></td><td><span class="feature-yes">✓</span></td><td><span class="feature-yes">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pricing-notes reveal">
+        <p><strong>Trip Pass:</strong> alle Pro-functies gedurende zeven dagen, zonder maandabonnement.</p>
+        <p>Na afloop val je terug naar Free. Je inhoud blijft veilig bewaard; items boven de Free-limiet worden tijdelijk verborgen en verschijnen weer zodra je toegang opnieuw activeert.</p>
+      </div>
+    </section>
+
+    <section class="app-section section" id="app">
+      <div class="app-card reveal">
+        <div><p class="eyebrow">Champagne Atlas voor onderweg</p><h2>Je persoonlijke atlas reist met je mee</h2><p>Gebruik offline kaarten, locatieadvies, Antoine en etiketherkenning in de Android-app.</p><a class="primary-button" href="#app">Ontdek de app</a></div>
+        <div class="phone-preview" aria-label="Voorbeeld van de Champagne Atlas-app"><div class="phone-screen"><img src="/champagne-atlas-logo.png" alt=""><strong>Vandaag aanbevolen</strong><span>Een huis passend bij jouw smaak</span><div class="mini-card"></div><div class="phone-nav">⌖　⌂　♢　♜</div></div></div>
+      </div>
+    </section>
+
+    <section class="muselet-band section" id="muselet">
+      <div class="muselet-mark" aria-hidden="true"><span>M</span></div>
+      <div>
+        <p class="eyebrow light">Voor thuis</p>
+        <h2>Verder ontdekken bij Muselet</h2>
+        <p>Vind champagnes uit je atlas en bekijk ook glazen, koelers, geschenkverpakkingen en andere champagne-accessoires. Bij een huis tonen we beschikbare flessen altijd als eerste.</p>
+      </div>
+      <a class="gold-button" href="https://muselet.nl" target="_blank" rel="sponsored noopener noreferrer">Naar Muselet.nl ↗</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><img src="/champagne-atlas-logo.png" alt="Champagne Atlas"><p>Ontdek · Bezoek · Verzamel</p></div>
+    <nav aria-label="Voetnavigatie"><a href="#kaart">Kaart</a><a href="#regios">Regio’s</a><a href="#huizen">Huizen</a><a href="#explore">Explore</a><a href="#pro">Pro vergelijken</a></nav>
+    <nav aria-label="Juridische informatie"><a href="/privacy">Privacy</a><a href="/account-verwijderen">Account verwijderen</a><a href="mailto:info@champagneatlas.nl">Contact</a></nav>
+    <p class="copyright">© <span id="year"></span> Champagne Atlas</p>
+  </footer>
+
+  <dialog class="house-dialog" id="houseDialog" aria-labelledby="houseDialogTitle"><button class="dialog-close" type="button" data-close-dialog aria-label="Sluiten">×</button><div id="houseDialogBody"></div></dialog>
+  <dialog class="account-dialog" id="accountDialog" aria-labelledby="accountTitle"><button class="dialog-close" type="button" data-close-account aria-label="Sluiten">×</button><div id="accountBody"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/atlas.js"></script>
+</body>
+</html>
