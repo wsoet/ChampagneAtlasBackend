@@ -45,6 +45,23 @@ export class TripGroupStore {
   }
   async list(userId) { const rows = (await database().query(`SELECT g.id FROM trip_groups g JOIN trip_group_members m ON m.group_id=g.id WHERE m.user_id=$1 ORDER BY g.updated_at DESC`, [userId])).rows; return Promise.all(rows.map(row => this.dto(database(), userId, row.id))); }
   async get(userId, groupId) { return this.dto(database(), userId, groupId); }
+  async deleteGroup(userId, groupId) {
+    const client = await database().connect();
+    try {
+      await client.query("BEGIN");
+      const group = await this.membership(client, userId, groupId);
+      if (group.role !== "OWNER") throw new TripGroupError(404, "NOT_FOUND", "Trip group not found");
+      const result = await client.query(`DELETE FROM trip_groups WHERE id=$1 AND owner_user_id=$2`, [groupId, userId]);
+      if (!result.rowCount) throw new TripGroupError(404, "NOT_FOUND", "Trip group not found");
+      await client.query("COMMIT");
+      return { deleted: true };
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
   async updateSnapshot(userId, groupId, revision, content) {
     const client = await database().connect(); let recipients=[]; try { await client.query("BEGIN"); const group = await this.membership(client, userId, groupId);
       if (!['OWNER','EDITOR'].includes(group.role)) throw new TripGroupError(403, "FORBIDDEN", "Write access required");
