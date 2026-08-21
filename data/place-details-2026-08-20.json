@@ -1,0 +1,3056 @@
+{
+  "version": 1,
+  "sourceWorkbook": "plaatsen_aangevuld.xlsx",
+  "importedAt": "2026-08-20",
+  "items": [
+    {
+      "id": "arrentieres",
+      "population": 176,
+      "vineyardAreaHectares": 137.7,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "voornamelijk Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 108.8,
+          "percentage": 79
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 19.2,
+          "percentage": 13.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 8.4,
+          "percentage": 6.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 1.3,
+          "percentage": 0.9
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/arrentieres",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "avenay-val-d-or",
+      "population": 956,
+      "vineyardAreaHectares": 236.3,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 183.2,
+          "percentage": 77.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 28.5,
+          "percentage": 12.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 23.6,
+          "percentage": 10
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 1,
+          "percentage": 0.4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/avenay-val-d-39-or",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "avize",
+      "population": 1742,
+      "vineyardAreaHectares": 266,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Grand Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 0.1,
+          "percentage": 0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 265.8,
+          "percentage": 99.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0,
+          "percentage": 0
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/avize",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "ay",
+      "population": 3400,
+      "vineyardAreaHectares": 356.1,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Grand Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 316.1,
+          "percentage": 88.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 29.6,
+          "percentage": 8.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 9.8,
+          "percentage": 2.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.6,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/ay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Aÿ binnen Aÿ-Champagne."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "baroville",
+      "population": 252,
+      "vineyardAreaHectares": 220.2,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "voornamelijk Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 190.6,
+          "percentage": 86.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 24.1,
+          "percentage": 10.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.2,
+          "percentage": 1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 3.3,
+          "percentage": 1.5
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/baroville",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "bar-sur-seine",
+      "population": 2858,
+      "vineyardAreaHectares": 19.2,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 14.2,
+          "percentage": 74
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 4,
+          "percentage": 20.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.4,
+          "percentage": 2.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.6,
+          "percentage": 3.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bar-sur-seine",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "bethon",
+      "population": 222,
+      "vineyardAreaHectares": 194.9,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "",
+      "soil": "krijt en kalk met meer klei/leem in de bovengrond",
+      "wineCharacter": "rijp fruit, rond, bloemig, soepel, met frisse mineraliteit",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 12.8,
+          "percentage": 6.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 180.7,
+          "percentage": 92.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.2,
+          "percentage": 0.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bethon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "bisseuil",
+      "population": 616,
+      "vineyardAreaHectares": 125.4,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Premier Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 35.9,
+          "percentage": 28.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 82.3,
+          "percentage": 65.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 6.9,
+          "percentage": 5.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bisseuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Bisseuil binnen Aÿ-Champagne."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "bligny",
+      "population": 160,
+      "vineyardAreaHectares": 160.4,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "voornamelijk Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 128.4,
+          "percentage": 80
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 28.8,
+          "percentage": 18
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.9,
+          "percentage": 1.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bligny-170",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Geïnterpreteerd als Bligny (Aube, 10200), passend bij de Champagneplaats/Château de Bligny."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "bonneil",
+      "population": 375,
+      "vineyardAreaHectares": 76.7,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 7.4,
+          "percentage": 9.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 8.7,
+          "percentage": 11.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 60.5,
+          "percentage": 78.9
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bonneil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "boursault",
+      "population": 393,
+      "vineyardAreaHectares": 252.5,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 53.1,
+          "percentage": 21
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 30.1,
+          "percentage": 11.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 169.3,
+          "percentage": 67
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/boursault",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "bouzy",
+      "population": 825,
+      "vineyardAreaHectares": 373.4,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Grand Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 325.8,
+          "percentage": 87.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 46.7,
+          "percentage": 12.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.3,
+          "percentage": 0.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.6,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bouzy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "buxeuil",
+      "population": 109,
+      "vineyardAreaHectares": 135.6,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 107.4,
+          "percentage": 79.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 20.6,
+          "percentage": 15.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.2,
+          "percentage": 1.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 5.4,
+          "percentage": 4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/buxeuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "buxieres-sur-arce",
+      "population": 100,
+      "vineyardAreaHectares": 43.5,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 34.7,
+          "percentage": 79.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 8.6,
+          "percentage": 19.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.2,
+          "percentage": 0.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/buxieres-sur-arce",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "celles-sur-ource",
+      "population": 490,
+      "vineyardAreaHectares": 309.1,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 250.8,
+          "percentage": 81.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 33.7,
+          "percentage": 10.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 5.6,
+          "percentage": 1.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 19,
+          "percentage": 6.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/celles-sur-ource",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "chalons-en-champagne",
+      "population": 42971,
+      "vineyardAreaHectares": 0,
+      "mainGrape": "",
+      "cruClassification": "",
+      "soil": "n.v.t. – geen afgebakende Champagne-wijngaard in de gebruikte gemeentelijke data",
+      "wineCharacter": "",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "grote stad in de Champagnestreek; geen afzonderlijke UMC-wijngaardfiche voor de gemeente."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "champillon",
+      "population": 510,
+      "vineyardAreaHectares": 72.8,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 36,
+          "percentage": 49.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 14.5,
+          "percentage": 19.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 22.1,
+          "percentage": 30.4
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/champillon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "charly-sur-marne",
+      "population": 2594,
+      "vineyardAreaHectares": 364.4,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 33,
+          "percentage": 9.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 57.9,
+          "percentage": 15.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 272.7,
+          "percentage": 74.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.8,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/charly-sur-marne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "chateau-thierry",
+      "population": 15097,
+      "vineyardAreaHectares": 44.4,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 10.5,
+          "percentage": 23.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 7,
+          "percentage": 15.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 26.9,
+          "percentage": 60.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chateau-thierry",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "chavot",
+      "population": 340,
+      "vineyardAreaHectares": 124.6,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "krijt en kalksteen met klei/leem in de bovengrond",
+      "wineCharacter": "fris, fruitig, bloemig, soepel, evenwichtig",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 6,
+          "percentage": 4.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 56.6,
+          "percentage": 45.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 61.7,
+          "percentage": 49.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chavot-courcourt",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de huidige gemeente Chavot-Courcourt."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "chigny-les-roses",
+      "population": 521,
+      "vineyardAreaHectares": 131.7,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 34,
+          "percentage": 25.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 23.9,
+          "percentage": 18.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 73.5,
+          "percentage": 55.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chigny-les-roses",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "chouilly",
+      "population": 1064,
+      "vineyardAreaHectares": 525.8,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Grand Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 5,
+          "percentage": 1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 518.9,
+          "percentage": 98.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.5,
+          "percentage": 0.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.4,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chouilly",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "congy",
+      "population": 257,
+      "vineyardAreaHectares": 78.1,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en krijt, lokaal zwaardere bodems",
+      "wineCharacter": "fruitig, rond, soepel, fris, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 17,
+          "percentage": 21.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 23.8,
+          "percentage": 30.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 37.3,
+          "percentage": 47.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/congy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "cormicy",
+      "population": 1500,
+      "vineyardAreaHectares": 56.8,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "zand, klei, mergel en lokaal krijt",
+      "wineCharacter": "fruitig, aromatisch, soepel, fris",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 24.4,
+          "percentage": 43
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 12.8,
+          "percentage": 22.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 19.6,
+          "percentage": 34.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cormicy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "cormoyeux",
+      "population": 129,
+      "vineyardAreaHectares": 75.5,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 14.8,
+          "percentage": 19.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 15.8,
+          "percentage": 20.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 44.6,
+          "percentage": 59.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cormoyeux",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "courteron",
+      "population": 99,
+      "vineyardAreaHectares": 87.5,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 77.1,
+          "percentage": 88.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 8.8,
+          "percentage": 10.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.6,
+          "percentage": 0.7
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 1,
+          "percentage": 1.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/courteron",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "cramant",
+      "population": 871,
+      "vineyardAreaHectares": 345.4,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Grand Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 0,
+          "percentage": 0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 345.2,
+          "percentage": 99.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.2,
+          "percentage": 0.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cramant",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "cuis",
+      "population": 368,
+      "vineyardAreaHectares": 176.3,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Premier Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 0.1,
+          "percentage": 0.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 169.6,
+          "percentage": 96.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 6.3,
+          "percentage": 3.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cuis",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "damery",
+      "population": 1322,
+      "vineyardAreaHectares": 416.4,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 86.9,
+          "percentage": 20.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 77.9,
+          "percentage": 18.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 249.7,
+          "percentage": 60
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 1.9,
+          "percentage": 0.5
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/damery",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "dizy",
+      "population": 1482,
+      "vineyardAreaHectares": 180.4,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 74.3,
+          "percentage": 41.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 70,
+          "percentage": 38.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 36.1,
+          "percentage": 20
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/dizy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "ecueil",
+      "population": 358,
+      "vineyardAreaHectares": 144.9,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 110.7,
+          "percentage": 76.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 17.4,
+          "percentage": 12
+        },
+        {
+          "name": "Meunier",
+          "hectares": 16.3,
+          "percentage": 11.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.5,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/ecueil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "epernay",
+      "population": 22174,
+      "vineyardAreaHectares": 257.2,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "",
+      "soil": "krijt en kalksteen met klei/leem in de bovengrond",
+      "wineCharacter": "fris, fruitig, bloemig, soepel, evenwichtig",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 64,
+          "percentage": 24.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 156.9,
+          "percentage": 61
+        },
+        {
+          "name": "Meunier",
+          "hectares": 36,
+          "percentage": 14
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/epernay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "faverolles-et-coemy",
+      "population": 601,
+      "vineyardAreaHectares": 76.2,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 13.7,
+          "percentage": 18
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 3,
+          "percentage": 3.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 58.9,
+          "percentage": 77.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.6,
+          "percentage": 0.8
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/faverolles-et-coemy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "festigny",
+      "population": 394,
+      "vineyardAreaHectares": 190.8,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 11.4,
+          "percentage": 6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 15.4,
+          "percentage": 8.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 163.8,
+          "percentage": 85.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/festigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "flavigny",
+      "population": 172,
+      "vineyardAreaHectares": 0,
+      "mainGrape": "",
+      "cruClassification": "",
+      "soil": "n.v.t. – geen afgebakende Champagne-wijngaard in de gebruikte gemeentelijke data",
+      "wineCharacter": "",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "geen afzonderlijke UMC-cru/wijngaardfiche gevonden voor deze gemeente."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "fontette",
+      "population": 178,
+      "vineyardAreaHectares": 177.5,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 155.1,
+          "percentage": 87.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 17.7,
+          "percentage": 10
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.5,
+          "percentage": 0.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 3.2,
+          "percentage": 1.8
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/fontette",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "gye-sur-seine",
+      "population": 463,
+      "vineyardAreaHectares": 268.6,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 236.5,
+          "percentage": 88
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 26.9,
+          "percentage": 10
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.7,
+          "percentage": 1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 2.5,
+          "percentage": 0.9
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/gye-sur-seine",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "hautvillers",
+      "population": 608,
+      "vineyardAreaHectares": 290.7,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 129.2,
+          "percentage": 44.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 77.3,
+          "percentage": 26.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 84,
+          "percentage": 28.9
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/hautvillers",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "jouy-les-reims",
+      "population": 204,
+      "vineyardAreaHectares": 95.6,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 29.7,
+          "percentage": 31.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 14.5,
+          "percentage": 15.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 50.3,
+          "percentage": 52.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 1.1,
+          "percentage": 1.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/jouy-les-reims",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "le-breuil",
+      "population": 372,
+      "vineyardAreaHectares": 141.1,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 14.5,
+          "percentage": 10.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 11.4,
+          "percentage": 8.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 115.2,
+          "percentage": 81.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/le-breuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "le-mesnil-sur-oger",
+      "population": 988,
+      "vineyardAreaHectares": 437.6,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Grand Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.2,
+          "percentage": 0.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 436.4,
+          "percentage": 99.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0,
+          "percentage": 0
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/le-mesnil-sur-oger",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "les-riceys",
+      "population": 1174,
+      "vineyardAreaHectares": 838,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 766,
+          "percentage": 91.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 60.3,
+          "percentage": 7.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 5.9,
+          "percentage": 0.7
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 5.8,
+          "percentage": 0.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/les-riceys",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "louvois",
+      "population": 341,
+      "vineyardAreaHectares": 41.2,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Grand Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 33.3,
+          "percentage": 80.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 7.8,
+          "percentage": 18.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.1,
+          "percentage": 0.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/louvois",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Louvois binnen Val de Livre."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "ludes",
+      "population": 687,
+      "vineyardAreaHectares": 318.6,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 102.3,
+          "percentage": 32.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 57.2,
+          "percentage": 18
+        },
+        {
+          "name": "Meunier",
+          "hectares": 158.7,
+          "percentage": 49.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.4,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/ludes",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "mardeuil",
+      "population": 1457,
+      "vineyardAreaHectares": 193.9,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 35.2,
+          "percentage": 18.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 59.1,
+          "percentage": 30.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 99.4,
+          "percentage": 51.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/mardeuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "mareuil-sur-ay",
+      "population": 1087,
+      "vineyardAreaHectares": 294.3,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 248.7,
+          "percentage": 84.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 25.6,
+          "percentage": 8.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 20,
+          "percentage": 6.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/mareuil-sur-ay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Mareuil-sur-Aÿ binnen Aÿ-Champagne."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "marne",
+      "population": 0,
+      "vineyardAreaHectares": null,
+      "mainGrape": "",
+      "cruClassification": "",
+      "soil": "n.v.t. – departement, geen afzonderlijke Champagne-cru",
+      "wineCharacter": "",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Geen afzonderlijke gemeentelijke wijngaarddata toegepast. Marne is een departement en geen afzonderlijke Champagne-wijngemeente; gemeentelijke velden zijn daarom n.v.t."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "merfy",
+      "population": 609,
+      "vineyardAreaHectares": 46.2,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "zand, klei, mergel en lokaal krijt",
+      "wineCharacter": "fruitig, aromatisch, soepel, fris",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 9.6,
+          "percentage": 20.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 16.2,
+          "percentage": 35.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 20.4,
+          "percentage": 44.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/merfy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "neuville-sur-seine",
+      "population": 376,
+      "vineyardAreaHectares": 318,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 267.2,
+          "percentage": 84
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 41.6,
+          "percentage": 13.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 3.8,
+          "percentage": 1.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 5.4,
+          "percentage": 1.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/neuville-sur-seine",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "noe-les-mallets",
+      "population": 104,
+      "vineyardAreaHectares": 192.1,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 169.3,
+          "percentage": 88.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 19.1,
+          "percentage": 9.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.6,
+          "percentage": 0.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 3.1,
+          "percentage": 1.6
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/noe-les-mallets",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "oeuilly",
+      "population": 564,
+      "vineyardAreaHectares": 139.8,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 37.2,
+          "percentage": 26.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 34.5,
+          "percentage": 24.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 67.6,
+          "percentage": 48.4
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.5,
+          "percentage": 0.4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/oeuilly",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "oger",
+      "population": 508,
+      "vineyardAreaHectares": 401.9,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Grand Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.7,
+          "percentage": 0.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 400.2,
+          "percentage": 99.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0,
+          "percentage": 0
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/oger",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Oger binnen Blancs-Coteaux."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "passy-grigny",
+      "population": 370,
+      "vineyardAreaHectares": 196.2,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 27.8,
+          "percentage": 14.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 12,
+          "percentage": 6.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 156.1,
+          "percentage": 79.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/passy-grigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "pierry",
+      "population": 1264,
+      "vineyardAreaHectares": 109.8,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "krijt en kalksteen met klei/leem in de bovengrond",
+      "wineCharacter": "fris, fruitig, bloemig, soepel, evenwichtig",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 19.8,
+          "percentage": 18
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 38.7,
+          "percentage": 35.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 50.8,
+          "percentage": 46.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.5,
+          "percentage": 0.5
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/pierry",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "polisot",
+      "population": 321,
+      "vineyardAreaHectares": 71.4,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 63.3,
+          "percentage": 88.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 6.4,
+          "percentage": 9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.2,
+          "percentage": 1.7
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.5,
+          "percentage": 0.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/polisot",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "port-a-binson",
+      "population": 1150,
+      "vineyardAreaHectares": 396.4,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 36.4,
+          "percentage": 9.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 57.7,
+          "percentage": 14.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 302,
+          "percentage": 76.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/mareuil-le-port",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Port-à-Binson ligt binnen Mareuil-le-Port; inwoners- en wijngaarddata zijn daarom van Mareuil-le-Port."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "pouillon",
+      "population": 529,
+      "vineyardAreaHectares": 52.2,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "zand, klei, mergel en lokaal krijt",
+      "wineCharacter": "fruitig, aromatisch, soepel, fris",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 6.8,
+          "percentage": 13
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 9.2,
+          "percentage": 17.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 36.1,
+          "percentage": 69.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/pouillon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "prunay",
+      "population": 1042,
+      "vineyardAreaHectares": 0,
+      "mainGrape": "",
+      "cruClassification": "",
+      "soil": "n.v.t. – geen afgebakende Champagne-wijngaard in de gebruikte gemeentelijke data",
+      "wineCharacter": "",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "geen afgebakende Champagne-wijngaardoppervlakte in de gebruikte gemeentelijke data."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "reims",
+      "population": 177674,
+      "vineyardAreaHectares": 54.9,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 15.8,
+          "percentage": 28.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 20.4,
+          "percentage": 37.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 18.7,
+          "percentage": 34.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/reims",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "rilly-la-montagne",
+      "population": 1003,
+      "vineyardAreaHectares": 313.1,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 128,
+          "percentage": 40.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 82.8,
+          "percentage": 26.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 102.3,
+          "percentage": 32.7
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/rilly-la-montagne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "romeny-sur-marne",
+      "population": 450,
+      "vineyardAreaHectares": 75.5,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 12,
+          "percentage": 15.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 10.8,
+          "percentage": 14.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 52.7,
+          "percentage": 69.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/romeny-sur-marne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "rouvres-les-vignes",
+      "population": 115,
+      "vineyardAreaHectares": 101,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "voornamelijk Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 77.6,
+          "percentage": 76.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 10.9,
+          "percentage": 10.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 12.4,
+          "percentage": 12.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/rouvres-les-vignes",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "sacy",
+      "population": 369,
+      "vineyardAreaHectares": 150.7,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Premier Cru",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 73.2,
+          "percentage": 48.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 20.8,
+          "percentage": 13.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 56.4,
+          "percentage": 37.4
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/sacy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "sillery",
+      "population": 1824,
+      "vineyardAreaHectares": 92.4,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Grand Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 29.7,
+          "percentage": 32.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 54.2,
+          "percentage": 58.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 8.5,
+          "percentage": 9.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/sillery",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "taissy",
+      "population": 2194,
+      "vineyardAreaHectares": 149.3,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Premier Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 37.3,
+          "percentage": 25
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 62.5,
+          "percentage": 41.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 49.5,
+          "percentage": 33.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/taissy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "talus-saint-prix",
+      "population": 106,
+      "vineyardAreaHectares": 40.6,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en krijt, lokaal zwaardere bodems",
+      "wineCharacter": "fruitig, rond, soepel, fris, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 11,
+          "percentage": 27.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 3.4,
+          "percentage": 8.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 26.2,
+          "percentage": 64.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/talus-saint-prix",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "tours-sur-marne",
+      "population": 1360,
+      "vineyardAreaHectares": 52.3,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Grand Cru",
+      "soil": "kalk/krijt op de hellingen met klei en mergel",
+      "wineCharacter": "fruitig, breed, gestructureerd, fris, vaak vineus",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 37,
+          "percentage": 70.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 15.2,
+          "percentage": 29.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0,
+          "percentage": 0
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/tours-sur-marne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "trigny",
+      "population": 619,
+      "vineyardAreaHectares": 189.9,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "zand, klei, mergel en lokaal krijt",
+      "wineCharacter": "fruitig, aromatisch, soepel, fris",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 67.1,
+          "percentage": 35.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 33,
+          "percentage": 17.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 89.8,
+          "percentage": 47.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/trigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "trois-puits",
+      "population": 167,
+      "vineyardAreaHectares": 39.7,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 13.4,
+          "percentage": 33.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 3.9,
+          "percentage": 9.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 22.3,
+          "percentage": 56.2
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/trois-puits",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "troissy",
+      "population": 821,
+      "vineyardAreaHectares": 350.4,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 30.8,
+          "percentage": 8.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 25.8,
+          "percentage": 7.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 293.8,
+          "percentage": 83.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/troissy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "troyes",
+      "population": 62088,
+      "vineyardAreaHectares": 0,
+      "mainGrape": "",
+      "cruClassification": "",
+      "soil": "n.v.t. – geen afgebakende Champagne-wijngaard in de gebruikte gemeentelijke data",
+      "wineCharacter": "",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "grote stad in de Aube; geen afzonderlijke UMC-wijngaardfiche voor de gemeente."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "urville",
+      "population": 103,
+      "vineyardAreaHectares": 190.7,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "",
+      "soil": "voornamelijk Kimmeridgien mergel en kalksteen, met klei",
+      "wineCharacter": "fruitig, vineus, krachtig, mineraal, gastronomisch",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 142.7,
+          "percentage": 74.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 27.1,
+          "percentage": 14.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 15.8,
+          "percentage": 8.3
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 5.1,
+          "percentage": 2.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/urville",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "venteuil",
+      "population": 462,
+      "vineyardAreaHectares": 183.6,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 68.9,
+          "percentage": 37.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 36.3,
+          "percentage": 19.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 78.1,
+          "percentage": 42.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/venteuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "verneuil",
+      "population": 836,
+      "vineyardAreaHectares": 356.2,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 63.8,
+          "percentage": 17.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 37.2,
+          "percentage": 10.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 255,
+          "percentage": 71.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/verneuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "vertus",
+      "population": 2188,
+      "vineyardAreaHectares": 542.3,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "Premier Cru",
+      "soil": "krijtrijke kalkbodem (Belemnietkrijt), zeer goed drainerend",
+      "wineCharacter": "strak, fris, citrus, floraal, krijtig/mineraal, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 48,
+          "percentage": 8.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 492,
+          "percentage": 90.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.2,
+          "percentage": 0.4
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.1,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vertus",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Vertus binnen Blancs-Coteaux."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "verzenay",
+      "population": 991,
+      "vineyardAreaHectares": 418.4,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Grand Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 363,
+          "percentage": 86.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 52.7,
+          "percentage": 12.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.5,
+          "percentage": 0.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/verzenay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "verzy",
+      "population": 961,
+      "vineyardAreaHectares": 404,
+      "mainGrape": "Pinot Noir",
+      "cruClassification": "Grand Cru",
+      "soil": "krijt en kalksteen met dunne klei/leemlaag",
+      "wineCharacter": "krachtig, gestructureerd, rood fruit, mineraal, lange afdronk",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 309.3,
+          "percentage": 76.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 91,
+          "percentage": 22.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.4,
+          "percentage": 0.6
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 1.3,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/verzy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "villedommange",
+      "population": 407,
+      "vineyardAreaHectares": 191.5,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 58.8,
+          "percentage": 30.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 23.1,
+          "percentage": 12.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 109.3,
+          "percentage": 57.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/villedommange",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. INSEE-gemeentenaam: Ville-Dommange."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "villers-sous-chatillon",
+      "population": 209,
+      "vineyardAreaHectares": 21.3,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.4,
+          "percentage": 6.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 0.5,
+          "percentage": 2.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 19.4,
+          "percentage": 91.1
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/villers-sous-chatillon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling. Inwonertal van de commune déléguée Villers-sous-Châtillon binnen Cœur-de-la-Vallée."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "vinay",
+      "population": 535,
+      "vineyardAreaHectares": 148,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "krijt en kalksteen met klei/leem in de bovengrond",
+      "wineCharacter": "fris, fruitig, bloemig, soepel, evenwichtig",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 24.7,
+          "percentage": 16.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 41,
+          "percentage": 27.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 82.1,
+          "percentage": 55.5
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vinay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "vincelles",
+      "population": 333,
+      "vineyardAreaHectares": 150.7,
+      "mainGrape": "Meunier",
+      "cruClassification": "",
+      "soil": "klei-kalk, mergel en zandige/leemrijke lagen",
+      "wineCharacter": "fruitig, soepel, rond, genereus, vaak Meunier-gedreven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 20,
+          "percentage": 13.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 24.8,
+          "percentage": 16.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 105.4,
+          "percentage": 69.9
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.5,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vincelles",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "vitry-en-perthois",
+      "population": 863,
+      "vineyardAreaHectares": 61.9,
+      "mainGrape": "Chardonnay",
+      "cruClassification": "",
+      "soil": "zeer kalk- en krijtrijke ondergrond",
+      "wineCharacter": "fris, lineair, citrusachtig, licht bloemig, mineraal",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.8,
+          "percentage": 2.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 58.9,
+          "percentage": 95.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.2,
+          "percentage": 1.9
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0,
+          "percentage": 0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vitry-en-perthois",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    },
+    {
+      "id": "vrigny",
+      "population": 234,
+      "vineyardAreaHectares": 90.4,
+      "mainGrape": "Meunier",
+      "cruClassification": "Premier Cru",
+      "soil": "klei, zand, mergel en lokaal krijt/kalk",
+      "wineCharacter": "fruitig, soepel, rond, met frisse zuren",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 18.7,
+          "percentage": 20.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 9.9,
+          "percentage": 11
+        },
+        {
+          "name": "Meunier",
+          "hectares": 61.3,
+          "percentage": 67.8
+        },
+        {
+          "name": "Overige rassen",
+          "hectares": 0.5,
+          "percentage": 0.6
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vrigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Wijngaardoppervlakte en druivenmix: Union des Maisons de Champagne. Bodem en wijnkarakter: terroir-synthese op basis van de regionale terroirindeling."
+      },
+      "sourceLanguage": "nl"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+BEGIN;
+DROP TABLE IF EXISTS pro_entitlements;
+COMMIT;

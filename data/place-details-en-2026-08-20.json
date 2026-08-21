@@ -1,0 +1,2642 @@
+{
+  "version": 1,
+  "sourceWorkbook": "places_english.xlsx",
+  "sourceWorkbookSha256": "3178d7ac7ed74fe1f37275ef74dbe9800ec7dd0d54d496bbf72631724e91fefd",
+  "importedAt": "2026-08-20",
+  "items": [
+    {
+      "id": "arrentieres",
+      "soil": "mainly Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 108.8,
+          "percentage": 79.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 19.2,
+          "percentage": 13.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 8.4,
+          "percentage": 6.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 1.3,
+          "percentage": 0.9
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/arrentieres",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "avenay-val-d-or",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 183.2,
+          "percentage": 77.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 28.5,
+          "percentage": 12.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 23.6,
+          "percentage": 10.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 1.0,
+          "percentage": 0.4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/avenay-val-d-39-or",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "avize",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 0.1,
+          "percentage": 0.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 265.8,
+          "percentage": 99.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.0,
+          "percentage": 0.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/avize",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "ay",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 316.1,
+          "percentage": 88.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 29.6,
+          "percentage": 8.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 9.8,
+          "percentage": 2.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.6,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/ay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Aÿ within Aÿ-Champagne."
+      }
+    },
+    {
+      "id": "baroville",
+      "soil": "mainly Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 190.6,
+          "percentage": 86.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 24.1,
+          "percentage": 10.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.2,
+          "percentage": 1.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 3.3,
+          "percentage": 1.5
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/baroville",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "bar-sur-seine",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 14.2,
+          "percentage": 74.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 4.0,
+          "percentage": 20.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.4,
+          "percentage": 2.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.6,
+          "percentage": 3.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bar-sur-seine",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "bethon",
+      "soil": "chalk and limestone with more clay/loam in the topsoil",
+      "wineCharacter": "ripe fruit, rounded, floral, supple, with fresh minerality",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 12.8,
+          "percentage": 6.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 180.7,
+          "percentage": 92.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.2,
+          "percentage": 0.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bethon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "bisseuil",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 35.9,
+          "percentage": 28.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 82.3,
+          "percentage": 65.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 6.9,
+          "percentage": 5.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bisseuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Bisseuil within Aÿ-Champagne."
+      }
+    },
+    {
+      "id": "bligny",
+      "soil": "mainly Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 128.4,
+          "percentage": 80.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 28.8,
+          "percentage": 18.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.9,
+          "percentage": 1.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bligny-170",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Interpreted as Bligny (Aube, 10200), matching the Champagne village/Château de Bligny."
+      }
+    },
+    {
+      "id": "bonneil",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 7.4,
+          "percentage": 9.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 8.7,
+          "percentage": 11.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 60.5,
+          "percentage": 78.9
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bonneil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "boursault",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 53.1,
+          "percentage": 21.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 30.1,
+          "percentage": 11.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 169.3,
+          "percentage": 67.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/boursault",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "bouzy",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 325.8,
+          "percentage": 87.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 46.7,
+          "percentage": 12.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.3,
+          "percentage": 0.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.6,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/bouzy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "buxeuil",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 107.4,
+          "percentage": 79.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 20.6,
+          "percentage": 15.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.2,
+          "percentage": 1.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 5.4,
+          "percentage": 4.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/buxeuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "buxieres-sur-arce",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 34.7,
+          "percentage": 79.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 8.6,
+          "percentage": 19.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.2,
+          "percentage": 0.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/buxieres-sur-arce",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "celles-sur-ource",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 250.8,
+          "percentage": 81.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 33.7,
+          "percentage": 10.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 5.6,
+          "percentage": 1.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 19.0,
+          "percentage": 6.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/celles-sur-ource",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "chalons-en-champagne",
+      "soil": "N/A – no delimited Champagne vineyard area in the municipal data used",
+      "wineCharacter": "N/A",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Large town in the Champagne region; no separate UMC vineyard profile for the municipality."
+      }
+    },
+    {
+      "id": "champillon",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 36.0,
+          "percentage": 49.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 14.5,
+          "percentage": 19.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 22.1,
+          "percentage": 30.4
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/champillon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "charly-sur-marne",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 33.0,
+          "percentage": 9.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 57.9,
+          "percentage": 15.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 272.7,
+          "percentage": 74.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.8,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/charly-sur-marne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "chateau-thierry",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 10.5,
+          "percentage": 23.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 7.0,
+          "percentage": 15.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 26.9,
+          "percentage": 60.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chateau-thierry",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "chavot",
+      "soil": "chalk and limestone with clay/loam in the topsoil",
+      "wineCharacter": "fresh, fruity, floral, supple, balanced",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 6.0,
+          "percentage": 4.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 56.6,
+          "percentage": 45.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 61.7,
+          "percentage": 49.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chavot-courcourt",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the current municipality of Chavot-Courcourt."
+      }
+    },
+    {
+      "id": "chigny-les-roses",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 34.0,
+          "percentage": 25.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 23.9,
+          "percentage": 18.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 73.5,
+          "percentage": 55.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chigny-les-roses",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "chouilly",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 5.0,
+          "percentage": 1.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 518.9,
+          "percentage": 98.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.5,
+          "percentage": 0.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.4,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/chouilly",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "congy",
+      "soil": "clay-limestone, marl and chalk, with locally heavier soils",
+      "wineCharacter": "fruity, rounded, supple, fresh, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 17.0,
+          "percentage": 21.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 23.8,
+          "percentage": 30.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 37.3,
+          "percentage": 47.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/congy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "cormicy",
+      "soil": "sand, clay, marl and locally chalk",
+      "wineCharacter": "fruity, aromatic, supple, fresh",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 24.4,
+          "percentage": 43.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 12.8,
+          "percentage": 22.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 19.6,
+          "percentage": 34.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cormicy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "cormoyeux",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 14.8,
+          "percentage": 19.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 15.8,
+          "percentage": 20.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 44.6,
+          "percentage": 59.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cormoyeux",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "courteron",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 77.1,
+          "percentage": 88.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 8.8,
+          "percentage": 10.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.6,
+          "percentage": 0.7
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 1.0,
+          "percentage": 1.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/courteron",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "cramant",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 0.0,
+          "percentage": 0.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 345.2,
+          "percentage": 99.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.2,
+          "percentage": 0.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cramant",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "cuis",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 0.1,
+          "percentage": 0.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 169.6,
+          "percentage": 96.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 6.3,
+          "percentage": 3.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/cuis",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "damery",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 86.9,
+          "percentage": 20.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 77.9,
+          "percentage": 18.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 249.7,
+          "percentage": 60.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 1.9,
+          "percentage": 0.5
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/damery",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "dizy",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 74.3,
+          "percentage": 41.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 70.0,
+          "percentage": 38.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 36.1,
+          "percentage": 20.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/dizy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "ecueil",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 110.7,
+          "percentage": 76.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 17.4,
+          "percentage": 12.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 16.3,
+          "percentage": 11.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.5,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/ecueil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "epernay",
+      "soil": "chalk and limestone with clay/loam in the topsoil",
+      "wineCharacter": "fresh, fruity, floral, supple, balanced",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 64.0,
+          "percentage": 24.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 156.9,
+          "percentage": 61.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 36.0,
+          "percentage": 14.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/epernay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "faverolles-et-coemy",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 13.7,
+          "percentage": 18.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 3.0,
+          "percentage": 3.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 58.9,
+          "percentage": 77.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.6,
+          "percentage": 0.8
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/faverolles-et-coemy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "festigny",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 11.4,
+          "percentage": 6.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 15.4,
+          "percentage": 8.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 163.8,
+          "percentage": 85.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/festigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "flavigny",
+      "soil": "N/A – no delimited Champagne vineyard area in the municipal data used",
+      "wineCharacter": "N/A",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "No separate UMC cru/vineyard profile found for this municipality."
+      }
+    },
+    {
+      "id": "fontette",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 155.1,
+          "percentage": 87.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 17.7,
+          "percentage": 10.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.5,
+          "percentage": 0.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 3.2,
+          "percentage": 1.8
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/fontette",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "gye-sur-seine",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 236.5,
+          "percentage": 88.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 26.9,
+          "percentage": 10.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.7,
+          "percentage": 1.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 2.5,
+          "percentage": 0.9
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/gye-sur-seine",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "hautvillers",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 129.2,
+          "percentage": 44.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 77.3,
+          "percentage": 26.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 84.0,
+          "percentage": 28.9
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/hautvillers",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "jouy-les-reims",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 29.7,
+          "percentage": 31.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 14.5,
+          "percentage": 15.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 50.3,
+          "percentage": 52.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 1.1,
+          "percentage": 1.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/jouy-les-reims",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "le-breuil",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 14.5,
+          "percentage": 10.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 11.4,
+          "percentage": 8.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 115.2,
+          "percentage": 81.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/le-breuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "le-mesnil-sur-oger",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.2,
+          "percentage": 0.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 436.4,
+          "percentage": 99.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.0,
+          "percentage": 0.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/le-mesnil-sur-oger",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "les-riceys",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 766.0,
+          "percentage": 91.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 60.3,
+          "percentage": 7.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 5.9,
+          "percentage": 0.7
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 5.8,
+          "percentage": 0.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/les-riceys",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "louvois",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 33.3,
+          "percentage": 80.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 7.8,
+          "percentage": 18.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.1,
+          "percentage": 0.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/louvois",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Louvois within Val de Livre."
+      }
+    },
+    {
+      "id": "ludes",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 102.3,
+          "percentage": 32.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 57.2,
+          "percentage": 18.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 158.7,
+          "percentage": 49.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.4,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/ludes",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "mardeuil",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 35.2,
+          "percentage": 18.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 59.1,
+          "percentage": 30.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 99.4,
+          "percentage": 51.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/mardeuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "mareuil-sur-ay",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 248.7,
+          "percentage": 84.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 25.6,
+          "percentage": 8.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 20.0,
+          "percentage": 6.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/mareuil-sur-ay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Mareuil-sur-Aÿ within Aÿ-Champagne."
+      }
+    },
+    {
+      "id": "marne",
+      "soil": "N/A – department, not a separate Champagne cru",
+      "wineCharacter": "N/A",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "No separate municipal vineyard data applied. Marne is a department rather than an individual Champagne wine village; municipal fields are therefore N/A."
+      }
+    },
+    {
+      "id": "merfy",
+      "soil": "sand, clay, marl and locally chalk",
+      "wineCharacter": "fruity, aromatic, supple, fresh",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 9.6,
+          "percentage": 20.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 16.2,
+          "percentage": 35.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 20.4,
+          "percentage": 44.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/merfy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "neuville-sur-seine",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 267.2,
+          "percentage": 84.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 41.6,
+          "percentage": 13.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 3.8,
+          "percentage": 1.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 5.4,
+          "percentage": 1.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/neuville-sur-seine",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "noe-les-mallets",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 169.3,
+          "percentage": 88.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 19.1,
+          "percentage": 9.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.6,
+          "percentage": 0.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 3.1,
+          "percentage": 1.6
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/noe-les-mallets",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "oeuilly",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 37.2,
+          "percentage": 26.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 34.5,
+          "percentage": 24.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 67.6,
+          "percentage": 48.4
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.5,
+          "percentage": 0.4
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/oeuilly",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "oger",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.7,
+          "percentage": 0.4
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 400.2,
+          "percentage": 99.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.0,
+          "percentage": 0.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/oger",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Oger within Blancs-Coteaux."
+      }
+    },
+    {
+      "id": "passy-grigny",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 27.8,
+          "percentage": 14.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 12.0,
+          "percentage": 6.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 156.1,
+          "percentage": 79.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/passy-grigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "pierry",
+      "soil": "chalk and limestone with clay/loam in the topsoil",
+      "wineCharacter": "fresh, fruity, floral, supple, balanced",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 19.8,
+          "percentage": 18.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 38.7,
+          "percentage": 35.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 50.8,
+          "percentage": 46.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.5,
+          "percentage": 0.5
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/pierry",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "polisot",
+      "soil": "Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 63.3,
+          "percentage": 88.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 6.4,
+          "percentage": 9.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.2,
+          "percentage": 1.7
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.5,
+          "percentage": 0.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/polisot",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "port-a-binson",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 36.4,
+          "percentage": 9.2
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 57.7,
+          "percentage": 14.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 302.0,
+          "percentage": 76.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/mareuil-le-port",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Port-à-Binson lies within Mareuil-le-Port; population and vineyard data therefore refer to Mareuil-le-Port."
+      }
+    },
+    {
+      "id": "pouillon",
+      "soil": "sand, clay, marl and locally chalk",
+      "wineCharacter": "fruity, aromatic, supple, fresh",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 6.8,
+          "percentage": 13.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 9.2,
+          "percentage": 17.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 36.1,
+          "percentage": 69.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/pouillon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "prunay",
+      "soil": "N/A – no delimited Champagne vineyard area in the municipal data used",
+      "wineCharacter": "N/A",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "No delimited Champagne vineyard area in the municipal data used."
+      }
+    },
+    {
+      "id": "reims",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 15.8,
+          "percentage": 28.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 20.4,
+          "percentage": 37.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 18.7,
+          "percentage": 34.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/reims",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "rilly-la-montagne",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 128.0,
+          "percentage": 40.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 82.8,
+          "percentage": 26.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 102.3,
+          "percentage": 32.7
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/rilly-la-montagne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "romeny-sur-marne",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 12.0,
+          "percentage": 15.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 10.8,
+          "percentage": 14.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 52.7,
+          "percentage": 69.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/romeny-sur-marne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "rouvres-les-vignes",
+      "soil": "mainly Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 77.6,
+          "percentage": 76.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 10.9,
+          "percentage": 10.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 12.4,
+          "percentage": 12.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/rouvres-les-vignes",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "sacy",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 73.2,
+          "percentage": 48.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 20.8,
+          "percentage": 13.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 56.4,
+          "percentage": 37.4
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/sacy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "sillery",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 29.7,
+          "percentage": 32.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 54.2,
+          "percentage": 58.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 8.5,
+          "percentage": 9.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/sillery",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "taissy",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 37.3,
+          "percentage": 25.0
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 62.5,
+          "percentage": 41.9
+        },
+        {
+          "name": "Meunier",
+          "hectares": 49.5,
+          "percentage": 33.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/taissy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "talus-saint-prix",
+      "soil": "clay-limestone, marl and chalk, with locally heavier soils",
+      "wineCharacter": "fruity, rounded, supple, fresh, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 11.0,
+          "percentage": 27.1
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 3.4,
+          "percentage": 8.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 26.2,
+          "percentage": 64.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/talus-saint-prix",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "tours-sur-marne",
+      "soil": "limestone/chalk on the slopes with clay and marl",
+      "wineCharacter": "fruity, broad, structured, fresh, often vinous",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 37.0,
+          "percentage": 70.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 15.2,
+          "percentage": 29.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 0.0,
+          "percentage": 0.0
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/tours-sur-marne",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "trigny",
+      "soil": "sand, clay, marl and locally chalk",
+      "wineCharacter": "fruity, aromatic, supple, fresh",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 67.1,
+          "percentage": 35.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 33.0,
+          "percentage": 17.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 89.8,
+          "percentage": 47.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/trigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "trois-puits",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 13.4,
+          "percentage": 33.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 3.9,
+          "percentage": 9.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 22.3,
+          "percentage": 56.2
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/trois-puits",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "troissy",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 30.8,
+          "percentage": 8.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 25.8,
+          "percentage": 7.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 293.8,
+          "percentage": 83.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/troissy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "troyes",
+      "soil": "N/A – no delimited Champagne vineyard area in the municipal data used",
+      "wineCharacter": "N/A",
+      "grapeVarieties": [],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/vignoble",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Large town in the Aube; no separate UMC vineyard profile for the municipality."
+      }
+    },
+    {
+      "id": "urville",
+      "soil": "mainly Kimmeridgian marl and limestone, with clay",
+      "wineCharacter": "fruity, vinous, powerful, mineral, gastronomic",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 142.7,
+          "percentage": 74.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 27.1,
+          "percentage": 14.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 15.8,
+          "percentage": 8.3
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 5.1,
+          "percentage": 2.7
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/urville",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "venteuil",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 68.9,
+          "percentage": 37.5
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 36.3,
+          "percentage": 19.8
+        },
+        {
+          "name": "Meunier",
+          "hectares": 78.1,
+          "percentage": 42.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/venteuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "verneuil",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 63.8,
+          "percentage": 17.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 37.2,
+          "percentage": 10.4
+        },
+        {
+          "name": "Meunier",
+          "hectares": 255.0,
+          "percentage": 71.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/verneuil",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "vertus",
+      "soil": "chalk-rich limestone soil (Belemnite chalk), very well drained",
+      "wineCharacter": "precise, fresh, citrus, floral, chalky/mineral, elegant",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 48.0,
+          "percentage": 8.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 492.0,
+          "percentage": 90.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.2,
+          "percentage": 0.4
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.1,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vertus",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Vertus within Blancs-Coteaux."
+      }
+    },
+    {
+      "id": "verzenay",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 363.0,
+          "percentage": 86.8
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 52.7,
+          "percentage": 12.6
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.5,
+          "percentage": 0.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/verzenay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "verzy",
+      "soil": "chalk and limestone with a thin clay/loam layer",
+      "wineCharacter": "powerful, structured, red fruit, mineral, long finish",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 309.3,
+          "percentage": 76.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 91.0,
+          "percentage": 22.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 2.4,
+          "percentage": 0.6
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 1.3,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/verzy",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "villedommange",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 58.8,
+          "percentage": 30.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 23.1,
+          "percentage": 12.1
+        },
+        {
+          "name": "Meunier",
+          "hectares": 109.3,
+          "percentage": 57.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.3,
+          "percentage": 0.2
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/villedommange",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. INSEE municipality name: Ville-Dommange."
+      }
+    },
+    {
+      "id": "villers-sous-chatillon",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.4,
+          "percentage": 6.6
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 0.5,
+          "percentage": 2.3
+        },
+        {
+          "name": "Meunier",
+          "hectares": 19.4,
+          "percentage": 91.1
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/villers-sous-chatillon",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification. Population figure for the delegated commune of Villers-sous-Châtillon within Cœur-de-la-Vallée."
+      }
+    },
+    {
+      "id": "vinay",
+      "soil": "chalk and limestone with clay/loam in the topsoil",
+      "wineCharacter": "fresh, fruity, floral, supple, balanced",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 24.7,
+          "percentage": 16.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 41.0,
+          "percentage": 27.7
+        },
+        {
+          "name": "Meunier",
+          "hectares": 82.1,
+          "percentage": 55.5
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.2,
+          "percentage": 0.1
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vinay",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "vincelles",
+      "soil": "clay-limestone, marl and sandy/loamy layers",
+      "wineCharacter": "fruity, supple, rounded, generous, often Meunier-driven",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 20.0,
+          "percentage": 13.3
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 24.8,
+          "percentage": 16.5
+        },
+        {
+          "name": "Meunier",
+          "hectares": 105.4,
+          "percentage": 69.9
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.5,
+          "percentage": 0.3
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vincelles",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "vitry-en-perthois",
+      "soil": "very limestone- and chalk-rich subsoil",
+      "wineCharacter": "fresh, linear, citrus-driven, lightly floral, mineral",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 1.8,
+          "percentage": 2.9
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 58.9,
+          "percentage": 95.2
+        },
+        {
+          "name": "Meunier",
+          "hectares": 1.2,
+          "percentage": 1.9
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.0,
+          "percentage": 0.0
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vitry-en-perthois",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    },
+    {
+      "id": "vrigny",
+      "soil": "clay, sand, marl and locally chalk/limestone",
+      "wineCharacter": "fruity, supple, rounded, with fresh acidity",
+      "grapeVarieties": [
+        {
+          "name": "Pinot Noir",
+          "hectares": 18.7,
+          "percentage": 20.7
+        },
+        {
+          "name": "Chardonnay",
+          "hectares": 9.9,
+          "percentage": 11.0
+        },
+        {
+          "name": "Meunier",
+          "hectares": 61.3,
+          "percentage": 67.8
+        },
+        {
+          "name": "Other varieties",
+          "hectares": 0.5,
+          "percentage": 0.6
+        }
+      ],
+      "sources": {
+        "vineyardUrl": "https://maisons-champagne.com/en/village/vrigny",
+        "populationUrl": "https://www.insee.fr/fr/statistiques/8680726?sommaire=8681011",
+        "cruUrl": "https://www.champagne.fr/system/files/2024-03/Cahier_des_charges_appellation.pdf",
+        "note": "Vineyard area and grape mix: Union des Maisons de Champagne. Soil and wine character: terroir synthesis based on the regional terroir classification."
+      }
+    }
+  ]
+}

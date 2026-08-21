@@ -1,0 +1,21 @@
+{
+  "objects": [
+    {
+      "@id": "https://data.datatourisme.fr/42/event-1",
+      "rdfs:label": {"fr": "Vendanges en fête"},
+      "shortDescription": {"fr": "Rencontre dans les vignes."},
+      "takesPlaceAt": [{"startDate": "2026-09-19T10:00:00Z", "endDate": "2026-09-20T18:00:00Z"}],
+      "isLocatedAt": [{
+        "rdfs:label": {"fr": "Place de la République"},
+        "schema:address": [{"schema:streetAddress": "1 rue du Vin", "schema:postalCode": "51200", "schema:addressLocality": "Épernay"}],
+        "schema:geo": [{"schema:latitude": "49.041", "schema:longitude": "3.959"}]
+      }],
+      "hasBeenCreatedBy": [{"rdfs:label": {"fr": "Office de Tourisme Épernay"}}],
+      "hasRepresentation": [{"schema:contentUrl": "https://example.test/event.jpg", "credit": "Photo OT Épernay"}],
+      "schema:url": "https://example.test/event",
+      "lastUpdate": "2026-07-31T08:00:00Z",
+      "@type": ["EntertainmentAndEvent", "CulturalEvent"]
+    }
+  ],
+  "meta": {"next": null}
+}

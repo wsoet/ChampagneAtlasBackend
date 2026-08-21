@@ -346,7 +346,7 @@ function openHouseEditor(p){const list=filtered(),index=list.findIndex(item=>ite
   <label class="check wide"><input name="retranslateEn" type="checkbox" value="yes"> Engelse machinevertaling expliciet opnieuw maken <span class="muted">Status: \${esc(p.localizationMeta?.en?.fields?.description?.status||"nog niet vertaald")}</span></label>
 </div></details>
 <section class="form-section" data-editor-section="media"><div class="section-intro"><div><h3>Logo & media</h3><p>Bronlogo, badgegeneratie en kwaliteitscontrole.</p></div></div>
-  <label class="wide"><span>Nieuw bronlogo <em class="field-hint">PNG, JPG of WebP · max. 2 MB</em></span><input class="badge-source" type="file" accept="image/jpeg,image/png,image/webp"></label>
+  <label class="wide"><span>Nieuw huislogo of bronlogo <em class="field-hint">PNG, JPG of WebP · max. 2 MB</em></span><input class="badge-source" name="logo" type="file" accept="image/jpeg,image/png,image/webp"></label>
   <div class="badge-actions" data-producer-id="\${esc(p.id)}"><button class="button" type="button" data-badge-mode="direct">Nu badge maken</button><button class="button light" type="button" data-badge-mode="background">Op achtergrond maken</button><span class="info-tip" tabindex="0" data-tip="Nu maken houdt dit venster open. Op achtergrond maken laat je ondertussen verder werken. Het bronlogo wordt in beide gevallen eerst veilig bewaard.">?</span><div class="badge-progress" hidden><progress max="100" value="0"></progress><span>Voorbereiden…</span></div></div>
 </section>
 \${p.cruLabel?\`<section class="form-section" data-editor-section="cru"><h3>Huidige cru-classificatie</h3><div class="cru-card">\${cruBadge(p)}<div><p><strong>\${esc(p.cruCommune)}</strong></p><p class="muted">\${esc(p.cruBasis)}</p><p><a href="\${esc(p.cruSourceUrl)}" target="_blank" rel="noopener noreferrer">Bekijk officiële AOC-bron</a></p></div></div></section>\`:""}
@@ -389,7 +389,7 @@ rows.addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;
 <label class="check wide"><input name="retranslateEn" type="checkbox" value="yes"> Engelse vertaling expliciet opnieuw maken</label>
 <label><span>Plaats</span><select name="city">\${placeOptions(p.city||"")}</select></label>
 <label class="wide"><span>Adres</span><input name="address" value="\${esc(p.address||"")}"></label>
-<label class="wide"><span>Nieuw bronlogo (JPG, PNG of WebP; maximaal 2 MB)</span><input class="badge-source" type="file" accept="image/jpeg,image/png,image/webp"></label>
+<label class="wide"><span>Nieuw bronlogo (JPG, PNG of WebP; maximaal 2 MB)</span><input class="badge-source" name="logo" type="file" accept="image/jpeg,image/png,image/webp"></label>
 <div class="badge-actions" data-producer-id="\${esc(p.id)}"><button class="button" type="button" data-badge-mode="direct">Nu badge maken</button><button class="button light" type="button" data-badge-mode="background">Op achtergrond maken</button><div class="badge-progress" hidden><progress max="100" value="0"></progress><span>Voorbereiden…</span></div></div>
 <label><span>Website</span><input name="website" type="url" value="\${esc(p.website||"")}"></label>
 <label><span>Google Maps</span><input name="mapsUrl" type="url" value="\${esc(p.mapsUrl||"")}"></label>

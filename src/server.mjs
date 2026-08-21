@@ -47,6 +47,7 @@ import { placeAdminPage } from "./place-admin-page.mjs";
 import { placePage, placesIndexPage } from "./place-page.mjs";
 import { basePlaces, placeById, placeId } from "./places.mjs";
 import { allPlaces, deletePlace, placeBanner, savePlace, savePlaceBanner } from "./place-store.mjs";
+import { placeDetailsFromForm } from "./place-details.mjs";
 import { museletProductsForProducer } from "./muselet-products.mjs";
 import {
   saveTasteProfile,
@@ -267,7 +268,11 @@ async function readMultipart(request, fileField = "banner") {
     let failed = false;
     const parser = Busboy({
       headers: request.headers,
-      limits: { files: 1, fileSize: 3 * 1024 * 1024, fields: 20, fieldSize: 32768 }
+      // Producer forms contain the complete NL/EN profile and now exceed the
+      // original 20-field limit. Busboy silently stops emitting later fields
+      // when that limit is reached, which meant reviewChecked was dropped and
+      // a reviewed house stayed in the review queue.
+      limits: { files: 1, fileSize: 3 * 1024 * 1024, fields: 128, fieldSize: 32768 }
     });
     parser.on("field", (name, value) => { fields[name] = value; });
     parser.on("file", (name, stream, info) => {
@@ -652,6 +657,7 @@ function cleanPlaceData(form, regionList) {
     regionId: region?.id || "",
     region: region?.name || "",
     description: String(form.description || "").trim(),
+    ...placeDetailsFromForm(form),
     sourceLanguage: "nl",
     localizedContent: localizedContentFromForm(form, CATALOG_LOCALIZABLE_FIELDS.place)
   };
@@ -1933,7 +1939,8 @@ export function createServer({
               : "",
             reviewedBy: data.reviewStatus === "checked" ? profile.username : ""
           },
-          profile.username
+          profile.username,
+          logo
         );
         await ensureImportedPlace(data, currentPlaces, currentRegions, `${profile.username}:producer-place`);
         const saveBase = form.returnTo === "/admin/import" ? "/admin/import" : "/admin";

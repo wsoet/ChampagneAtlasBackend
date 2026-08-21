@@ -1,0 +1,19 @@
+node_modules/
+.env
+.env.*
+!.env.example
+
+# Local/runtime data and temporary deployment workspaces
+tmp/
+.tmp_*/
+.production-*/
+production-merge/
+release-staging/
+release-review-*/
+
+# One-off merge/deployment copies and source backups
+.deploy-*
+production-merge-*.mjs
+*.before-*
+*.bak
+*.bak-*

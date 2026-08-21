@@ -342,6 +342,7 @@ test("valid admin credentials create a protected session", async () => {
       assert.match(body, /Bekijk officiële AOC-bron/);
       assert.match(body, /class="cru-badge/);
       assert.match(body, /name="cruVerificationMode"/);
+      assert.match(body, /class="badge-source" name="logo" type="file"/);
       assert.match(body, /MANUAL_GRAND_CRU/);
       assert.match(body, /MANUAL_PREMIER_CRU/);
       assert.match(body, /MANUAL_NONE/);
@@ -449,6 +450,13 @@ test("valid admin credentials create a protected session", async () => {
       logoForm.set("tastings", "yes");
       logoForm.set("museletAvailable", "yes");
       logoForm.set("museletUrl", created.museletUrl);
+      // Keep reviewChecked behind more than twenty multipart fields. This
+      // protects the full producer editor from silently losing its final
+      // fields when the form grows.
+      for (let index = 0; index < 24; index += 1) {
+        logoForm.set(`profileField${index}`, `value-${index}`);
+      }
+      logoForm.set("reviewChecked", "yes");
       const logoPng = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 0]);
       logoForm.set("logo", new Blob([logoPng], { type: "image/png" }), "logo.png");
       const logoUploadResponse = await fetch(`${baseUrl}/admin/producers/${createdId}`, {
@@ -460,6 +468,7 @@ test("valid admin credentials create a protected session", async () => {
       assert.equal(logoUploadResponse.status, 303);
       const withLogo = await (await fetch(`${baseUrl}/api/v1/producers/${createdId}`)).json();
       assert.equal(withLogo.logoUrl, `/producers/${createdId}/logo`);
+      assert.equal(withLogo.reviewStatus, "checked");
       const refreshedAdmin = await (await fetch(`${baseUrl}/admin`, {
         headers: { Cookie: sessionCookie.split(";")[0] }
       })).text();

@@ -1,0 +1,6 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+test("migration 010 is additive, transactional and reversible",async()=>{const up=await readFile(new URL("../migrations/010_shared_trip_groups.up.sql",import.meta.url),"utf8"),down=await readFile(new URL("../migrations/010_shared_trip_groups.down.sql",import.meta.url),"utf8");assert.match(up,/^BEGIN;/);assert.match(up,/COMMIT;\s*$/);assert.match(down,/^BEGIN;/);assert.match(down,/COMMIT;\s*$/);for(const table of ["trip_groups","trip_group_members","trip_group_invitations","trip_group_audit"]){assert.match(up,new RegExp(`CREATE TABLE IF NOT EXISTS ${table}`));assert.match(down,new RegExp(`DROP TABLE IF EXISTS ${table}`));}assert.doesNotMatch(up,/ALTER TABLE (user_trips|user_visits|user_saved_houses)/i);});
+test("invitation storage contains a hash but no raw token column",async()=>{const sql=await readFile(new URL("../migrations/010_shared_trip_groups.up.sql",import.meta.url),"utf8");assert.match(sql,/token_hash TEXT NOT NULL UNIQUE/);assert.doesNotMatch(sql,/\btoken TEXT\b|raw_token|invite_url/i);assert.match(sql,/status IN \('PENDING','ACCEPTED','DECLINED','REVOKED','EXPIRED','DELIVERY_FAILED'\)/);});

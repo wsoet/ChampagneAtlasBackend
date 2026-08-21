@@ -1,0 +1,27 @@
+[
+  {
+    "producer_id": "replace-with-atlas-producer-id",
+    "cuvee_key": "official-stable-cuvee-key",
+    "cuvee_name": "Naam volgens producent",
+    "vintage_year": null,
+    "base_vintage": null,
+    "disgorgement_date": null,
+    "edition_label": "Exacte editie of lot indien vermeld",
+    "grapes": ["Pinot Noir 60%", "Chardonnay 40%"],
+    "dosage_g_l": null,
+    "reserve_wine_percentage": null,
+    "malolactic": null,
+    "oak_vinification": null,
+    "lees_aging_months": null,
+    "villages": [],
+    "official_tasting_notes": "Alleen letterlijk door de producent gepubliceerde inhoud, compact geparafraseerd.",
+    "official_pairing": "Alleen officiële producentclaim.",
+    "source_url": "https://official-producer.example/technical-sheet",
+    "source_title": "Officiële technische fiche",
+    "source_type": "OFFICIAL_PRODUCER",
+    "checked_at": "2026-08-02",
+    "expires_at": "2027-02-02",
+    "confidence": 0.95,
+    "active": true
+  }
+]

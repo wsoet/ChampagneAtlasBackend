@@ -1,0 +1,16 @@
+function esc(value) {
+  return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+}
+
+export function placesIndexPage(places) {
+  return `<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Plaatsen · Champagne Atlas</title><style>
+  body{margin:0;background:#f7f5ef;color:#1d1d1b;font:15px/1.5 Arial,sans-serif}main{width:min(1200px,92vw);margin:45px auto}h1,h2{font-family:Georgia,serif;color:#0f3b2e}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:#fff;border:1px solid #e4ded2;border-radius:16px;overflow:hidden}.card img,.hero{width:100%;height:145px;object-fit:cover;background:#0f3b2e}.body{padding:16px}.body h2{margin:0}.body a{color:#0f3b2e;font-weight:700}@media(max-width:800px){.grid{grid-template-columns:1fr}}</style></head><body><main><h1>Champagneplaatsen</h1><div class="grid">${places.map((p) => `<article class="card">${p.hasBanner ? `<img src="/places/${esc(p.id)}/banner" alt="">` : `<div class="hero"></div>`}<div class="body"><h2>${esc(p.name)}</h2><p>${esc(p.region)} · ${p.producerCount} huizen</p><a href="/places/${esc(p.id)}">Bekijk plaats</a></div></article>`).join("")}</div></main></body></html>`;
+}
+
+export function placePage(place, returnToAdmin = false) {
+  const backHref = returnToAdmin ? "/admin/places" : "/places";
+  const backLabel = returnToAdmin ? "Terug naar plaatsenbeheer" : "Alle plaatsen";
+  return `<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(place.name)} · Champagne Atlas</title><style>
+  body{margin:0;background:#f7f5ef;color:#1d1d1b;font:15px/1.6 Arial,sans-serif}.hero{height:min(390px,42vw);min-height:230px;background:#0f3b2e}.hero img{width:100%;height:100%;object-fit:cover}main{width:min(960px,92vw);margin:-55px auto 60px;position:relative;background:#fff;border-radius:20px;padding:28px;box-shadow:0 18px 50px #0f3b2e22}h1,h2{font-family:Georgia,serif;color:#0f3b2e}h1{font-size:42px;margin:0}.meta{color:#68665f}.houses{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0;list-style:none}.houses li{border:1px solid #e4ded2;border-radius:12px;padding:13px}.houses a{color:#0f3b2e;font-weight:700}@media(max-width:650px){.houses{grid-template-columns:1fr}}</style></head><body><div class="hero">${place.hasBanner ? `<img src="/places/${esc(place.id)}/banner" alt="${esc(place.name)}">` : ""}</div><main><p><a href="${backHref}">← ${backLabel}</a></p><h1>${esc(place.name)}</h1><p class="meta">Regio: ${esc(place.region || "Niet gekoppeld")} · ${place.producerCount} champagnehuizen</p>${place.description ? `<p>${esc(place.description)}</p>` : ""}<h2>Champagnehuizen in ${esc(place.name)}</h2><ul class="houses">${place.producers.map((p) => `<li>${p.logoUrl ? `<img src="${esc(p.logoUrl)}" alt="" width="44" height="44" style="object-fit:contain;float:left;margin-right:10px">` : ""}<strong>${esc(p.name)}</strong>${p.website ? `<br><a href="${esc(p.website)}" target="_blank" rel="noopener">Website</a>` : ""}</li>`).join("")}</ul></main></body></html>`;
+}

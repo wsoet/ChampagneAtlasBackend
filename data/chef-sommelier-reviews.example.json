@@ -1,0 +1,15 @@
+[
+  {
+    "case_key": "sha256-from-review-queue",
+    "reviewer": "initialen-of-reviewer-id",
+    "verdict": "CORRECT",
+    "factuality": 3,
+    "source_quality": 5,
+    "sensory_reasoning": 4,
+    "usefulness": 4,
+    "issues": ["FACTUAL", "SOURCE"],
+    "correction": "Volledig vervangend antwoord met duidelijk onderscheid tussen bronfeit en smaakinterpretatie.",
+    "notes": "Korte interne toelichting.",
+    "evidence_urls": ["https://www.champagne.fr/"]
+  }
+]

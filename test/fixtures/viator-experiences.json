@@ -1,0 +1,42 @@
+{
+  "destinations": [
+    {
+      "destinationId": 5049,
+      "name": "Reims",
+      "type": "CITY",
+      "center": { "latitude": 49.2583, "longitude": 4.0317 }
+    }
+  ],
+  "search": {
+    "searchResults": [
+      {
+        "searchType": "PRODUCTS",
+        "totalCount": 1,
+        "results": [
+          {
+            "status": "ACTIVE",
+            "productCode": "12345P1",
+            "title": "Champagne tour in Reims with tastings",
+            "description": "Visit two cellars and taste Champagne with a local guide.",
+            "productUrl": "https://www.viator.com/tours/Reims/example/d5049-12345P1",
+            "lastUpdatedAt": "2026-08-07T12:00:00Z",
+            "destinations": [{ "ref": "5049", "primary": true }],
+            "images": [{
+              "isCover": true,
+              "variants": [
+                { "width": 320, "height": 180, "url": "https://images.example.test/320.jpg" },
+                { "width": 720, "height": 405, "url": "https://images.example.test/720.jpg" }
+              ]
+            }],
+            "reviews": { "combinedAverageRating": 4.8, "totalReviews": 132 },
+            "pricing": { "summary": { "fromPrice": 89.5 }, "currency": "EUR" },
+            "duration": { "fixedDurationInMinutes": 420 },
+            "supplier": { "name": "Reims Champagne Tours" },
+            "bookingConfirmationSettings": { "confirmationType": "INSTANT" },
+            "flags": ["FREE_CANCELLATION"]
+          }
+        ]
+      }
+    ]
+  }
+}
