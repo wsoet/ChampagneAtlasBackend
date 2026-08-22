@@ -34,6 +34,20 @@ test("paid subscription requires a future expiry and inserts an admin entitlemen
   await assert.rejects(() => store.setSubscription({ userId:"u1", kind:"PRO", endsAt:"2026-07-01" }), /toekomstige/);
 });
 
+test("paid subscription uses plan-specific duration when expiry is omitted", async () => {
+  const calls = [];
+  const client = { query: async (sql, params) => { calls.push({ sql, params }); return { rows: sql.startsWith("SELECT") ? [{ id:"u1" }] : [] }; }, release() {} };
+  const store = userAdminStore({ db: { connect: async () => client }, now: () => new Date("2026-08-01T12:00:00.000Z") });
+  await store.setSubscription({ userId:"u1", kind:"TRIP_PASS", changedBy:"wsoet" });
+  const tripInsert = calls.find((item) => /INSERT INTO pro_entitlements/.test(item.sql));
+  assert.equal(tripInsert.params[4].toISOString(), "2026-08-08T12:00:00.000Z");
+
+  calls.length = 0;
+  await store.setSubscription({ userId:"u1", kind:"PRO_PLUS", changedBy:"wsoet" });
+  const proInsert = calls.find((item) => /INSERT INTO pro_entitlements/.test(item.sql));
+  assert.equal(proInsert.params[4].toISOString(), "2026-08-31T12:00:00.000Z");
+});
+
 test("delete targets exactly one app user and page escapes identity", async () => {
   let params;
   const store = userAdminStore({ db: { query: async (_sql, input) => { params = input; return { rows:[{ id:"u1" }] }; } } });
@@ -41,5 +55,11 @@ test("delete targets exactly one app user and page escapes identity", async () =
   const page = userAdminPage([{ id:"u1",email:"x@example.com",displayName:"<script>x</script>",createdAt:"2026-01-01",subscription:null }], { username:"wsoet" }, "csrf");
   assert.doesNotMatch(page, /<script>x<\/script>/);
   assert.match(page, /Gebruiker definitief verwijderen/);
+  assert.match(page, /name="confirmDelete"/);
+  assert.match(page, /VERWIJDER/);
   assert.match(page, /\/admin\/users\/subscription/);
+  assert.match(page, /Pro · € 4 p\/m/);
+  assert.match(page, /Pro Plus · € 9 p\/m/);
+  assert.match(page, /Trip Pass · € 2 p\/w/);
+  assert.match(page, /Trip Pass 7 dagen/);
 });

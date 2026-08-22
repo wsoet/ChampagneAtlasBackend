@@ -2134,6 +2134,9 @@ export function createServer({
           adminAudit("admin_user_subscription_changed", { sub: profile.sub, targetUserId: String(fields.userId || "") });
           response.writeHead(303, { Location: "/admin/users?updated=1", "Cache-Control": "no-store" });
         } else {
+          if (String(fields.confirmDelete || "").trim() !== "VERWIJDER") {
+            throw new Error("Typ VERWIJDER om de gebruiker definitief te verwijderen");
+          }
           await userManagementStoreFor().deleteUser(fields.userId);
           adminAudit("admin_user_deleted", { sub: profile.sub, targetUserId: String(fields.userId || "") });
           response.writeHead(303, { Location: "/admin/users?deleted=1", "Cache-Control": "no-store" });

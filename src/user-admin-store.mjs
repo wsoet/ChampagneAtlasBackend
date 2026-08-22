@@ -27,8 +27,15 @@ export function userAdminStore({ db = database(), now = () => new Date() } = {})
     async setSubscription({ userId, kind, endsAt, changedBy }) {
       const normalizedKind = String(kind || "FREE").toUpperCase();
       if (!["FREE", "TRIP_PASS", "PRO", "PRO_PLUS"].includes(normalizedKind)) throw new Error("Onbekend abonnement");
-      const expiry = normalizedKind === "FREE" ? null : new Date(`${endsAt}T23:59:59.999Z`);
-      if (expiry && (!Number.isFinite(expiry.valueOf()) || expiry <= now())) throw new Error("Kies een toekomstige vervaldatum");
+      const currentTime = now();
+      const requestedEndsAt = String(endsAt || "").trim();
+      const defaultDurationDays = normalizedKind === "TRIP_PASS" ? 7 : 30;
+      const expiry = normalizedKind === "FREE"
+        ? null
+        : requestedEndsAt
+          ? new Date(`${requestedEndsAt}T23:59:59.999Z`)
+          : new Date(currentTime.valueOf() + defaultDurationDays * 24 * 60 * 60 * 1000);
+      if (expiry && (!Number.isFinite(expiry.valueOf()) || expiry <= currentTime)) throw new Error("Kies een toekomstige vervaldatum");
       const client = await db.connect();
       try {
         await client.query("BEGIN");
